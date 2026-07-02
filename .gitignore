@@ -1,2 +1,24 @@
+# OS metadata
 .DS_Store
+Thumbs.db
+
+# IDEs & Tools
 .gemini/
+.vscode/
+.idea/
+
+# Node / Dependency Directories
+node_modules/
+jspm_packages/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build / Output Directories
+dist/
+build/
+.cache/
+out/
