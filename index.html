@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.2">
 </head>
 <body>
 
@@ -323,10 +323,11 @@
 
                     <!-- Card 4 -->
                     <div class="resource-card">
-                        <div class="resource-badge">E-Booklet</div>
+                        <div class="resource-badge">FREE GUIDE</div>
                         <h3 class="resource-title">Movement & Mindset Guide</h3>
-                        <p class="resource-desc">An introductory handbook to building joy in physical expression, moving beyond exercise guilt, and respecting your body.</p>
-                        <button class="btn btn-primary resource-download-btn" data-resource="Movement & Mindset Guide">Download Resource</button>
+                        <p class="resource-subtitle-card">Move Your Body. Shift Your Mind.</p>
+                        <p class="resource-desc">A gentle guide to building consistent movement habits through realistic daily actions and positive mindset shifts.</p>
+                        <button class="btn btn-primary resource-download-btn" data-resource="Movement & Mindset Guide">Download Free Guide</button>
                     </div>
                 </div>
             </div>
@@ -509,7 +510,92 @@
         </div>
     </div>
 
+    <!-- GUIDE DOWNLOAD MODAL (TWO COLUMN FOR FEATURED LEAD MAGNET) -->
+    <div id="guide-download-modal" class="modal guide-modal" aria-hidden="true" role="dialog">
+        <div class="guide-modal-card">
+            <button class="modal-close guide-card-close" aria-label="Close download window">&times;</button>
+            <div class="guide-modal-body">
+                
+                <!-- Left Side: Book Cover Mockup -->
+                <div class="guide-modal-left">
+                    <div class="book-mockup">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-face">
+                            <span class="book-badge">Free Guide</span>
+                            <div class="book-artwork">
+                                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                                    <path d="M50,95 C50,60 25,45 25,22 C25,10 38,4 50,22 C62,4 75,10 75,22 C75,45 50,60 50,95" />
+                                    <path d="M50,75 C45,66 33,60 29,67 C25,74 38,76 49,69" />
+                                    <path d="M50,60 C55,51 67,45 71,52 C75,59 62,61 51,54" />
+                                    <path d="M50,45 C43,36 32,30 28,37 C24,44 37,46 48,39" />
+                                </svg>
+                            </div>
+                            <h4 class="book-title">Move Your Body.<br>Shift Your Mind.</h4>
+                            <p class="book-subtitle">A Simple Guide to Building Consistent Movement Habits</p>
+                            <p class="book-author">By Abigail Stocks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Content & Form -->
+                <div class="guide-modal-right">
+                    
+                    <!-- Pre-submission Form View -->
+                    <div id="guide-form-container">
+                        <span class="modal-tag">Featured Workbook</span>
+                        <h3 class="guide-modal-title">Free Movement & Mindset Guide</h3>
+                        <p class="guide-modal-subtitle">Start building healthier habits with confidence. This beautifully designed workbook will help you reconnect with movement, develop a kinder mindset and create realistic routines that last.</p>
+                        
+                        <div class="guide-bullets-title">Inside you'll discover:</div>
+                        <ul class="guide-bullets-list">
+                            <li><span class="bullet-check">✔</span> Gentle movement ideas</li>
+                            <li><span class="bullet-check">✔</span> Abi's Five-Minute Rule</li>
+                            <li><span class="bullet-check">✔</span> Mindset shifts</li>
+                            <li><span class="bullet-check">✔</span> Weekly planning pages</li>
+                            <li><span class="bullet-check">✔</span> Habit trackers</li>
+                            <li><span class="bullet-check">✔</span> Reflection exercises</li>
+                            <li><span class="bullet-check">✔</span> Your Consistency Promise</li>
+                        </ul>
+
+                        <form id="guide-lead-form" class="guide-lead-form">
+                            <div class="form-group">
+                                <label for="guide-lead-name">First Name</label>
+                                <input type="text" id="guide-lead-name" name="lead-name" required placeholder="Your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="guide-lead-email">Email Address</label>
+                                <input type="email" id="guide-lead-email" name="lead-email" required placeholder="name@example.com">
+                            </div>
+                            <div class="form-consent">
+                                <input type="checkbox" id="guide-consent" name="consent" required>
+                                <label for="guide-consent">I consent to receiving this resource and occasional wellness encouragement from Abigail Stocks. I can unsubscribe at any time.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Send Me My Free Guide</button>
+                            <p class="guide-form-disclosure">Your guide will be emailed instantly, and you'll also be able to download it immediately.</p>
+                        </form>
+                    </div>
+
+                    <!-- Post-submission Success View -->
+                    <div id="guide-success-container" class="guide-success-panel" aria-hidden="true">
+                        <div class="success-header">
+                            <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <h3>Thank you!</h3>
+                        </div>
+                        <p class="success-subheading">Your guide is ready.</p>
+                        <p class="success-text">Check your inbox for your copy, or click below to download it now.</p>
+                        <div class="success-actions">
+                            <a id="guide-direct-download" href="assets/movement-mindset-guide.pdf" download="Movement_and_Mindset_Guide_Abigail_Stocks.pdf" class="btn btn-primary btn-block">Download Guide</a>
+                            <a href="https://calendly.com/example" target="_blank" rel="noopener" class="btn btn-secondary btn-block">Book a Discovery Call</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Script -->
-    <script src="script.js"></script>
+    <script src="script.js?v=1.2"></script>
 </body>
 </html>

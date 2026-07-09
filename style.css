@@ -697,12 +697,23 @@ ul {
     letter-spacing: 0.05em;
     padding: 4px 12px;
     border-radius: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .resource-title {
     font-size: 1.35rem;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.resource-subtitle-card {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-sage-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: -12px;
+    margin-bottom: 16px;
 }
 
 .resource-desc {
@@ -1372,5 +1383,270 @@ ul {
     
     .philosophy-highlight-box {
         padding: 24px;
+    }
+}
+
+/* --- Guide Modal & Mockup Styling --- */
+.guide-modal {
+    background-color: rgba(44, 45, 43, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.guide-modal-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 850px;
+    width: 90%;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--color-beige);
+    overflow: hidden;
+}
+
+.modal.show .guide-modal-card {
+    transform: translateY(0);
+}
+
+.guide-card-close {
+    top: 20px;
+    right: 24px;
+    color: var(--color-charcoal-muted);
+    z-index: 10;
+}
+
+.guide-card-close:hover {
+    color: var(--color-charcoal);
+}
+
+.guide-modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    min-height: 520px;
+}
+
+/* Left Side: Mockup */
+.guide-modal-left {
+    background-color: var(--color-cream-dark);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--color-beige);
+}
+
+.book-mockup {
+    width: 230px;
+    height: 320px;
+    background-color: var(--color-cream);
+    border-radius: 4px 14px 14px 4px;
+    box-shadow: 
+        4px 4px 16px rgba(63, 75, 60, 0.12),
+        16px 16px 36px rgba(63, 75, 60, 0.08);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(63, 75, 60, 0.06);
+}
+
+.book-spine {
+    width: 12px;
+    background: linear-gradient(90deg, rgba(0,0,0,0.12) 0%, rgba(255,255,255,0.08) 40%, rgba(0,0,0,0.04) 100%), var(--color-sage-medium);
+    height: 100%;
+    border-right: 1px solid rgba(0,0,0,0.08);
+}
+
+.book-cover-face {
+    flex-grow: 1;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: var(--color-cream);
+    background-image: radial-gradient(circle at 100% 0%, var(--color-sage-light) 0%, transparent 45%),
+                        radial-gradient(circle at 0% 100%, var(--color-blush-light) 0%, transparent 45%);
+}
+
+.book-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-sage-dark);
+    border: 1px solid var(--color-sage);
+    padding: 2px 8px;
+    border-radius: 20px;
+    background-color: var(--color-sage-light);
+}
+
+.book-artwork {
+    color: var(--color-sage);
+    width: 48px;
+    height: 48px;
+    margin: 8px 0;
+    opacity: 0.8;
+}
+
+.book-title {
+    font-family: var(--font-headings);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-sage-dark);
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.book-subtitle {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    color: var(--color-charcoal-muted);
+    line-height: 1.4;
+    max-width: 160px;
+}
+
+.book-author {
+    font-family: var(--font-headings);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--color-sage-dark);
+    margin-top: 12px;
+    border-top: 1px solid var(--color-beige);
+    width: 70px;
+    padding-top: 4px;
+}
+
+/* Right Side: Content */
+.guide-modal-right {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.guide-modal-title {
+    font-size: 1.6rem;
+    color: var(--color-sage-dark);
+    margin-bottom: 8px;
+}
+
+.guide-modal-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-charcoal-muted);
+    margin-bottom: 16px;
+}
+
+.guide-bullets-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-charcoal);
+    margin-bottom: 8px;
+}
+
+.guide-bullets-list {
+    list-style: none;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 12px;
+}
+
+.guide-bullets-list li {
+    font-size: 0.85rem;
+    color: var(--color-charcoal-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bullet-check {
+    color: var(--color-sage);
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.guide-form-disclosure {
+    font-size: 0.72rem;
+    color: var(--color-charcoal-muted);
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.45;
+}
+
+/* Success Panel */
+.guide-success-panel {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px 0;
+    animation: fadeIn 0.4s ease;
+}
+
+.guide-success-panel.show {
+    display: flex;
+}
+
+.success-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.success-header h3 {
+    font-size: 1.6rem;
+    color: var(--color-sage-dark);
+    margin: 0;
+}
+
+.success-subheading {
+    font-family: var(--font-headings);
+    font-size: 1.25rem;
+    color: var(--color-sage-medium);
+    margin-bottom: 6px;
+}
+
+.success-text {
+    font-size: 0.92rem;
+    color: var(--color-charcoal-muted);
+    margin-bottom: 24px;
+    max-width: 320px;
+}
+
+.success-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 280px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 850px) {
+    .guide-modal-body {
+        grid-template-columns: 1fr;
+    }
+    
+    .guide-modal-left {
+        padding: 32px;
+        border-right: none;
+        border-bottom: 1px solid var(--color-beige);
+    }
+    
+    .guide-modal-right {
+        padding: 32px 24px;
+    }
+    
+    .guide-bullets-list {
+        grid-template-columns: 1fr;
+        gap: 6px;
     }
 }

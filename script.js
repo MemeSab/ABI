@@ -114,11 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             closeLightbox();
             closeDownloadModal();
+            closeGuideModal();
         }
     });
 
     // ==========================================
-    // 4. RESOURCE LEAD MAGNET MODAL
+    // 4. RESOURCE LEAD MAGNET MODAL (STANDARD)
     // ==========================================
     const downloadModal = document.getElementById('download-modal');
     const modalResourceName = document.getElementById('modal-resource-name');
@@ -138,6 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (leadSuccessMessage) {
             leadSuccessMessage.classList.remove('show');
+            // Reset success text back to defaults
+            const successTitle = leadSuccessMessage.querySelector('h4');
+            const successText = leadSuccessMessage.querySelector('p');
+            if (successTitle) successTitle.textContent = "Sent with love!";
+            if (successText) successText.textContent = "Please check your inbox (and spam folder, just in case) for your download link. Happy reading!";
+            const fallbackLink = document.getElementById('manual-download-btn');
+            if (fallbackLink) fallbackLink.remove();
         }
 
         modalResourceName.textContent = resourceName;
@@ -157,7 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const resource = btn.getAttribute('data-resource');
-            openDownloadModal(resource);
+            if (resource === "Movement & Mindset Guide") {
+                openGuideModal();
+            } else {
+                openDownloadModal(resource);
+            }
         });
     });
 
@@ -170,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Lead Form submission simulation
+    // Lead Form submission simulation (Standard)
     if (leadForm) {
         leadForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -212,6 +224,101 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeDownloadModal();
                 }
             }, 5000);
+        });
+    }
+
+    // ==========================================
+    // 4b. FEATURED GUIDE LEAD MAGNET MODAL
+    // ==========================================
+    const guideDownloadModal = document.getElementById('guide-download-modal');
+    const guideDownloadClose = document.querySelector('.guide-card-close');
+    const guideLeadForm = document.getElementById('guide-lead-form');
+    const guideFormContainer = document.getElementById('guide-form-container');
+    const guideSuccessContainer = document.getElementById('guide-success-container');
+
+    const openGuideModal = () => {
+        if (!guideDownloadModal) return;
+        
+        // Reset forms
+        if (guideLeadForm) {
+            guideLeadForm.reset();
+        }
+        if (guideFormContainer) {
+            guideFormContainer.style.display = 'block';
+        }
+        if (guideSuccessContainer) {
+            guideSuccessContainer.classList.remove('show');
+            guideSuccessContainer.setAttribute('aria-hidden', 'true');
+        }
+
+        guideDownloadModal.classList.add('show');
+        guideDownloadModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeGuideModal = () => {
+        if (!guideDownloadModal) return;
+        guideDownloadModal.classList.remove('show');
+        guideDownloadModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    if (guideDownloadClose) {
+        guideDownloadClose.addEventListener('click', closeGuideModal);
+    }
+    
+    if (guideDownloadModal) {
+        guideDownloadModal.addEventListener('click', (e) => {
+            if (e.target === guideDownloadModal) {
+                closeGuideModal();
+            }
+        });
+    }
+
+    if (guideLeadForm) {
+        guideLeadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('guide-lead-name').value;
+            const email = document.getElementById('guide-lead-email').value;
+            const resource = "Movement & Mindset Guide";
+            
+            console.log(`Lead collected: ${name} (${email}) downloaded resource: "${resource}"`);
+            
+            // Submit form via fetch to FormSubmit
+            fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    resource: resource,
+                    _subject: `New Lead Magnet Download: ${resource}`
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('FormSubmit Success:', data))
+            .catch(error => console.error('FormSubmit Error:', error));
+            
+            // Transition to success state
+            if (guideFormContainer) {
+                guideFormContainer.style.display = 'none';
+            }
+            if (guideSuccessContainer) {
+                guideSuccessContainer.classList.add('show');
+                guideSuccessContainer.setAttribute('aria-hidden', 'false');
+            }
+            
+            // Trigger auto-download
+            const autoLink = document.createElement('a');
+            autoLink.href = 'assets/movement-mindset-guide.pdf';
+            autoLink.setAttribute('download', 'Movement_and_Mindset_Guide_Abigail_Stocks.pdf');
+            document.body.appendChild(autoLink);
+            autoLink.click();
+            document.body.removeChild(autoLink);
         });
     }
 
