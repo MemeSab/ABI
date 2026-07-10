@@ -152,14 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
         resourceIdentifierInput.value = resourceName;
         downloadModal.classList.add('show');
         downloadModal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
     };
 
     const closeDownloadModal = () => {
         if (!downloadModal) return;
         downloadModal.classList.remove('show');
         downloadModal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
     };
 
     downloadButtons.forEach(btn => {
@@ -253,14 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         guideDownloadModal.classList.add('show');
         guideDownloadModal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
     };
 
     const closeGuideModal = () => {
         if (!guideDownloadModal) return;
         guideDownloadModal.classList.remove('show');
         guideDownloadModal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
     };
 
     if (guideDownloadClose) {
