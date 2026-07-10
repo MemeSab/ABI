@@ -214,14 +214,49 @@ document.addEventListener('DOMContentLoaded', () => {
             leadForm.style.display = 'none';
             if (leadSuccessMessage) {
                 leadSuccessMessage.classList.add('show');
+                
+                // If it is the Weekly Habits Tracker, trigger immediate download
+                let downloadUrl = '';
+                let filename = '';
+                if (resource === "Weekly Habits Tracker") {
+                    downloadUrl = 'assets/daily-habits-tracker.pdf';
+                    filename = 'Daily_Healthy_Habits_Tracker_Abigail_Stocks.pdf';
+                }
+                
+                if (downloadUrl) {
+                    // Show a direct download button fallback inside the success modal
+                    let fallbackLink = document.getElementById('manual-download-btn');
+                    if (!fallbackLink) {
+                        fallbackLink = document.createElement('a');
+                        fallbackLink.id = 'manual-download-btn';
+                        fallbackLink.className = 'btn btn-primary btn-block';
+                        fallbackLink.style.marginTop = '16px';
+                        fallbackLink.style.display = 'inline-flex';
+                        fallbackLink.style.justifyContent = 'center';
+                        fallbackLink.style.alignItems = 'center';
+                        fallbackLink.textContent = 'Download Tracker Directly';
+                        leadSuccessMessage.appendChild(fallbackLink);
+                    }
+                    fallbackLink.href = downloadUrl;
+                    fallbackLink.setAttribute('download', filename);
+                    
+                    // Trigger auto-download
+                    const autoLink = document.createElement('a');
+                    autoLink.href = downloadUrl;
+                    autoLink.setAttribute('download', filename);
+                    document.body.appendChild(autoLink);
+                    autoLink.click();
+                    document.body.removeChild(autoLink);
+                }
             }
 
-            // Optional: Close modal automatically after 5 seconds
+            // Optional: Close modal automatically after 5-10 seconds
+            const autoCloseDelay = (resource === "Weekly Habits Tracker") ? 10000 : 5000;
             setTimeout(() => {
                 if (downloadModal.classList.contains('show')) {
                     closeDownloadModal();
                 }
-            }, 5000);
+            }, autoCloseDelay);
         });
     }
 

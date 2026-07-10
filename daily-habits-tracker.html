@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Healthy Habits Tracker - Abigail Stocks Coaching</title>
+    <style>
+        /* --- Brand Colors & Variables --- */
+        :root {
+            --color-cream: #FDFCF7;          /* Page background */
+            --color-cream-dark: #F5F3E9;     /* Highlight background */
+            --color-beige: #EBE5DA;          /* Borders & Dividers */
+            --color-sage: #8FA08A;           /* Primary brand accent */
+            --color-sage-medium: #71846E;    /* Strong brand accent */
+            --color-sage-dark: #3F4B3C;      /* Heading text color */
+            --color-blush-light: #FCECE8;    /* Soft secondary accent */
+            --color-blush-medium: #DFA99B;   /* Secondary accent */
+            --color-blush-dark: #A66556;     /* Darker blush */
+            --color-charcoal: #2C2D2B;       /* Readable body text */
+            --color-charcoal-muted: #5F615C; /* Supporting text */
+            --color-white: #FFFFFF;
+            
+            --font-headings: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        /* --- Print Setup --- */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-charcoal);
+            background-color: var(--color-cream);
+            line-height: 1.5;
+            font-size: 10pt;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Page Layout --- */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--color-cream);
+            padding: 20mm 18mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Decorative Botanical Watermark */
+        .page::before {
+            content: '';
+            position: absolute;
+            width: 80mm;
+            height: 80mm;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%238FA08A' stroke-width='0.5' stroke-linecap='round' stroke-opacity='0.08'%3E%3Cpath d='M50,90 C50,60 30,40 30,20 C30,10 40,5 50,20 C60,5 70,10 70,20 C70,40 50,60 50,90 Z'/%3E%3Cpath d='M38,45 C38,45 25,40 20,48 C15,56 25,58 35,50'/%3E%3Cpath d='M62,45 C62,45 75,40 80,48 C85,56 75,58 65,50'/%3E%3Cpath d='M44,30 C44,30 30,22 25,30 C20,38 32,40 40,32'/%3E%3Cpath d='M56,30 C56,30 70,22 75,30 C80,38 68,40 60,32'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .page:nth-child(even)::before {
+            bottom: 10mm;
+            left: 10mm;
+            transform: rotate(-15deg);
+        }
+
+        .page:nth-child(odd)::before {
+            top: 10mm;
+            right: 10mm;
+            transform: rotate(15deg);
+        }
+
+        /* --- Headers & Footers --- */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-beige);
+            padding-bottom: 4mm;
+            margin-bottom: 6mm;
+            z-index: 10;
+        }
+
+        .page-header .brand-name {
+            font-family: var(--font-headings);
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--color-sage-medium);
+            letter-spacing: 0.05em;
+        }
+
+        .page-header .document-title {
+            font-size: 8.5pt;
+            color: var(--color-charcoal-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--color-beige);
+            padding-top: 4mm;
+            margin-top: 6mm;
+            font-size: 8pt;
+            color: var(--color-charcoal-muted);
+            z-index: 10;
+        }
+
+        .page-footer .footer-tagline {
+            font-style: italic;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-headings);
+            color: var(--color-sage-dark);
+            font-weight: 600;
+        }
+
+        /* --- Page 1: Cover Page --- */
+        .cover-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30mm 20mm;
+        }
+
+        .cover-border {
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24mm 15mm;
+            background-color: rgba(253, 252, 247, 0.9);
+            box-shadow: 0 4px 20px rgba(143, 160, 138, 0.05);
+            position: relative;
+        }
+
+        .cover-badge {
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-sage-medium);
+            border: 1px solid var(--color-sage);
+            padding: 1.5mm 4mm;
+            border-radius: 20px;
+            align-self: center;
+            background-color: var(--color-cream);
+        }
+
+        .cover-title-group {
+            margin: 15mm 0;
+        }
+
+        .cover-main-title {
+            font-size: 38pt;
+            line-height: 1.1;
+            margin-bottom: 5mm;
+            color: var(--color-sage-dark);
+        }
+
+        .cover-subtitle {
+            font-size: 14pt;
+            font-family: var(--font-body);
+            color: var(--color-charcoal-muted);
+            font-weight: 400;
+            max-width: 140mm;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        .cover-art-svg {
+            color: var(--color-sage);
+            opacity: 0.75;
+            width: 32mm;
+            height: 32mm;
+            margin: 8mm auto;
+        }
+
+        .cover-footer {
+            font-size: 10pt;
+            color: var(--color-charcoal-muted);
+        }
+
+        .cover-author {
+            font-family: var(--font-headings);
+            font-size: 15pt;
+            font-style: italic;
+            color: var(--color-sage-dark);
+            margin-bottom: 2mm;
+        }
+
+        /* --- Page 2: Welcome / Intro --- */
+        .intro-title {
+            font-size: 24pt;
+            margin-bottom: 6mm;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 10mm;
+            margin-bottom: 8mm;
+        }
+
+        .intro-lead {
+            font-size: 11.5pt;
+            line-height: 1.6;
+            color: var(--color-charcoal);
+            margin-bottom: 4mm;
+        }
+
+        .intro-text {
+            color: var(--color-charcoal-muted);
+            margin-bottom: 4mm;
+            line-height: 1.5;
+        }
+
+        .intro-box {
+            background-color: var(--color-cream-dark);
+            border-radius: var(--radius-md);
+            padding: 6mm;
+            border: 1px solid var(--color-beige);
+        }
+
+        .intro-box-title {
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--color-sage-medium);
+            margin-bottom: 3mm;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .intro-box ul {
+            list-style: none;
+        }
+
+        .intro-box li {
+            font-size: 9.5pt;
+            margin-bottom: 3mm;
+            padding-left: 5mm;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .intro-box li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--color-sage-medium);
+        }
+
+        .abi-signature-block {
+            margin-top: 6mm;
+            display: flex;
+            align-items: center;
+            gap: 4mm;
+        }
+
+        .abi-sig-text {
+            font-family: var(--font-headings);
+            font-size: 13pt;
+            font-style: italic;
+            color: var(--color-sage-medium);
+        }
+
+        /* --- Daily Sheets (Pages 3-9) --- */
+        .daily-meta-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6mm;
+            margin-bottom: 5mm;
+        }
+
+        .meta-field {
+            border-bottom: 1.5px dotted var(--color-sage);
+            padding-bottom: 1mm;
+            font-size: 10pt;
+            color: var(--color-charcoal-muted);
+        }
+
+        .meta-field span {
+            color: var(--color-charcoal);
+            font-weight: 600;
+        }
+
+        .daily-title-row {
+            margin-bottom: 4mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .daily-title-row h2 {
+            font-size: 26pt;
+            color: var(--color-sage-dark);
+        }
+
+        .daily-title-row .day-quote {
+            font-size: 9pt;
+            color: var(--color-charcoal-muted);
+            font-style: italic;
+        }
+
+        .intention-box {
+            background-color: var(--color-blush-light);
+            border-left: 4px solid var(--color-blush-medium);
+            padding: 3mm 4mm;
+            margin-bottom: 5mm;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+
+        .intention-box .intention-title {
+            font-size: 8pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-blush-dark);
+            margin-bottom: 1px;
+        }
+
+        .intention-box .intention-text {
+            font-style: italic;
+            font-size: 9.5pt;
+            color: var(--color-charcoal);
+        }
+
+        .tracker-sections-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5mm;
+            margin-bottom: 5mm;
+        }
+
+        .tracker-column {
+            display: flex;
+            flex-direction: column;
+            gap: 5mm;
+        }
+
+        .tracker-block {
+            border: 1px solid var(--color-beige);
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 4mm 5mm;
+            box-shadow: 0 2px 8px rgba(143,160,138,0.02);
+        }
+
+        .tracker-block-title {
+            font-size: 11pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-sage-dark);
+            border-bottom: 1px solid var(--color-beige);
+            padding-bottom: 2mm;
+            margin-bottom: 3mm;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .checkbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.2mm;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            font-size: 9pt;
+            color: var(--color-charcoal);
+            line-height: 1.3;
+        }
+
+        .custom-check {
+            width: 4mm;
+            height: 4mm;
+            border: 1.5px solid var(--color-sage);
+            border-radius: 3px;
+            margin-right: 2.5mm;
+            margin-top: 0.5mm;
+            flex-shrink: 0;
+            background-color: var(--color-cream);
+        }
+
+        /* Reflection Prompt Fields */
+        .reflection-block {
+            border: 1px solid var(--color-beige);
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 4.5mm 5mm;
+            margin-bottom: 5mm;
+        }
+
+        .reflection-block-title {
+            font-size: 11pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-sage-dark);
+            margin-bottom: 3.5mm;
+        }
+
+        .reflection-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4mm 6mm;
+        }
+
+        .prompt-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .prompt-label {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: var(--color-sage-medium);
+            margin-bottom: 1.5mm;
+        }
+
+        .prompt-line {
+            height: 7mm;
+            border-bottom: 1px dotted var(--color-beige);
+        }
+
+        /* Daily Scores Block */
+        .scores-block {
+            border: 1px solid var(--color-beige);
+            background-color: var(--color-cream-dark);
+            border-radius: var(--radius-md);
+            padding: 4mm 5mm;
+        }
+
+        .scores-block-title {
+            font-size: 11pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-sage-dark);
+            margin-bottom: 3mm;
+            text-align: center;
+        }
+
+        .scores-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 140mm;
+            margin: 0 auto;
+        }
+
+        .score-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5mm;
+        }
+
+        .score-label {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: var(--color-charcoal-muted);
+        }
+
+        .stars-row {
+            display: flex;
+            gap: 0.8mm;
+        }
+
+        .star-shape {
+            width: 3.8mm;
+            height: 3.8mm;
+            color: var(--color-beige);
+            fill: none;
+            stroke: var(--color-sage);
+            stroke-width: 1.5px;
+        }
+
+        /* --- Page 10: Weekly Check-in --- */
+        .checkin-title {
+            font-size: 24pt;
+            margin-bottom: 5mm;
+        }
+
+        .checkin-section {
+            border: 1px solid var(--color-beige);
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 5mm 6mm;
+            margin-bottom: 5mm;
+        }
+
+        .checkin-section-title {
+            font-size: 11.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-sage-dark);
+            border-bottom: 1px solid var(--color-beige);
+            padding-bottom: 2mm;
+            margin-bottom: 4mm;
+        }
+
+        /* Mood Selector Row */
+        .mood-row {
+            display: flex;
+            justify-content: space-around;
+            margin: 2mm 0 4mm 0;
+        }
+
+        .mood-item {
+            display: flex;
+            align-items: center;
+            font-size: 10pt;
+            color: var(--color-charcoal);
+        }
+
+        .mood-circle {
+            width: 4.5mm;
+            height: 4.5mm;
+            border: 1.5px solid var(--color-sage);
+            border-radius: 50%;
+            margin-right: 2.5mm;
+            background-color: var(--color-cream);
+        }
+
+        .mood-emoji {
+            margin-right: 1.5mm;
+            font-size: 12pt;
+        }
+
+        .checkin-textarea {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 4mm;
+        }
+
+        .checkin-textarea .textarea-label {
+            font-size: 9.5pt;
+            font-weight: 700;
+            color: var(--color-sage-medium);
+            margin-bottom: 2mm;
+        }
+
+        .checkin-textarea .textarea-line {
+            height: 7.5mm;
+            border-bottom: 1.5px dotted var(--color-beige);
+            margin-bottom: 1.5mm;
+        }
+
+        /* Weekly Remember Quotes Box */
+        .remember-box {
+            background-color: var(--color-cream-dark);
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-lg);
+            padding: 6mm 8mm;
+            text-align: center;
+        }
+
+        .remember-title {
+            font-family: var(--font-headings);
+            font-size: 16pt;
+            font-style: italic;
+            color: var(--color-sage-medium);
+            margin-bottom: 3.5mm;
+            font-weight: 600;
+        }
+
+        .remember-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2mm;
+            max-width: 130mm;
+            margin: 0 auto;
+        }
+
+        .remember-list li {
+            font-size: 9.5pt;
+            color: var(--color-charcoal-muted);
+            line-height: 1.4;
+        }
+
+        .remember-list li strong {
+            color: var(--color-sage-dark);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ================= PAGE 1: COVER ================= -->
+    <div class="page">
+        <div class="cover-border">
+            <div class="cover-badge">Printable PDF</div>
+            
+            <div class="cover-title-group">
+                <svg class="cover-art-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                    <path d="M50,95 C50,60 25,45 25,22 C25,10 38,4 50,22 C62,4 75,10 75,22 C75,45 50,60 50,95" />
+                    <path d="M50,75 C45,66 33,60 29,67 C25,74 38,76 49,69" />
+                    <path d="M50,60 C55,51 67,45 71,52 C75,59 62,61 51,54" />
+                    <path d="M50,45 C43,36 32,30 28,37 C24,44 37,46 48,39" />
+                </svg>
+                <h1 class="cover-main-title">Daily Healthy<br>Habits Tracker</h1>
+                <p class="cover-subtitle">A simple tool to track consistency over perfection, one small step at a time.</p>
+            </div>
+            
+            <div class="cover-footer">
+                <p class="cover-author">Abigail Stocks</p>
+                <p>Healthy Habits Coaching</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 2: WELCOME ================= -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <h2 class="intro-title">Welcome to Your Tracker</h2>
+            <div class="intro-grid">
+                <div>
+                    <p class="intro-lead">"One small action today is better than waiting for the perfect moment."</p>
+                    <p class="intro-text">This tracker is designed to help you build awareness around your daily habits without judgment. Building sustainable health isn't about checking every box perfectly—it's about the simple, repeating practices that honor your body and restore your mind.</p>
+                    <p class="intro-text">Use this booklet to follow your daily intentions, reflect on your small wins, and map out your week. Remember, if you miss a habit or have an off day, show yourself compassion. Every day is a fresh opportunity to make the next right choice.</p>
+                    <div class="abi-signature-block">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 20px; height: 20px; color: var(--color-sage-medium);"><path d="M12 2C12 2 7 7 7 12C7 17 12 22 12 22C12 22 17 17 17 12C17 7 12 2 12 2Z"/></svg>
+                        <span class="abi-sig-text">Abigail Stocks</span>
+                    </div>
+                </div>
+                
+                <div class="intro-box">
+                    <h3 class="intro-box-title">How to Use This Booklet</h3>
+                    <ul>
+                        <li><strong>Print It Out:</strong> Keep this tracker on your bedside table or workspace where you can see it daily.</li>
+                        <li><strong>Set Your Morning Mindset:</strong> Start your day by checking off morning intentions and defining one simple focus.</li>
+                        <li><strong>Daily Reflection:</strong> Take 3 minutes before bed to review your wins, gratitude, and rate your overall energy.</li>
+                        <li><strong>Weekly Check-in:</strong> At the end of the week, complete the check-in to reflect on your progress and focus areas.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Progress over perfection.</span>
+        </div>
+    </div>
+
+    <!-- ================= PAGES 3-9: DAYS OF THE WEEK ================= -->
+    <!-- Helper macro loop simulation for A4 Print Days -->
+    
+    <!-- Monday -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <div class="daily-meta-bar">
+                <div class="meta-field">Name: <span>___________________________</span></div>
+                <div class="meta-field">Week Beginning: <span>___________________________</span></div>
+            </div>
+            
+            <div class="daily-title-row">
+                <h2>Monday</h2>
+                <span class="day-quote">"Start where you are. Use what you have. Do what you can."</span>
+            </div>
+
+            <div class="intention-box">
+                <div class="intention-title">Today’s Intention</div>
+                <div class="intention-text">“One small action today is better than waiting for the perfect moment.”</div>
+            </div>
+
+            <div class="tracker-sections-grid">
+                <!-- Left Column: Morning & Sleep -->
+                <div class="tracker-column">
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Morning Mindset</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>I woke up with gratitude</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I made my bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I drank a glass of water</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I ate a nourishing breakfast</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I completed 5–10 minutes of movement</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I set my intention for the day</div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Sleep Preparation</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Limited screen time before bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Created a relaxing bedtime routine</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Aim for 7–9 hours sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Mindset & Wellbeing -->
+                <div class="tracker-column">
+                    <div class="tracker-block" style="height: 100%;">
+                        <h3 class="tracker-block-title">Mindset & Wellbeing</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Practised positive self-talk</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Took 5 minutes to breathe or be still</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Read or listened to something inspiring</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Celebrated one win today</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Showed kindness to myself</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Connected with someone I care about</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reflections -->
+            <div class="reflection-block">
+                <h3 class="reflection-block-title">Daily Reflection</h3>
+                <div class="reflection-grid">
+                    <div class="prompt-item">
+                        <span class="prompt-label">My biggest win today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">Something I’m grateful for:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One thing I learned today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One small step I’ll take tomorrow:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Scores -->
+            <div class="scores-block">
+                <h3 class="scores-block-title">Daily Scores</h3>
+                <div class="scores-grid">
+                    <!-- Macro Star rating generation -->
+                    <div class="score-item">
+                        <span class="score-label">Movement</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Nutrition</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Mindset</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Energy</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Sleep</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Every healthy choice counts.</span>
+        </div>
+    </div>
+
+    <!-- Duplicate for Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday -->
+    <!-- Tuesday -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <div class="daily-meta-bar">
+                <div class="meta-field">Name: <span>___________________________</span></div>
+                <div class="meta-field">Week Beginning: <span>___________________________</span></div>
+            </div>
+            
+            <div class="daily-title-row">
+                <h2>Tuesday</h2>
+                <span class="day-quote">"Focus on the step in front of you. That’s all you need to take."</span>
+            </div>
+
+            <div class="intention-box">
+                <div class="intention-title">Today’s Intention</div>
+                <div class="intention-text">“One small action today is better than waiting for the perfect moment.”</div>
+            </div>
+
+            <div class="tracker-sections-grid">
+                <div class="tracker-column">
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Morning Mindset</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>I woke up with gratitude</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I made my bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I drank a glass of water</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I ate a nourishing breakfast</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I completed 5–10 minutes of movement</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I set my intention for the day</div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Sleep Preparation</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Limited screen time before bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Created a relaxing bedtime routine</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Aim for 7–9 hours sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tracker-column">
+                    <div class="tracker-block" style="height: 100%;">
+                        <h3 class="tracker-block-title">Mindset & Wellbeing</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Practised positive self-talk</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Took 5 minutes to breathe or be still</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Read or listened to something inspiring</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Celebrated one win today</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Showed kindness to myself</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Connected with someone I care about</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reflection-block">
+                <h3 class="reflection-block-title">Daily Reflection</h3>
+                <div class="reflection-grid">
+                    <div class="prompt-item">
+                        <span class="prompt-label">My biggest win today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">Something I’m grateful for:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One thing I learned today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One small step I’ll take tomorrow:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scores-block">
+                <h3 class="scores-block-title">Daily Scores</h3>
+                <div class="scores-grid">
+                    <div class="score-item">
+                        <span class="score-label">Movement</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Nutrition</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Mindset</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Energy</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Sleep</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Progress always beats perfection.</span>
+        </div>
+    </div>
+
+    <!-- Wednesday -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <div class="daily-meta-bar">
+                <div class="meta-field">Name: <span>___________________________</span></div>
+                <div class="meta-field">Week Beginning: <span>___________________________</span></div>
+            </div>
+            
+            <div class="daily-title-row">
+                <h2>Wednesday</h2>
+                <span class="day-quote">"Small daily consistency builds an unshakeable foundation of wellness."</span>
+            </div>
+
+            <div class="intention-box">
+                <div class="intention-title">Today’s Intention</div>
+                <div class="intention-text">“One small action today is better than waiting for the perfect moment.”</div>
+            </div>
+
+            <div class="tracker-sections-grid">
+                <div class="tracker-column">
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Morning Mindset</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>I woke up with gratitude</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I made my bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I drank a glass of water</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I ate a nourishing breakfast</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I completed 5–10 minutes of movement</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I set my intention for the day</div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Sleep Preparation</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Limited screen time before bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Created a relaxing bedtime routine</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Aim for 7–9 hours sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tracker-column">
+                    <div class="tracker-block" style="height: 100%;">
+                        <h3 class="tracker-block-title">Mindset & Wellbeing</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Practised positive self-talk</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Took 5 minutes to breathe or be still</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Read or listened to something inspiring</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Celebrated one win today</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Showed kindness to myself</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Connected with someone I care about</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reflection-block">
+                <h3 class="reflection-block-title">Daily Reflection</h3>
+                <div class="reflection-grid">
+                    <div class="prompt-item">
+                        <span class="prompt-label">My biggest win today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">Something I’m grateful for:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One thing I learned today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One small step I’ll take tomorrow:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scores-block">
+                <h3 class="scores-block-title">Daily Scores</h3>
+                <div class="scores-grid">
+                    <div class="score-item">
+                        <span class="score-label">Movement</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Nutrition</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Mindset</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Energy</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Sleep</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Progress over perfection.</span>
+        </div>
+    </div>
+
+    <!-- Thursday -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <div class="daily-meta-bar">
+                <div class="meta-field">Name: <span>___________________________</span></div>
+                <div class="meta-field">Week Beginning: <span>___________________________</span></div>
+            </div>
+            
+            <div class="daily-title-row">
+                <h2>Thursday</h2>
+                <span class="day-quote">"Be gentle with yourself. You are building habits for a lifetime."</span>
+            </div>
+
+            <div class="intention-box">
+                <div class="intention-title">Today’s Intention</div>
+                <div class="intention-text">“One small action today is better than waiting for the perfect moment.”</div>
+            </div>
+
+            <div class="tracker-sections-grid">
+                <div class="tracker-column">
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Morning Mindset</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>I woke up with gratitude</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I made my bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I drank a glass of water</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I ate a nourishing breakfast</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I completed 5–10 minutes of movement</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I set my intention for the day</div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Sleep Preparation</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Limited screen time before bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Created a relaxing bedtime routine</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Aim for 7–9 hours sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tracker-column">
+                    <div class="tracker-block" style="height: 100%;">
+                        <h3 class="tracker-block-title">Mindset & Wellbeing</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Practised positive self-talk</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Took 5 minutes to breathe or be still</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Read or listened to something inspiring</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Celebrated one win today</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Showed kindness to myself</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Connected with someone I care about</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reflection-block">
+                <h3 class="reflection-block-title">Daily Reflection</h3>
+                <div class="reflection-grid">
+                    <div class="prompt-item">
+                        <span class="prompt-label">My biggest win today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">Something I’m grateful for:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One thing I learned today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One small step I’ll take tomorrow:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scores-block">
+                <h3 class="scores-block-title">Daily Scores</h3>
+                <div class="scores-grid">
+                    <div class="score-item">
+                        <span class="score-label">Movement</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Nutrition</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Mindset</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Energy</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Sleep</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Progress always beats perfection.</span>
+        </div>
+    </div>
+
+    <!-- Friday -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <div class="daily-meta-bar">
+                <div class="meta-field">Name: <span>___________________________</span></div>
+                <div class="meta-field">Week Beginning: <span>___________________________</span></div>
+            </div>
+            
+            <div class="daily-title-row">
+                <h2>Friday</h2>
+                <span class="day-quote">"Take a deep breath. You are doing a wonderful job honoring your body."</span>
+            </div>
+
+            <div class="intention-box">
+                <div class="intention-title">Today’s Intention</div>
+                <div class="intention-text">“One small action today is better than waiting for the perfect moment.”</div>
+            </div>
+
+            <div class="tracker-sections-grid">
+                <div class="tracker-column">
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Morning Mindset</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>I woke up with gratitude</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I made my bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I drank a glass of water</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I ate a nourishing breakfast</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I completed 5–10 minutes of movement</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I set my intention for the day</div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Sleep Preparation</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Limited screen time before bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Created a relaxing bedtime routine</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Aim for 7–9 hours sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tracker-column">
+                    <div class="tracker-block" style="height: 100%;">
+                        <h3 class="tracker-block-title">Mindset & Wellbeing</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Practised positive self-talk</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Took 5 minutes to breathe or be still</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Read or listened to something inspiring</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Celebrated one win today</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Showed kindness to myself</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Connected with someone I care about</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reflection-block">
+                <h3 class="reflection-block-title">Daily Reflection</h3>
+                <div class="reflection-grid">
+                    <div class="prompt-item">
+                        <span class="prompt-label">My biggest win today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">Something I’m grateful for:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One thing I learned today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One small step I’ll take tomorrow:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scores-block">
+                <h3 class="scores-block-title">Daily Scores</h3>
+                <div class="scores-grid">
+                    <div class="score-item">
+                        <span class="score-label">Movement</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Nutrition</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Mindset</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Energy</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Sleep</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Progress always beats perfection.</span>
+        </div>
+    </div>
+
+    <!-- Saturday -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <div class="daily-meta-bar">
+                <div class="meta-field">Name: <span>___________________________</span></div>
+                <div class="meta-field">Week Beginning: <span>___________________________</span></div>
+            </div>
+            
+            <div class="daily-title-row">
+                <h2>Saturday</h2>
+                <span class="day-quote">"Wellness is a journey of self-love, not a restriction checklist."</span>
+            </div>
+
+            <div class="intention-box">
+                <div class="intention-title">Today’s Intention</div>
+                <div class="intention-text">“One small action today is better than waiting for the perfect moment.”</div>
+            </div>
+
+            <div class="tracker-sections-grid">
+                <div class="tracker-column">
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Morning Mindset</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>I woke up with gratitude</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I made my bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I drank a glass of water</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I ate a nourishing breakfast</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I completed 5–10 minutes of movement</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I set my intention for the day</div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Sleep Preparation</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Limited screen time before bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Created a relaxing bedtime routine</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Aim for 7–9 hours sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tracker-column">
+                    <div class="tracker-block" style="height: 100%;">
+                        <h3 class="tracker-block-title">Mindset & Wellbeing</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Practised positive self-talk</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Took 5 minutes to breathe or be still</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Read or listened to something inspiring</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Celebrated one win today</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Showed kindness to myself</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Connected with someone I care about</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reflection-block">
+                <h3 class="reflection-block-title">Daily Reflection</h3>
+                <div class="reflection-grid">
+                    <div class="prompt-item">
+                        <span class="prompt-label">My biggest win today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">Something I’m grateful for:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One thing I learned today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One small step I’ll take tomorrow:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scores-block">
+                <h3 class="scores-block-title">Daily Scores</h3>
+                <div class="scores-grid">
+                    <div class="score-item">
+                        <span class="score-label">Movement</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Nutrition</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Mindset</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Energy</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Sleep</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Progress always beats perfection.</span>
+        </div>
+    </div>
+
+    <!-- Sunday -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <div class="daily-meta-bar">
+                <div class="meta-field">Name: <span>___________________________</span></div>
+                <div class="meta-field">Week Beginning: <span>___________________________</span></div>
+            </div>
+            
+            <div class="daily-title-row">
+                <h2>Sunday</h2>
+                <span class="day-quote">"Rest and reflection are just as productive as action."</span>
+            </div>
+
+            <div class="intention-box">
+                <div class="intention-title">Today’s Intention</div>
+                <div class="intention-text">“One small action today is better than waiting for the perfect moment.”</div>
+            </div>
+
+            <div class="tracker-sections-grid">
+                <div class="tracker-column">
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Morning Mindset</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>I woke up with gratitude</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I made my bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I drank a glass of water</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I ate a nourishing breakfast</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I completed 5–10 minutes of movement</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>I set my intention for the day</div>
+                        </div>
+                    </div>
+
+                    <div class="tracker-block">
+                        <h3 class="tracker-block-title">Sleep Preparation</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Limited screen time before bed</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Created a relaxing bedtime routine</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Aim for 7–9 hours sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tracker-column">
+                    <div class="tracker-block" style="height: 100%;">
+                        <h3 class="tracker-block-title">Mindset & Wellbeing</h3>
+                        <div class="checkbox-list">
+                            <div class="checkbox-item"><div class="custom-check"></div>Practised positive self-talk</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Took 5 minutes to breathe or be still</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Read or listened to something inspiring</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Celebrated one win today</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Showed kindness to myself</div>
+                            <div class="checkbox-item"><div class="custom-check"></div>Connected with someone I care about</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reflection-block">
+                <h3 class="reflection-block-title">Daily Reflection</h3>
+                <div class="reflection-grid">
+                    <div class="prompt-item">
+                        <span class="prompt-label">My biggest win today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">Something I’m grateful for:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One thing I learned today:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                    <div class="prompt-item">
+                        <span class="prompt-label">One small step I’ll take tomorrow:</span>
+                        <div class="prompt-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scores-block">
+                <h3 class="scores-block-title">Daily Scores</h3>
+                <div class="scores-grid">
+                    <div class="score-item">
+                        <span class="score-label">Movement</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Nutrition</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Mindset</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Energy</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Sleep</span>
+                        <div class="stars-row">
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="star-shape" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Progress always beats perfection.</span>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 10: WEEKLY CHECK-IN ================= -->
+    <div class="page">
+        <div class="page-header">
+            <span class="brand-name">Abigail Stocks Coaching</span>
+            <span class="document-title">Daily Habits Tracker</span>
+        </div>
+        
+        <div>
+            <h2 class="checkin-title">Weekly Check-in</h2>
+            
+            <!-- Mood check -->
+            <div class="checkin-section">
+                <h3 class="checkin-section-title">How do I feel compared with last week?</h3>
+                <div class="mood-row">
+                    <div class="mood-item"><div class="mood-circle"></div><span class="mood-emoji">😊</span> Much Better</div>
+                    <div class="mood-item"><div class="mood-circle"></div><span class="mood-emoji">🙂</span> Better</div>
+                    <div class="mood-item"><div class="mood-circle"></div><span class="mood-emoji">😐</span> About the Same</div>
+                    <div class="mood-item"><div class="mood-circle"></div><span class="mood-emoji">🙁</span> Struggled</div>
+                </div>
+            </div>
+
+            <!-- Reflections -->
+            <div class="checkin-section">
+                <div class="checkin-textarea">
+                    <span class="textarea-label">The habit I’m most proud of this week:</span>
+                    <div class="textarea-line"></div>
+                    <div class="textarea-line"></div>
+                </div>
+
+                <div class="checkin-textarea" style="margin-bottom: 0;">
+                    <span class="textarea-label">The habit I want to focus on next week:</span>
+                    <div class="textarea-line"></div>
+                    <div class="textarea-line"></div>
+                </div>
+            </div>
+
+            <!-- Remember Encouragement Quotes -->
+            <div class="remember-box">
+                <h3 class="remember-title">Remember</h3>
+                <ul class="remember-list">
+                    <li>Healthy isn’t about being <strong>perfect</strong>.</li>
+                    <li>It’s about consistently choosing the <strong>next right step</strong>.</li>
+                    <li>Every healthy choice counts. Every day is a <strong>fresh opportunity</strong>.</li>
+                    <li>Progress always beats <strong>perfection</strong>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>abigailstockscoaching@gmail.com</span>
+            <span class="footer-tagline">Progress always beats perfection.</span>
+        </div>
+    </div>
+
+</body>
+</html>
