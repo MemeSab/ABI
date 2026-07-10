@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Strive Podcast with Abigail Stocks. Conversations rooted in faith, wellness, and healthy habits. Join the podcast waitlist today.">
+    <title>Strive Podcast | Abigail Stocks Coaching</title>
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co;">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=1.2">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-area" aria-label="Abigail Stocks Coaching - Home">
+                <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 26px; height: 26px; color: var(--color-sage);"><path d="M12 2C12 2 7 7 7 12C7 17 12 22 12 22C12 22 17 17 17 12C17 7 12 2 12 2Z"/><path d="M12 2V22"/></svg>
+                <span class="logo-text">Abigail Stocks Coaching</span>
+            </a>
+            
+            <button class="nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="primary-navigation">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+            
+            <nav id="primary-navigation" class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#philosophy" class="nav-link">Philosophy</a></li>
+                    <li><a href="index.html#pricing" class="nav-link">Investment</a></li>
+                    <li><a href="index.html#testimonials" class="nav-link">Kind Words</a></li>
+                    <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+                    <li><a href="#" class="nav-link active">Podcast</a></li>
+                    <li><a href="index.html#contact" class="nav-btn-outline">Book a Call</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Podcast Hero Section -->
+        <section class="podcast-hero-section">
+            <div class="section-container podcast-grid-layout">
+                <!-- Left: Strive Logo & Media elements -->
+                <div class="podcast-logo-visual">
+                    <div class="podcast-logo-wrapper">
+                        <img src="assets/logo.png" alt="Strive Logo" class="podcast-logo-img">
+                    </div>
+                </div>
+                
+                <!-- Right: Copy & Waitlist Form -->
+                <div class="podcast-hero-content">
+                    <span class="section-tag">Coming Soon</span>
+                    <h1 class="podcast-title">Strive Podcast</h1>
+                    <p class="podcast-tagline">Conversations rooted in faith, wellness, and healthy habits.</p>
+                    
+                    <div class="podcast-description">
+                        <p>The <strong>Strive Podcast</strong> is a space dedicated to exploring the intersection of faith, daily wellbeing, and the gentle art of consistent habits. Hosted by Abigail Stocks, these conversations will focus on honoring our bodies, renewing our minds, and finding peace in the daily rhythm of life.</p>
+                        <p>We are currently preparing a wonderful lineup of episodes, guest interviews, and practical habit coaching sessions designed to encourage and build you up.</p>
+                    </div>
+
+                    <!-- Waitlist Form Container -->
+                    <div class="podcast-form-box">
+                        <h3 class="podcast-form-title">Join the Podcast Waitlist</h3>
+                        <p class="podcast-form-subtitle">Be the first to know when the initial episode drops and get exclusive subscriber-only wellness guides.</p>
+                        
+                        <form id="podcast-waitlist-form" class="podcast-waitlist-form">
+                            <!-- Honeypot Spam Protection -->
+                            <input type="text" name="_honey" style="display:none">
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="waitlist-name">First Name</label>
+                                    <input type="text" id="waitlist-name" name="name" required placeholder="Your name">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="waitlist-email">Email Address</label>
+                                    <input type="email" id="waitlist-email" name="email" required placeholder="name@example.com">
+                                </div>
+                            </div>
+                            <div class="form-consent">
+                                <input type="checkbox" id="waitlist-consent" name="consent" required>
+                                <label for="waitlist-consent">I consent to receiving podcast updates and occasional habit encouragement from Abigail Stocks. I can unsubscribe at any time.</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Notify Me</button>
+                        </form>
+                        
+                        <div id="waitlist-success" class="form-success" aria-hidden="true">
+                            <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <div>
+                                <h4>You're on the list!</h4>
+                                <p>Thank you. We will send you an email as soon as our first episode goes live. Keep striving!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 24px; height: 24px; color: var(--color-sage);"><path d="M12 2C12 2 7 7 7 12C7 17 12 22 12 22C12 22 17 17 17 12C17 7 12 2 12 2Z"/><path d="M12 2V22"/></svg>
+                    <span class="logo-text">Abigail Stocks</span>
+                </div>
+                <p class="footer-tagline">Healthy Habits Coach</p>
+                <p class="footer-desc">Helping women build realistic, sustainable health and wellbeing practices through small, consistent daily habits.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4 class="footer-title">Explore</h4>
+                <ul>
+                    <li><a href="index.html#about">About Abi</a></li>
+                    <li><a href="index.html#philosophy">Coaching Philosophy</a></li>
+                    <li><a href="index.html#pricing">Coaching Investment</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#resources">Coaching Resources</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-legal">
+                <h4 class="footer-title">Contact</h4>
+                <ul>
+                    <li><a href="mailto:abigailstockscoaching@gmail.com">abigailstockscoaching@gmail.com</a></li>
+                    <li><a href="https://calendly.com/example" target="_blank" rel="noopener">Calendly Booking</a></li>
+                    <li class="footer-socials">
+                        <a href="https://www.instagram.com/abigailstocks6/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/abigail.stocks" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/abigail-stocks-6b395a417/" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Abigail Stocks Coaching. All rights reserved. • Helping Women Create Sustainable Wellness Through Consistent Daily Habits</p>
+        </div>
+    </footer>
+
+    <!-- JS script to handle drawer navigation and waitlist form submission -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile navigation toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !isExpanded);
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('show');
+                });
+            }
+
+            // Podcast Waitlist form submission
+            const waitlistForm = document.getElementById('podcast-waitlist-form');
+            const successBox = document.getElementById('waitlist-success');
+
+            if (waitlistForm && successBox) {
+                waitlistForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('waitlist-name').value;
+                    const email = document.getElementById('waitlist-email').value;
+                    
+                    // Submit waitlist details to FormSubmit
+                    fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
+                        method: "POST",
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            _subject: "New Strive Podcast Waitlist Signup"
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log('Waitlist Signup Success:', data))
+                    .catch(error => console.error('Waitlist Signup Error:', error));
+                    
+                    // Transition to success screen
+                    waitlistForm.style.display = 'none';
+                    successBox.classList.add('show');
+                    successBox.setAttribute('aria-hidden', 'false');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

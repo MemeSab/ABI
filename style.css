@@ -1650,3 +1650,287 @@ ul {
         gap: 6px;
     }
 }
+
+/* --- SVG Logo & Branding Animation --- */
+.logo-icon-svg {
+    flex-shrink: 0;
+    transition: transform var(--transition);
+}
+
+.logo-area:hover .logo-icon-svg {
+    transform: rotate(15deg);
+}
+
+/* --- Pricing / Coaching Investment Section --- */
+.pricing-section {
+    background-color: var(--color-cream);
+    padding: 100px 0;
+    position: relative;
+    border-top: 1px solid var(--color-beige);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    align-items: stretch;
+}
+
+.pricing-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 40px 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-beige);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.pricing-card.highlighted {
+    border: 2px solid var(--color-sage-medium);
+    background-color: var(--color-cream-dark);
+}
+
+.pricing-card.popular {
+    border: 2px solid var(--color-blush-medium);
+}
+
+.card-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-sage-medium);
+    color: var(--color-white);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 6px 16px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(119, 134, 115, 0.2);
+    white-space: nowrap;
+}
+
+.pricing-card.popular .card-badge {
+    background-color: var(--color-blush-medium);
+}
+
+.pricing-card-title {
+    font-family: var(--font-headings);
+    font-size: 1.5rem;
+    color: var(--color-sage-dark);
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.pricing-card-desc {
+    font-size: 0.85rem;
+    color: var(--color-charcoal-muted);
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    flex-grow: 0;
+    min-height: 60px;
+}
+
+.pricing-value {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-bottom: 12px;
+    color: var(--color-charcoal);
+}
+
+.price-currency {
+    font-size: 1.35rem;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+.price-amount {
+    font-size: 2.8rem;
+    font-weight: 700;
+    font-family: var(--font-headings);
+    line-height: 1;
+    color: var(--color-sage-dark);
+}
+
+.price-period {
+    font-size: 0.85rem;
+    color: var(--color-charcoal-muted);
+    margin-left: 4px;
+}
+
+.price-saving {
+    font-size: 0.78rem;
+    color: var(--color-blush-dark);
+    background-color: var(--color-blush-light);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    flex-grow: 1;
+    border-top: 1px solid var(--color-beige);
+    padding-top: 20px;
+}
+
+.pricing-features li {
+    font-size: 0.85rem;
+    color: var(--color-charcoal);
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 18px;
+    line-height: 1.4;
+}
+
+.pricing-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-sage);
+    font-weight: bold;
+}
+
+.pricing-card .btn {
+    margin-top: auto;
+}
+
+.pricing-note {
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+.pricing-note a {
+    color: var(--color-sage-dark);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* --- Strive Podcast Landing Page --- */
+.podcast-hero-section {
+    background-color: var(--color-cream);
+    padding: 140px 0 100px 0;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--color-beige);
+}
+
+.podcast-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.podcast-logo-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.podcast-logo-wrapper {
+    background-color: var(--color-white);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: 
+        0 10px 30px rgba(63, 75, 60, 0.08),
+        0 30px 60px rgba(63, 75, 60, 0.04);
+    border: 1px solid var(--color-beige);
+    max-width: 320px;
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform var(--transition);
+}
+
+.podcast-logo-wrapper:hover {
+    transform: scale(1.03);
+}
+
+.podcast-logo-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.podcast-hero-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.podcast-title {
+    font-family: var(--font-headings);
+    font-size: 2.8rem;
+    color: var(--color-sage-dark);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    line-height: 1.1;
+}
+
+.podcast-tagline {
+    font-family: var(--font-headings);
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--color-sage-medium);
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.podcast-description p {
+    font-size: 0.95rem;
+    color: var(--color-charcoal-muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.podcast-form-box {
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-beige);
+    margin-top: 24px;
+}
+
+.podcast-form-title {
+    font-size: 1.1rem;
+    color: var(--color-sage-dark);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.podcast-form-subtitle {
+    font-size: 0.82rem;
+    color: var(--color-charcoal-muted);
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+.podcast-waitlist-form .form-group {
+    margin-bottom: 16px;
+}
+
+.podcast-waitlist-form .form-consent {
+    margin: 16px 0 20px 0;
+}
