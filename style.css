@@ -1084,9 +1084,11 @@ ul {
     opacity: 0;
     pointer-events: none;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     transition: opacity 0.4s ease;
+    overflow-y: auto;
+    padding: 40px 0;
 }
 
 .modal.show {
@@ -1151,6 +1153,7 @@ ul {
     max-width: 500px;
     width: 90%;
     position: relative;
+    margin: auto;
     transform: translateY(20px);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid var(--color-beige);
@@ -1400,6 +1403,7 @@ ul {
     max-width: 850px;
     width: 90%;
     position: relative;
+    margin: auto;
     transform: translateY(20px);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid var(--color-beige);
@@ -1636,13 +1640,13 @@ ul {
     }
     
     .guide-modal-left {
-        padding: 32px;
+        padding: 24px;
         border-right: none;
         border-bottom: 1px solid var(--color-beige);
     }
     
     .guide-modal-right {
-        padding: 32px 24px;
+        padding: 24px 20px;
     }
     
     .guide-bullets-list {
