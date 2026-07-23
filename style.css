@@ -1845,7 +1845,7 @@ ul {
 
 .podcast-grid-layout {
     display: grid;
-    grid-template-columns: 1fr 1.25fr;
+    grid-template-columns: 1.1fr 1fr;
     gap: 60px;
     align-items: center;
 }
@@ -1861,10 +1861,10 @@ ul {
     padding: 0;
     border-radius: var(--radius-lg);
     box-shadow: 
-        0 16px 40px rgba(63, 75, 60, 0.12),
-        0 4px 12px rgba(63, 75, 60, 0.05);
+        0 20px 48px rgba(63, 75, 60, 0.14),
+        0 6px 16px rgba(63, 75, 60, 0.06);
     border: 1px solid rgba(235, 229, 218, 0.6);
-    max-width: 400px;
+    max-width: 500px;
     width: 100%;
     overflow: hidden;
     display: flex;
