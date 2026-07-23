@@ -1858,28 +1858,31 @@ ul {
 
 .podcast-logo-wrapper {
     background-color: var(--color-white);
-    padding: 40px;
-    border-radius: var(--radius-lg);
+    padding: 12px;
+    border-radius: var(--radius-md);
     box-shadow: 
         0 10px 30px rgba(63, 75, 60, 0.08),
         0 30px 60px rgba(63, 75, 60, 0.04);
     border: 1px solid var(--color-beige);
-    max-width: 320px;
+    max-width: 360px;
     width: 100%;
-    aspect-ratio: 1;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .podcast-logo-wrapper:hover {
-    transform: scale(1.03);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(63, 75, 60, 0.12);
 }
 
 .podcast-logo-img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    border-radius: calc(var(--radius-md) - 4px);
+    display: block;
 }
 
 .podcast-hero-content {
