@@ -12,6 +12,7 @@
     
     --color-blush: #E2B3AC;          /* Accent blush pink */
     --color-blush-light: #F7ECEB;    /* Soft pink background tint */
+    --color-blush-medium: #C48E86;   /* Medium accent blush */
     --color-blush-dark: #A5736C;     /* Contrast blush for buttons or hover */
     
     --color-charcoal: #2C2D2B;       /* Text color - soft charcoal for readability */
@@ -1705,15 +1706,15 @@ ul {
 }
 
 .pricing-card.popular {
-    border: 2px solid var(--color-blush-medium);
+    border: 2px solid var(--color-blush-dark);
 }
 
 .card-badge {
     position: absolute;
-    top: -15px;
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--color-sage-medium);
+    background-color: var(--color-sage-dark);
     color: var(--color-white);
     font-size: 0.72rem;
     font-weight: 700;
@@ -1721,12 +1722,14 @@ ul {
     letter-spacing: 0.1em;
     padding: 6px 16px;
     border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(119, 134, 115, 0.2);
+    box-shadow: 0 4px 10px rgba(165, 115, 108, 0.25);
     white-space: nowrap;
+    z-index: 5;
 }
 
 .pricing-card.popular .card-badge {
-    background-color: var(--color-blush-medium);
+    background-color: var(--color-blush-dark);
+    color: var(--color-white);
 }
 
 .pricing-card-title {
