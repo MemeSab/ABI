@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/podcast", "dest": "/podcast.html" },
+    { "src": "/brand-suite", "dest": "/brand-suite.html" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
