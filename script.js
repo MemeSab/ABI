@@ -215,10 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (leadSuccessMessage) {
                 leadSuccessMessage.classList.add('show');
                 
-                // If it is the Weekly Habits Tracker, trigger immediate download
+                // If it is any Habit Tracker resource, trigger immediate download
                 let downloadUrl = '';
                 let filename = '';
-                if (resource === "Weekly Habits Tracker") {
+                const isHabitTracker = resource.toLowerCase().includes("habit") || resource.toLowerCase().includes("tracker");
+                if (isHabitTracker) {
                     downloadUrl = 'assets/daily-habits-tracker.pdf';
                     filename = 'Daily_Healthy_Habits_Tracker_Abigail_Stocks.pdf';
                 }
@@ -251,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Optional: Close modal automatically after 5-10 seconds
-            const autoCloseDelay = (resource === "Weekly Habits Tracker") ? 10000 : 5000;
+            const autoCloseDelay = isHabitTracker ? 10000 : 5000;
             setTimeout(() => {
                 if (downloadModal.classList.contains('show')) {
                     closeDownloadModal();
