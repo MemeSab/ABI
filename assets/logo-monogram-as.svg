@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%" aria-label="Abigail Stocks AS Monogram">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&amp;display=swap');
+            .monogram-text {
+                font-family: 'Alex Brush', 'Cormorant Garamond', cursive;
+                font-size: 135px;
+                fill: #2C2D2B;
+                font-weight: 400;
+                text-anchor: middle;
+            }
+        </style>
+    </defs>
+    
+    <!-- Background Circle for Tab Visibility -->
+    <circle cx="120" cy="120" r="115" fill="#FCFAF6" />
+    
+    <!-- Outer Elegant Circle Accent -->
+    <circle cx="120" cy="120" r="108" fill="none" stroke="#EBE5DA" stroke-width="2" />
+    <circle cx="120" cy="120" r="100" fill="none" stroke="#3F4B3C" stroke-width="1.2" opacity="0.5" />
+    
+    <!-- AS Monogram Text -->
+    <text x="120" y="152" class="monogram-text">AS</text>
+</svg>
