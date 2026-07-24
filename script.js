@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Lead collected: ${name} (${email}) downloaded resource: "${resource}"`);
             
             // Submit form via fetch to FormSubmit
-            fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
+            fetch("https://formsubmit.co/ajax/hello@abigailstocks.com", {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Lead collected: ${name} (${email}) downloaded resource: "${resource}"`);
             
             // Submit form via fetch to FormSubmit
-            fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
+            fetch("https://formsubmit.co/ajax/hello@abigailstocks.com", {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Contact Form Submission: ${name} (${email}) - Message: ${message}`);
             
             // Submit form via fetch to FormSubmit
-            fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
+            fetch("https://formsubmit.co/ajax/hello@abigailstocks.com", {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
