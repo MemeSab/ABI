@@ -132,6 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const openDownloadModal = (resourceName) => {
         if (!downloadModal) return;
         
+        const isComingSoon = resourceName === "Morning Wellness Checklist" || resourceName === "Weekly Reflection Prompts";
+        const modalFormDesc = downloadModal.querySelector('.modal-desc');
+        const submitBtn = downloadModal.querySelector('button[type="submit"]');
+
         // Reset modal forms
         if (leadForm) {
             leadForm.style.display = 'block';
@@ -142,10 +146,24 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reset success text back to defaults
             const successTitle = leadSuccessMessage.querySelector('h4');
             const successText = leadSuccessMessage.querySelector('p');
-            if (successTitle) successTitle.textContent = "Sent with love!";
-            if (successText) successText.textContent = "Please check your inbox (and spam folder, just in case) for your download link. Happy reading!";
+            if (isComingSoon) {
+                if (successTitle) successTitle.textContent = "You're on the list!";
+                if (successText) successText.textContent = "Thank you! We will email you your free download link as soon as Abigail publishes this guide.";
+            } else {
+                if (successTitle) successTitle.textContent = "Sent with love!";
+                if (successText) successText.textContent = "Please check your inbox (and spam folder, just in case) for your download link. Happy reading!";
+            }
             const fallbackLink = document.getElementById('manual-download-btn');
             if (fallbackLink) fallbackLink.remove();
+        }
+
+        if (modalFormDesc) {
+            modalFormDesc.textContent = isComingSoon 
+                ? "Abigail is currently crafting this resource. Enter your email below to be notified the moment it launches!" 
+                : "Enter your details below to instantly receive your free wellness download.";
+        }
+        if (submitBtn) {
+            submitBtn.textContent = isComingSoon ? "Join Resource Waitlist" : "Get My Free Guide";
         }
 
         modalResourceName.textContent = resourceName;
