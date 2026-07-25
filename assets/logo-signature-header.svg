@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 140" width="100%" height="100%" aria-label="Abigail Stocks Coaching Logo">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap');
+            svg { overflow: visible; }
+            .brand-script {
+                font-family: 'Alex Brush', 'Cormorant Garamond', cursive;
+                font-size: 58px;
+                fill: #2C2D2B;
+                font-weight: 400;
+            }
+            .brand-title {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 15px;
+                font-weight: 600;
+                letter-spacing: 0.42em;
+                fill: #2C2D2B;
+                text-transform: uppercase;
+            }
+            .brand-sub {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 9.5px;
+                font-weight: 500;
+                letter-spacing: 0.32em;
+                fill: #737570;
+                text-transform: uppercase;
+            }
+        </style>
+    </defs>
+    <g transform="translate(15, 20)">
+        <!-- Signature "Abigail" -->
+        <text x="10" y="58" class="brand-script">Abigail</text>
+        
+        <!-- Divider / Spacing Line -->
+        <line x1="190" y1="28" x2="190" y2="82" stroke="#EBE5DA" stroke-width="1" />
+
+        <!-- Block "STOCKS COACHING" -->
+        <text x="215" y="52" class="brand-title">STOCKS</text>
+        <text x="217" y="74" class="brand-sub">COACHING</text>
+    </g>
+</svg>

@@ -351,6 +351,29 @@ ul {
     position: relative;
     z-index: 2;
     width: 100%;
+    height: auto;
+    display: block;
+}
+
+.floating-quote {
+    position: absolute;
+    bottom: 24px;
+    left: -20px;
+    background-color: var(--color-white);
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    z-index: 3;
+    max-width: 280px;
+    border-left: 4px solid var(--color-blush);
+}
+
+.float-quote-text {
+    font-family: var(--font-headings);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--color-sage-dark);
+    line-height: 1.4;
 }
 
 .floating-quote {

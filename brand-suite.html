@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Suite Showcase | Abigail Stocks Coaching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #FCFAF6;
+            --primary: #3F4B3C;
+            --accent: #A5736C;
+            --accent-light: #F7ECEB;
+            --text-main: #5F615C;
+            --text-dark: #2C2D2B;
+            --border: #EBE5DA;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-canvas);
+            padding: 60px 30px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        header.suite-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .suite-header h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .suite-header p {
+            font-size: 1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+        }
+
+        .featured-banner {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F9F6F0 100%);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(165, 115, 108, 0.08);
+        }
+
+        .featured-tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .section-heading {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .logo-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 35px 30px;
+            box-shadow: 0 4px 20px rgba(63, 75, 60, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(63, 75, 60, 0.08);
+        }
+
+        .logo-card-tag {
+            background-color: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        .logo-preview-box {
+            width: 100%;
+            min-height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-canvas);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            overflow: visible;
+        }
+
+        .logo-preview-box img {
+            max-width: 100%;
+            max-height: 170px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .logo-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .logo-desc {
+            font-size: 0.88rem;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        /* Mockup Section */
+        .mockup-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 45px;
+            margin-bottom: 50px;
+        }
+
+        .mockup-section h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .header-mockup-bar {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+        }
+
+        .header-mockup-bar img {
+            height: 54px;
+            width: auto;
+        }
+
+        .header-mockup-nav {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 40px;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background-color: #FFFFFF;
+                -webkit-print-color-adjust: exact;
+            }
+            .container {
+                max-width: 100%;
+                padding: 20px 0;
+            }
+            .logo-card, .mockup-section, .featured-banner {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                box-shadow: none !important;
+            }
+            .header-mockup-bar {
+                box-shadow: none !important;
+                border: 1px solid #EBE5DA;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="suite-header">
+            <h1>Abigail Stocks Coaching</h1>
+            <p>Bespoke Brand Identity &amp; Vector Logo Suite</p>
+        </header>
+
+        <!-- FEATURED: Jody Moore Style Lockup -->
+        <div class="featured-banner">
+            <span class="featured-tag">★ Featured — Jody Moore Inspired Style</span>
+            <div class="featured-grid">
+                <div class="logo-card" style="box-shadow: none; border: 1px solid var(--border); margin: 0;">
+                    <div class="logo-preview-box" style="background: #FFFFFF;">
+                        <img src="assets/logo-jody-moore-style.svg" alt="Jody Moore Inspired Logo Horizontal" style="max-height: 160px;">
+                    </div>
+                    <h3 class="logo-title">Jody Moore Style — Horizontal Header</h3>
+                    <p class="logo-desc">Casual lowercase signature brush script (<em>"abigail stocks"</em>) paired with bold uppercase tracking (<em>"COACHING"</em>) tucked neatly underneath <em>"stocks"</em>.</p>
+                </div>
+                
+                <div class="logo-card" style="box-shadow: none; border: 1px solid var(--border); margin: 0;">
+                    <div class="logo-preview-box" style="background: #FFFFFF; min-height: 230px; padding: 20px;">
+                        <img src="assets/logo-jody-moore-style-stacked.svg" alt="Jody Moore Inspired Logo Stacked" style="max-height: 190px; width: 100%; object-fit: contain;">
+                    </div>
+                    <h3 class="logo-title">Jody Moore Style — Centered Stacked</h3>
+                    <p class="logo-desc">Centered stacked variation featuring lowercase refined signature script with classy <em>"COACHING"</em> subtext. Perfect for Instagram profiles &amp; workbooks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Style Variations -->
+        <h2 class="section-heading">Additional Signature &amp; Serif Variations</h2>
+        <div class="grid-3">
+            <!-- Full Signature Script -->
+            <div class="logo-card">
+                <span class="logo-card-tag">Formal Signature Script</span>
+                <div class="logo-preview-box">
+                    <img src="assets/logo-full-signature.svg" alt="Full Signature Logo">
+                </div>
+                <h3 class="logo-title">Formal Signature Script</h3>
+                <p class="logo-desc">Both <em>"Abigail Stocks"</em> in elegant cursive script + <em>"COACHING"</em> in tracked subtext below. Classic, refined, and personal.</p>
+            </div>
+
+            <!-- Classic Serif -->
+            <div class="logo-card">
+                <span class="logo-card-tag">Matching Serif Classic</span>
+                <div class="logo-preview-box">
+                    <img src="assets/logo-classic-serif.svg" alt="Classic Serif Logo">
+                </div>
+                <h3 class="logo-title">Classic Serif Lockup</h3>
+                <p class="logo-desc">Both <em>"ABIGAIL STOCKS"</em> in luxury uppercase serif typography. Timeless, editorial, and sophisticated.</p>
+            </div>
+
+            <!-- Monogram AS -->
+            <div class="logo-card">
+                <span class="logo-card-tag">Monogram Icon</span>
+                <div class="logo-preview-box">
+                    <img src="assets/logo-monogram-as.svg" alt="AS Monogram Icon" style="max-height: 130px;">
+                </div>
+                <h3 class="logo-title">Handwritten AS Monogram</h3>
+                <p class="logo-desc">Sophisticated <em>"AS"</em> initials mark with twin accent rings. Perfect for website favicons and mobile avatars.</p>
+            </div>
+        </div>
+
+        <!-- Live Website Header Comparison -->
+        <div class="mockup-section">
+            <h2>Live Website Header Comparison</h2>
+            
+            <p style="font-size: 0.88rem; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Option A (Featured): Jody Moore Inspired Style (Casual script + "COACHING" under stocks)</p>
+            <div class="header-mockup-bar">
+                <img src="assets/logo-jody-moore-style.svg" alt="Jody Moore Style Header Preview">
+                <ul class="header-mockup-nav">
+                    <li>About</li>
+                    <li>Philosophy</li>
+                    <li>Investment</li>
+                    <li>Podcast</li>
+                    <li style="color: var(--accent);">Book a Call</li>
+                </ul>
+            </div>
+
+            <p style="font-size: 0.88rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; margin-top: 25px;">Option B: Formal Signature Script ("Abigail Stocks" in cursive script)</p>
+            <div class="header-mockup-bar">
+                <img src="assets/logo-full-signature.svg" alt="Full Signature Header Preview">
+                <ul class="header-mockup-nav">
+                    <li>About</li>
+                    <li>Philosophy</li>
+                    <li>Investment</li>
+                    <li>Podcast</li>
+                    <li style="color: var(--accent);">Book a Call</li>
+                </ul>
+            </div>
+
+            <p style="font-size: 0.88rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; margin-top: 25px;">Option C: Classic Serif ("ABIGAIL STOCKS" in uppercase serif)</p>
+            <div class="header-mockup-bar">
+                <img src="assets/logo-classic-serif.svg" alt="Classic Serif Header Preview">
+                <ul class="header-mockup-nav">
+                    <li>About</li>
+                    <li>Philosophy</li>
+                    <li>Investment</li>
+                    <li>Podcast</li>
+                    <li style="color: var(--accent);">Book a Call</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>Designed with care for Abigail Stocks Coaching – Saba Haroon</p>
+        </footer>
+    </div>
+
+</body>
+</html>
