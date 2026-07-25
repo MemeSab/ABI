@@ -211,11 +211,14 @@ ul {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 
 .logo-img {
-    height: 60px;
+    height: 78px;
     width: auto;
+    max-width: 100%;
+    flex-shrink: 0;
     object-fit: contain;
     filter: drop-shadow(0 1px 2px rgba(63, 75, 60, 0.12));
 }
