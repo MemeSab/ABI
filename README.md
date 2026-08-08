@@ -70,3 +70,28 @@ A secure CSP meta tag is embedded in the head of `index.html` to block cross-sit
 ```html
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co;">
 ```
+
+---
+
+## 🔄 Stripe, Calendly & Google Calendar Integration (Completed Setup)
+
+### 1. Hybrid Booking Strategy (£0/month Total)
+To prevent scheduling overlaps and avoid paying for subscription tiers across multiple platforms, the booking architecture is structured as follows:
+
+- **Free 30-Min Discovery Calls**: Handled via **Calendly** (`https://calendly.com/hello-abigailstocks/30min`). Clicking "Book a Call" or "Book Free Call" anywhere on the website opens the 30-minute Calendly schedule.
+- **Paid 60-Min Coaching Sessions**: Handled via **Stripe** + **Google Calendar**:
+  1. Clients purchase a package (Single, 6-Session, or 12-Session) on [abigailstocks.com](https://abigailstocks.com/) via Stripe Payment Links.
+  2. Upon checkout completion, Stripe automatically redirects them to Abigail's **Google Calendar Appointment Schedule** (`https://calendar.app.google/P6SMBXnB2rAXyGBv7`).
+  3. Clients pick their 60-minute date & time, generating a Google Meet link and calendar invite automatically for both Abigail and the client.
+
+---
+
+## 🚀 Summary of Recent Updates & Website Enhancements
+
+- ✅ **Hero CTA Navigation**: Updated "Email Abigail" hero CTA to `#contact` to smoothly scroll down to the contact form section.
+- ✅ **Discovery Call Link Audit**: Replaced all `https://calendly.com/example` placeholders with the live active Calendly link (`https://calendly.com/hello-abigailstocks/30min`) in `index.html` and `movement-mindset-guide.html`.
+- ✅ **Contact Section Streamlining**: Removed the redundant "Email Abigail" card next to the contact form, creating a clear 2-column layout (Option 1: **Book a Discovery Call** on Calendly | Option 2: **Send a Message** form).
+- ✅ **Copy Alignment**: Updated contact card copy from "20-minute" to **"30-minute consultation"** to align with Calendly.
+- ✅ **Section Spacing**: Reduced excessive vertical padding in `style.css` between the *Coaching Investment* section and *Let's Connect* section (reduced from ~260px down to ~60px).
+- ✅ **Live Vercel Deployments**: All changes committed and pushed to GitHub `main` branch, automatically deployed live to [abigailstocks.com](https://abigailstocks.com/).
+
