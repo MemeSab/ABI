@@ -1696,9 +1696,18 @@ ul {
 /* --- Pricing / Coaching Investment Section --- */
 .pricing-section {
     background-color: var(--color-cream);
-    padding: 100px 0;
+    padding: 20px 0 0 0;
     position: relative;
     border-top: 1px solid var(--color-beige);
+}
+
+.pricing-section .section-container {
+    padding-bottom: 24px;
+}
+
+.contact-section .section-container {
+    padding-top: 40px;
+    padding-bottom: 60px;
 }
 
 .pricing-grid {
