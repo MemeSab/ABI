@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Morning Wellness Checklist & Habit Tracker | Abigail Stocks Coaching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Brand Colors & Variables --- */
+        :root {
+            --color-cream: #FCFAF6;
+            --color-cream-dark: #F5EFEB;
+            --color-beige: #EBE5DA;
+            --color-sage: #8FA08A;
+            --color-sage-light: #EDF2EC;
+            --color-sage-medium: #6B7C67;
+            --color-sage-dark: #3F4B3C;
+            --color-blush: #E2B3AC;
+            --color-blush-light: #F7ECEB;
+            --color-blush-dark: #A5736C;
+            --color-charcoal: #2C2D2B;
+            --color-charcoal-muted: #5F615C;
+            --color-white: #FFFFFF;
+            
+            --font-headings: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --font-accent: 'Caveat', cursive;
+            
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+        }
+
+        /* --- Print Setup --- */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-charcoal);
+            background-color: #E8E5DF; /* Subtle contrast outside page in screen mode */
+            line-height: 1.5;
+            font-size: 9.5pt;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Screen App Bar (Hidden in Print) --- */
+        .screen-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(252, 250, 246, 0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-beige);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(63, 75, 60, 0.06);
+            max-width: 100%;
+        }
+
+        .toolbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toolbar-brand span {
+            font-family: var(--font-headings);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-sage-dark);
+            letter-spacing: 0.05em;
+        }
+
+        .toolbar-brand small {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--color-blush-dark);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--color-blush-light);
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-tool {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn-tool-primary {
+            background-color: var(--color-sage-dark);
+            color: var(--color-white);
+        }
+
+        .btn-tool-primary:hover {
+            background-color: var(--color-sage-medium);
+            transform: translateY(-1px);
+        }
+
+        .btn-tool-secondary {
+            background-color: var(--color-white);
+            color: var(--color-sage-dark);
+            border-color: var(--color-beige);
+        }
+
+        .btn-tool-secondary:hover {
+            background-color: var(--color-cream-dark);
+            border-color: var(--color-sage);
+        }
+
+        .btn-tool-link {
+            color: var(--color-charcoal-muted);
+            background: transparent;
+        }
+
+        .btn-tool-link:hover {
+            color: var(--color-sage-dark);
+        }
+
+        /* --- Document Container --- */
+        .document-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px 60px 15px;
+            gap: 30px;
+        }
+
+        /* --- A4 Page Container --- */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            min-height: 297mm;
+            max-height: 297mm;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--color-cream);
+            padding: 16mm 18mm 14mm 18mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+            border-radius: 4px;
+        }
+
+        /* Botanical Watermarks */
+        .page::before {
+            content: '';
+            position: absolute;
+            width: 85mm;
+            height: 85mm;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%238FA08A' stroke-width='0.6' stroke-linecap='round' stroke-opacity='0.08'%3E%3Cpath d='M50,92 C50,62 30,42 30,20 C30,10 40,5 50,20 C60,5 70,10 70,20 C70,42 50,62 50,92 Z'/%3E%3Cpath d='M38,45 C38,45 25,40 20,48 C15,56 25,58 35,50'/%3E%3Cpath d='M62,45 C62,45 75,40 80,48 C85,56 75,58 65,50'/%3E%3Cpath d='M44,30 C44,30 30,22 25,30 C20,38 32,40 40,32'/%3E%3Cpath d='M56,30 C56,30 70,22 75,30 C80,38 68,40 60,32'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.9;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-1::before {
+            bottom: 8mm;
+            right: 8mm;
+            transform: rotate(-10deg);
+        }
+
+        .page-2::before {
+            top: 8mm;
+            left: 8mm;
+            transform: scaleX(-1) rotate(15deg);
+        }
+
+        .page-3::before {
+            bottom: 12mm;
+            left: 10mm;
+            transform: rotate(5deg);
+        }
+
+        /* --- Header & Footer --- */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-beige);
+            padding-bottom: 2.5mm;
+            margin-bottom: 3.5mm;
+            z-index: 10;
+            position: relative;
+        }
+
+        .page-header .brand-name {
+            font-family: var(--font-headings);
+            font-size: 11.5pt;
+            font-weight: 700;
+            color: var(--color-sage-medium);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .page-header .doc-tag {
+            font-size: 7.5pt;
+            font-weight: 600;
+            color: var(--color-blush-dark);
+            background: var(--color-blush-light);
+            padding: 1mm 3mm;
+            border-radius: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--color-beige);
+            padding-top: 2.5mm;
+            margin-top: 3mm;
+            font-size: 7.5pt;
+            color: var(--color-charcoal-muted);
+            z-index: 10;
+            position: relative;
+        }
+
+        .page-footer .footer-tagline {
+            font-family: var(--font-headings);
+            font-style: italic;
+            font-size: 9.5pt;
+            color: var(--color-sage-dark);
+        }
+
+        /* --- Main Content Layout --- */
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 5;
+            position: relative;
+        }
+
+        /* --- Hero Header Block --- */
+        .hero-banner {
+            text-align: center;
+            margin-bottom: 3mm;
+            background: linear-gradient(180deg, rgba(237, 242, 236, 0.45) 0%, rgba(252, 250, 246, 0) 100%);
+            border: 1px solid rgba(235, 229, 218, 0.8);
+            border-radius: var(--radius-md);
+            padding: 3.5mm 5mm 3mm 5mm;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 7.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--color-sage-dark);
+            background-color: var(--color-sage-light);
+            padding: 1mm 3.5mm;
+            border-radius: 20px;
+            margin-bottom: 1.5mm;
+            border: 1px solid rgba(143, 160, 138, 0.3);
+        }
+
+        .hero-title {
+            font-family: var(--font-headings);
+            font-size: 20pt;
+            font-weight: 600;
+            color: var(--color-sage-dark);
+            line-height: 1.15;
+            margin-bottom: 1mm;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-accent);
+            font-size: 13pt;
+            color: var(--color-blush-dark);
+            line-height: 1.2;
+            margin-bottom: 1mm;
+        }
+
+        .hero-desc {
+            font-size: 8.2pt;
+            color: var(--color-charcoal-muted);
+            max-width: 135mm;
+            margin: 0 auto;
+            line-height: 1.35;
+        }
+
+        /* --- Today's Progress Box --- */
+        .progress-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-md);
+            padding: 3mm 4.5mm;
+            margin-bottom: 3.5mm;
+            box-shadow: 0 2px 10px rgba(63, 75, 60, 0.03);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2mm;
+        }
+
+        .progress-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .progress-title {
+            font-family: var(--font-headings);
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--color-sage-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .habit-counter-badge {
+            font-family: var(--font-body);
+            font-size: 8pt;
+            font-weight: 700;
+            color: var(--color-sage-dark);
+            background-color: var(--color-sage-light);
+            padding: 1mm 3mm;
+            border-radius: 12px;
+            border: 1px solid rgba(143, 160, 138, 0.4);
+        }
+
+        .streak-badge {
+            font-size: 8pt;
+            font-weight: 700;
+            color: var(--color-blush-dark);
+            background: var(--color-blush-light);
+            padding: 1mm 3.5mm;
+            border-radius: 12px;
+            border: 1px solid rgba(226, 179, 172, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .streak-input {
+            width: 24px;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            color: var(--color-blush-dark);
+            font-family: inherit;
+            text-align: center;
+            font-size: 8.5pt;
+        }
+
+        .streak-input:focus {
+            outline: 1px solid var(--color-blush);
+            background: var(--color-white);
+            border-radius: 4px;
+        }
+
+        /* Progress Circles Row */
+        .progress-bubbles-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--color-cream-dark);
+            border-radius: 20px;
+            padding: 2mm 3.5mm;
+            margin-bottom: 2mm;
+        }
+
+        .progress-bubble {
+            width: 6.5mm;
+            height: 6.5mm;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-sage);
+            background: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7pt;
+            font-weight: 700;
+            color: var(--color-sage-medium);
+            transition: all 0.25s ease;
+        }
+
+        .progress-bubble.completed {
+            background-color: var(--color-sage);
+            color: var(--color-white);
+            border-color: var(--color-sage-dark);
+            box-shadow: 0 2px 6px rgba(63, 75, 60, 0.2);
+        }
+
+        .progress-quote {
+            text-align: center;
+            font-family: var(--font-headings);
+            font-style: italic;
+            font-size: 9.5pt;
+            color: var(--color-sage-dark);
+            line-height: 1.2;
+        }
+
+        /* --- Habits Grid (8 Habits) --- */
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2mm;
+            border-bottom: 1px solid var(--color-beige);
+            padding-bottom: 1mm;
+        }
+
+        .section-heading-sm {
+            font-family: var(--font-headings);
+            font-size: 13pt;
+            font-weight: 600;
+            color: var(--color-sage-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-meta-tip {
+            font-size: 7.5pt;
+            color: var(--color-charcoal-muted);
+            font-style: italic;
+        }
+
+        .habits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5mm 3.5mm;
+            margin-bottom: 3.5mm;
+        }
+
+        .habit-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-sm);
+            padding: 2.5mm 3mm;
+            display: flex;
+            align-items: flex-start;
+            gap: 2.5mm;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .habit-card.checked-card {
+            background: var(--color-sage-light);
+            border-color: var(--color-sage);
+        }
+
+        /* Checkbox Custom Style */
+        .habit-check-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 0.5mm;
+        }
+
+        .habit-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 4.8mm;
+            height: 4.8mm;
+            border: 1.5px solid var(--color-sage);
+            border-radius: 4px;
+            background: var(--color-cream);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .habit-checkbox:hover {
+            border-color: var(--color-sage-dark);
+            background-color: var(--color-white);
+        }
+
+        .habit-checkbox:checked {
+            background-color: var(--color-sage-dark);
+            border-color: var(--color-sage-dark);
+        }
+
+        .habit-checkbox:checked::after {
+            content: '✔';
+            color: #FFFFFF;
+            font-size: 7pt;
+            font-weight: 700;
+            display: block;
+        }
+
+        .habit-body {
+            flex: 1;
+        }
+
+        .habit-title-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 0.5mm;
+        }
+
+        .habit-icon {
+            font-size: 9pt;
+            line-height: 1;
+        }
+
+        .habit-title {
+            font-size: 8.8pt;
+            font-weight: 700;
+            color: var(--color-sage-dark);
+        }
+
+        .habit-action-text {
+            font-size: 7.8pt;
+            color: var(--color-charcoal-muted);
+            line-height: 1.25;
+        }
+
+        /* Priority fill-in lines in Card 6 */
+        .priority-mini-lines {
+            margin-top: 1.5mm;
+            display: flex;
+            flex-direction: column;
+            gap: 1mm;
+        }
+
+        .priority-line {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 7pt;
+            color: var(--color-sage-medium);
+            font-weight: 600;
+        }
+
+        .priority-line input {
+            flex: 1;
+            border: none;
+            border-bottom: 1px dotted var(--color-beige);
+            background: transparent;
+            font-size: 7.5pt;
+            font-family: inherit;
+            color: var(--color-charcoal);
+            padding: 0 2px;
+        }
+
+        .priority-line input:focus {
+            outline: none;
+            border-bottom-color: var(--color-sage);
+        }
+
+        /* Self check-in line in Card 8 */
+        .checkin-mini-line {
+            margin-top: 1.5mm;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .checkin-mini-line input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px dotted var(--color-beige);
+            background: transparent;
+            font-size: 7.5pt;
+            font-style: italic;
+            font-family: inherit;
+            color: var(--color-charcoal);
+            padding: 0 2px;
+        }
+
+        .checkin-mini-line input:focus {
+            outline: none;
+            border-bottom-color: var(--color-blush);
+        }
+
+        /* --- Bottom Reflections Block --- */
+        .bottom-prompts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5mm;
+            background: var(--color-cream-dark);
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-sm);
+            padding: 2.5mm 3.5mm;
+        }
+
+        .prompt-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1mm;
+        }
+
+        .prompt-label-sm {
+            font-size: 7.8pt;
+            font-weight: 700;
+            color: var(--color-sage-dark);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .prompt-write-area {
+            width: 100%;
+            border: none;
+            border-bottom: 1px dashed var(--color-beige);
+            background: transparent;
+            font-family: inherit;
+            font-size: 8pt;
+            color: var(--color-charcoal);
+            padding: 1mm 0;
+            line-height: 1.4;
+            resize: none;
+        }
+
+        .prompt-write-area:focus {
+            outline: none;
+            border-bottom-color: var(--color-sage);
+        }
+
+        /* ============================================================ */
+        /* --- PAGE 2: WEEKLY HABIT MATRIX --- */
+        /* ============================================================ */
+        .page-2 .hero-banner {
+            margin-bottom: 3.5mm;
+        }
+
+        .weekly-matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--color-white);
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 4mm;
+            box-shadow: 0 2px 10px rgba(63, 75, 60, 0.02);
+        }
+
+        .weekly-matrix-table th {
+            background-color: var(--color-sage-light);
+            color: var(--color-sage-dark);
+            font-family: var(--font-headings);
+            font-size: 9.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 2.5mm 2mm;
+            text-align: center;
+            border-bottom: 1px solid var(--color-beige);
+        }
+
+        .weekly-matrix-table th.th-habit {
+            text-align: left;
+            padding-left: 3.5mm;
+            width: 44%;
+        }
+
+        .weekly-matrix-table td {
+            padding: 2.5mm 1.5mm;
+            text-align: center;
+            border-bottom: 1px solid rgba(235, 229, 218, 0.6);
+            vertical-align: middle;
+        }
+
+        .weekly-matrix-table td.td-habit {
+            text-align: left;
+            padding-left: 3.5mm;
+        }
+
+        .weekly-habit-title {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: var(--color-sage-dark);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .weekly-habit-sub {
+            font-size: 7pt;
+            color: var(--color-charcoal-muted);
+            padding-left: 16px;
+        }
+
+        .matrix-circle {
+            width: 4.8mm;
+            height: 4.8mm;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-sage);
+            background: var(--color-cream);
+            margin: 0 auto;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6pt;
+            color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .matrix-circle.active {
+            background-color: var(--color-sage-dark);
+            border-color: var(--color-sage-dark);
+            color: var(--color-white);
+        }
+
+        .matrix-total-cell {
+            font-weight: 700;
+            color: var(--color-sage-dark);
+            font-size: 8pt;
+        }
+
+        .tr-footer td {
+            background-color: var(--color-cream-dark);
+            font-weight: 700;
+            font-size: 8pt;
+            color: var(--color-sage-dark);
+            border-top: 1.5px solid var(--color-beige);
+            padding: 2mm 1.5mm;
+        }
+
+        /* Weekly Reflection Cards */
+        .weekly-reflections-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5mm;
+            margin-bottom: 3.5mm;
+        }
+
+        .reflection-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-sm);
+            padding: 3mm 3.5mm;
+        }
+
+        .reflection-card h4 {
+            font-family: var(--font-headings);
+            font-size: 10.5pt;
+            color: var(--color-sage-dark);
+            margin-bottom: 1.5mm;
+        }
+
+        .reflection-lines-box {
+            display: flex;
+            flex-direction: column;
+            gap: 2mm;
+        }
+
+        .write-line {
+            height: 1px;
+            border-bottom: 1px dashed var(--color-beige);
+        }
+
+        /* Abigail's Coaching Advice Banner */
+        .coaching-quote-card {
+            background: linear-gradient(135deg, var(--color-blush-light) 0%, rgba(252, 250, 246, 0.8) 100%);
+            border: 1px solid rgba(226, 179, 172, 0.6);
+            border-radius: var(--radius-sm);
+            padding: 3mm 4mm;
+            display: flex;
+            align-items: center;
+            gap: 3.5mm;
+        }
+
+        .coaching-quote-icon {
+            font-size: 16pt;
+            color: var(--color-blush-dark);
+        }
+
+        .coaching-quote-text {
+            font-size: 8.2pt;
+            color: var(--color-charcoal);
+            line-height: 1.35;
+        }
+
+        .coaching-quote-text strong {
+            color: var(--color-blush-dark);
+        }
+
+        /* ============================================================ */
+        /* --- PAGE 3: GENTLE MORNING ROUTINE GUIDE --- */
+        /* ============================================================ */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5mm;
+            margin-bottom: 4mm;
+        }
+
+        .pillar-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-md);
+            padding: 3.5mm 4mm;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5mm;
+            box-shadow: 0 2px 8px rgba(63, 75, 60, 0.02);
+        }
+
+        .pillar-num {
+            font-size: 7.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-blush-dark);
+        }
+
+        .pillar-title {
+            font-family: var(--font-headings);
+            font-size: 12pt;
+            font-weight: 600;
+            color: var(--color-sage-dark);
+            line-height: 1.2;
+        }
+
+        .pillar-desc {
+            font-size: 8pt;
+            color: var(--color-charcoal-muted);
+            line-height: 1.35;
+        }
+
+        /* Habits In Action Box */
+        .habits-deepdive {
+            background: var(--color-cream-dark);
+            border: 1px solid var(--color-beige);
+            border-radius: var(--radius-md);
+            padding: 3.5mm 4.5mm;
+            margin-bottom: 3.5mm;
+        }
+
+        .deepdive-title {
+            font-family: var(--font-headings);
+            font-size: 12pt;
+            font-weight: 600;
+            color: var(--color-sage-dark);
+            margin-bottom: 2mm;
+            text-align: center;
+        }
+
+        .deepdive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 2.5mm;
+        }
+
+        .deepdive-item {
+            background: var(--color-white);
+            border-radius: var(--radius-sm);
+            padding: 2mm 2.5mm;
+            border: 1px solid rgba(235, 229, 218, 0.8);
+            text-align: center;
+        }
+
+        .deepdive-icon {
+            font-size: 11pt;
+            margin-bottom: 1mm;
+        }
+
+        .deepdive-h {
+            font-size: 7.8pt;
+            font-weight: 700;
+            color: var(--color-sage-dark);
+            margin-bottom: 0.5mm;
+        }
+
+        .deepdive-p {
+            font-size: 6.8pt;
+            color: var(--color-charcoal-muted);
+            line-height: 1.25;
+        }
+
+        /* Note from Abigail Card */
+        .coach-note-card {
+            background: linear-gradient(135deg, var(--color-white) 0%, rgba(237, 242, 236, 0.5) 100%);
+            border: 1px solid var(--color-sage);
+            border-radius: var(--radius-md);
+            padding: 4mm 5mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 5mm;
+        }
+
+        .coach-note-left {
+            flex: 1;
+        }
+
+        .coach-note-title {
+            font-family: var(--font-headings);
+            font-size: 12.5pt;
+            color: var(--color-sage-dark);
+            margin-bottom: 1.5mm;
+        }
+
+        .coach-note-body {
+            font-size: 8pt;
+            color: var(--color-charcoal);
+            line-height: 1.4;
+            margin-bottom: 2mm;
+        }
+
+        .coach-signature-text {
+            font-family: var(--font-accent);
+            font-size: 14pt;
+            color: var(--color-blush-dark);
+        }
+
+        .coach-note-cta {
+            flex-shrink: 0;
+            text-align: center;
+            background: var(--color-white);
+            border: 1px solid var(--color-beige);
+            padding: 3mm 4mm;
+            border-radius: var(--radius-sm);
+        }
+
+        .cta-label {
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-charcoal-muted);
+            margin-bottom: 1mm;
+        }
+
+        .cta-link-text {
+            font-weight: 700;
+            font-size: 8pt;
+            color: var(--color-sage-dark);
+            text-decoration: none;
+            display: block;
+        }
+
+        /* --- Print Media Query Rules --- */
+        @media print {
+            body {
+                background: none !important;
+                padding: 0 !important;
+            }
+
+            .screen-toolbar {
+                display: none !important;
+            }
+
+            .document-wrapper {
+                padding: 0 !important;
+                gap: 0 !important;
+            }
+
+            .page {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                page-break-after: always !important;
+                break-after: page !important;
+            }
+
+            .habit-checkbox {
+                border-color: #3F4B3C !important;
+            }
+        }
+
+        @media screen and (max-width: 850px) {
+            .page {
+                width: 100%;
+                height: auto;
+                min-height: unset;
+                max-height: unset;
+                padding: 24px 18px;
+                border-radius: 12px;
+            }
+
+            .document-wrapper {
+                padding: 15px 10px 40px 10px;
+            }
+
+            .habits-grid, .bottom-prompts-grid, .weekly-reflections-grid, .pillars-grid, .deepdive-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .weekly-matrix-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .coach-note-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN TOP BAR -->
+    <header class="screen-toolbar">
+        <div class="toolbar-brand">
+            <span>Abigail Stocks Coaching</span>
+            <small>Printable Resource</small>
+        </div>
+        <div class="toolbar-actions">
+            <a href="index.html" class="btn-tool btn-tool-link">← Back to Site</a>
+            <button onclick="resetChecklist()" class="btn-tool btn-tool-secondary">↺ Reset</button>
+            <button onclick="window.print()" class="btn-tool btn-tool-secondary">🖨️ Print</button>
+            <a href="assets/morning-wellness-checklist.pdf" download="Morning_Wellness_Checklist_Abigail_Stocks.pdf" class="btn-tool btn-tool-primary">📥 Download PDF</a>
+        </div>
+    </header>
+
+    <main class="document-wrapper">
+
+        <!-- ============================================================ -->
+        <!-- PAGE 1: DAILY MORNING WELLNESS CHECKLIST -->
+        <!-- ============================================================ -->
+        <article class="page page-1" id="daily-checklist-page">
+            <div class="page-header">
+                <span class="brand-name">Abigail Stocks Coaching</span>
+                <span class="doc-tag">Morning Wellness Routine</span>
+            </div>
+
+            <div class="page-content">
+                <!-- Hero Header -->
+                <div class="hero-banner">
+                    <div class="hero-pill">🌿 My Morning Wellness</div>
+                    <h1 class="hero-title">Start Small. Stay Consistent. Feel the Difference.</h1>
+                    <p class="hero-tagline">“Small steps, repeated consistently, create lasting change.”</p>
+                    <p class="hero-desc">A gentle morning routine designed to help you build healthy habits without aiming for perfection.</p>
+                </div>
+
+                <!-- Today's Progress Box -->
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <div class="progress-title-wrap">
+                            <span class="progress-title">☀️ Today’s Progress</span>
+                            <span class="habit-counter-badge" id="habit-progress-text">0 / 8 habits completed</span>
+                        </div>
+                        <div class="streak-badge">
+                            <span>🔥 Morning Streak:</span>
+                            <input type="number" id="streak-counter" class="streak-input" value="0" min="0" title="Click to edit your day streak">
+                            <span>days</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Circles -->
+                    <div class="progress-bubbles-row">
+                        <div class="progress-bubble" id="bubble-1">1</div>
+                        <div class="progress-bubble" id="bubble-2">2</div>
+                        <div class="progress-bubble" id="bubble-3">3</div>
+                        <div class="progress-bubble" id="bubble-4">4</div>
+                        <div class="progress-bubble" id="bubble-5">5</div>
+                        <div class="progress-bubble" id="bubble-6">6</div>
+                        <div class="progress-bubble" id="bubble-7">7</div>
+                        <div class="progress-bubble" id="bubble-8">8</div>
+                    </div>
+
+                    <div class="progress-quote">
+                        Focus on the feeling of showing up for yourself today.
+                    </div>
+                </div>
+
+                <!-- Checklist Header -->
+                <div class="section-header-row">
+                    <h2 class="section-heading-sm">🌅 Morning Checklist</h2>
+                    <span class="section-meta-tip">Tick each habit as you complete it</span>
+                </div>
+
+                <!-- 8 Habits Grid -->
+                <div class="habits-grid">
+                    <!-- Habit 1 -->
+                    <div class="habit-card" id="card-1">
+                        <div class="habit-check-wrapper">
+                            <input type="checkbox" class="habit-checkbox" id="habit-1" onchange="toggleHabit(1)">
+                        </div>
+                        <div class="habit-body">
+                            <div class="habit-title-row">
+                                <span class="habit-icon">💧</span>
+                                <label for="habit-1" class="habit-title">Hydrate</label>
+                            </div>
+                            <p class="habit-action-text">Drink a glass of water to replenish your body.</p>
+                        </div>
+                    </div>
+
+                    <!-- Habit 2 -->
+                    <div class="habit-card" id="card-2">
+                        <div class="habit-check-wrapper">
+                            <input type="checkbox" class="habit-checkbox" id="habit-2" onchange="toggleHabit(2)">
+                        </div>
+                        <div class="habit-body">
+                            <div class="habit-title-row">
+                                <span class="habit-icon">☀️</span>
+                                <label for="habit-2" class="habit-title">Get Some Natural Light</label>
+                            </div>
+                            <p class="habit-action-text">Spend a few minutes outside or near a bright window.</p>
+                        </div>
+                    </div>
+
+                    <!-- Habit 3 -->
+                    <div class="habit-card" id="card-3">
+                        <div class="habit-check-wrapper">
+                            <input type="checkbox" class="habit-checkbox" id="habit-3" onchange="toggleHabit(3)">
+                        </div>
+                        <div class="habit-body">
+                            <div class="habit-title-row">
+                                <span class="habit-icon">🧘</span>
+                                <label for="habit-3" class="habit-title">Move Gently</label>
+                            </div>
+                            <p class="habit-action-text">Stretch, walk, or do some movement you enjoy.</p>
+                        </div>
+                    </div>
+
+                    <!-- Habit 4 -->
+                    <div class="habit-card" id="card-4">
+                        <div class="habit-check-wrapper">
+                            <input type="checkbox" class="habit-checkbox" id="habit-4" onchange="toggleHabit(4)">
+                        </div>
+                        <div class="habit-body">
+                            <div class="habit-title-row">
+                                <span class="habit-icon">🍳</span>
+                                <label for="habit-4" class="habit-title">Nourish Your Body</label>
+                            </div>
+                            <p class="habit-action-text">Have a balanced breakfast or nourishing morning meal.</p>
+                        </div>
+                    </div>
+
+                    <!-- Habit 5 -->
+                    <div class="habit-card" id="card-5">
+                        <div class="habit-check-wrapper">
+                            <input type="checkbox" class="habit-checkbox" id="habit-5" onchange="toggleHabit(5)">
+                        </div>
+                        <div class="habit-body">
+                            <div class="habit-title-row">
+                                <span class="habit-icon">🌿</span>
+                                <label for="habit-5" class="habit-title">Take a Mindful Moment</label>
+                            </div>
+                            <p class="habit-action-text">Breathe, journal, meditate, pray, or simply pause.</p>
+                        </div>
+                    </div>
+
+                    <!-- Habit 6 -->
+                    <div class="habit-card" id="card-6">
+                        <div class="habit-check-wrapper">
+                            <input type="checkbox" class="habit-checkbox" id="habit-6" onchange="toggleHabit(6)">
+                        </div>
+                        <div class="habit-body">
+                            <div class="habit-title-row">
+                                <span class="habit-icon">📝</span>
+                                <label for="habit-6" class="habit-title">Choose Your Priorities</label>
+                            </div>
+                            <p class="habit-action-text">Pick 1–3 things that truly matter today:</p>
+                            <div class="priority-mini-lines">
+                                <div class="priority-line"><span>1.</span><input type="text" placeholder="Priority one..."></div>
+                                <div class="priority-line"><span>2.</span><input type="text" placeholder="Priority two..."></div>
+                                <div class="priority-line"><span>3.</span><input type="text" placeholder="Priority three..."></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Habit 7 -->
+                    <div class="habit-card" id="card-7">
+                        <div class="habit-check-wrapper">
+                            <input type="checkbox" class="habit-checkbox" id="habit-7" onchange="toggleHabit(7)">
+                        </div>
+                        <div class="habit-body">
+                            <div class="habit-title-row">
+                                <span class="habit-icon">🪥</span>
+                                <label for="habit-7" class="habit-title">Personal Care</label>
+                            </div>
+                            <p class="habit-action-text">Brush teeth, wash, get dressed, and feel ready.</p>
+                        </div>
+                    </div>
+
+                    <!-- Habit 8 -->
+                    <div class="habit-card" id="card-8">
+                        <div class="habit-check-wrapper">
+                            <input type="checkbox" class="habit-checkbox" id="habit-8" onchange="toggleHabit(8)">
+                        </div>
+                        <div class="habit-body">
+                            <div class="habit-title-row">
+                                <span class="habit-icon">💛</span>
+                                <label for="habit-8" class="habit-title">Positive Check-In</label>
+                            </div>
+                            <p class="habit-action-text">Ask yourself: <em>“What do I need today?”</em></p>
+                            <div class="checkin-mini-line">
+                                <input type="text" placeholder="Today my body & mind need...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Mindset Prompts -->
+                <div class="bottom-prompts-grid">
+                    <div class="prompt-box">
+                        <span class="prompt-label-sm">🌱 Today's Intention / Focus</span>
+                        <input type="text" class="prompt-write-area" placeholder="How do I want to feel as I move through my day?">
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label-sm">✨ A Small Thing I Am Grateful For</span>
+                        <input type="text" class="prompt-write-area" placeholder="A warm drink, fresh air, peaceful breath...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <span>hello@abigailstocks.com</span>
+                <span class="footer-tagline">Progress always beats perfection.</span>
+                <span>Page 1 of 3</span>
+            </div>
+        </article>
+
+
+        <!-- ============================================================ -->
+        <!-- PAGE 2: WEEKLY WELLNESS HABIT MATRIX -->
+        <!-- ============================================================ -->
+        <article class="page page-2" id="weekly-matrix-page">
+            <div class="page-header">
+                <span class="brand-name">Abigail Stocks Coaching</span>
+                <span class="doc-tag">Weekly Morning Tracker</span>
+            </div>
+
+            <div class="page-content">
+                <!-- Hero Header -->
+                <div class="hero-banner">
+                    <div class="hero-pill">📊 7-Day Consistency Tracker</div>
+                    <h2 class="hero-title">Track Your Gentle Habits Across the Week</h2>
+                    <p class="hero-tagline">“Consistency isn’t about being flawless; it’s about returning with kindness.”</p>
+                    <p class="hero-desc">Fill in a circle each morning. Notice the rhythms that bring you the most peace, energy, and clarity.</p>
+                </div>
+
+                <!-- Weekly Matrix Table -->
+                <table class="weekly-matrix-table">
+                    <thead>
+                        <tr>
+                            <th class="th-habit">Morning Habit</th>
+                            <th>M</th>
+                            <th>T</th>
+                            <th>W</th>
+                            <th>T</th>
+                            <th>F</th>
+                            <th>S</th>
+                            <th>S</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Habit 1 -->
+                        <tr>
+                            <td class="td-habit">
+                                <div class="weekly-habit-title">💧 Hydrate</div>
+                                <div class="weekly-habit-sub">Glass of fresh water</div>
+                            </td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td class="matrix-total-cell row-total">/7</td>
+                        </tr>
+
+                        <!-- Habit 2 -->
+                        <tr>
+                            <td class="td-habit">
+                                <div class="weekly-habit-title">☀️ Natural Light</div>
+                                <div class="weekly-habit-sub">Outdoor or window light</div>
+                            </td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td class="matrix-total-cell row-total">/7</td>
+                        </tr>
+
+                        <!-- Habit 3 -->
+                        <tr>
+                            <td class="td-habit">
+                                <div class="weekly-habit-title">🧘 Move Gently</div>
+                                <div class="weekly-habit-sub">Stretch, walk, or flow</div>
+                            </td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td class="matrix-total-cell row-total">/7</td>
+                        </tr>
+
+                        <!-- Habit 4 -->
+                        <tr>
+                            <td class="td-habit">
+                                <div class="weekly-habit-title">🍳 Nourish Body</div>
+                                <div class="weekly-habit-sub">Balanced morning meal</div>
+                            </td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td class="matrix-total-cell row-total">/7</td>
+                        </tr>
+
+                        <!-- Habit 5 -->
+                        <tr>
+                            <td class="td-habit">
+                                <div class="weekly-habit-title">🌿 Mindful Moment</div>
+                                <div class="weekly-habit-sub">Breathe, journal, pause</div>
+                            </td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td class="matrix-total-cell row-total">/7</td>
+                        </tr>
+
+                        <!-- Habit 6 -->
+                        <tr>
+                            <td class="td-habit">
+                                <div class="weekly-habit-title">📝 Set Priorities</div>
+                                <div class="weekly-habit-sub">Choose top 1–3 focus items</div>
+                            </td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td class="matrix-total-cell row-total">/7</td>
+                        </tr>
+
+                        <!-- Habit 7 -->
+                        <tr>
+                            <td class="td-habit">
+                                <div class="weekly-habit-title">🪥 Personal Care</div>
+                                <div class="weekly-habit-sub">Groom, wash, get ready</div>
+                            </td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td class="matrix-total-cell row-total">/7</td>
+                        </tr>
+
+                        <!-- Habit 8 -->
+                        <tr>
+                            <td class="td-habit">
+                                <div class="weekly-habit-title">💛 Positive Check-In</div>
+                                <div class="weekly-habit-sub">“What do I need today?”</div>
+                            </td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td><div class="matrix-circle" onclick="toggleMatrix(this)">✔</div></td>
+                            <td class="matrix-total-cell row-total">/7</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="tr-footer">
+                            <td class="td-habit">Daily Total (out of 8)</td>
+                            <td>/8</td>
+                            <td>/8</td>
+                            <td>/8</td>
+                            <td>/8</td>
+                            <td>/8</td>
+                            <td>/8</td>
+                            <td>/8</td>
+                            <td>⭐</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <!-- Weekly Reflections -->
+                <div class="weekly-reflections-grid">
+                    <div class="reflection-card">
+                        <h4>🌱 What felt easiest and most natural this week?</h4>
+                        <div class="reflection-lines-box">
+                            <div class="write-line"></div>
+                            <div class="write-line"></div>
+                        </div>
+                    </div>
+                    <div class="reflection-card">
+                        <h4>💛 Where did I show myself kindness when plans shifted?</h4>
+                        <div class="reflection-lines-box">
+                            <div class="write-line"></div>
+                            <div class="write-line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abigail's Coaching Advice Banner -->
+                <div class="coaching-quote-card">
+                    <div class="coaching-quote-icon">🌿</div>
+                    <div class="coaching-quote-text">
+                        <strong>Abigail’s Coaching Note:</strong> A missed day or an incomplete checklist is never a failure—it is simply information. Notice what supported you, let go of self-criticism, and begin the next morning fresh.
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <span>hello@abigailstocks.com</span>
+                <span class="footer-tagline">Progress always beats perfection.</span>
+                <span>Page 2 of 3</span>
+            </div>
+        </article>
+
+
+        <!-- ============================================================ -->
+        <!-- PAGE 3: GENTLE MORNING ROUTINE GUIDE -->
+        <!-- ============================================================ -->
+        <article class="page page-3" id="guide-page">
+            <div class="page-header">
+                <span class="brand-name">Abigail Stocks Coaching</span>
+                <span class="doc-tag">Routine Wisdom</span>
+            </div>
+
+            <div class="page-content">
+                <!-- Hero Header -->
+                <div class="hero-banner">
+                    <div class="hero-pill">✨ The 4 Pillars of Gentle Mornings</div>
+                    <h2 class="hero-title">How to Build Habits You Genuinely Look Forward To</h2>
+                    <p class="hero-tagline">“You don’t have to overhaul your life in a day—just build one gentle anchor at a time.”</p>
+                </div>
+
+                <!-- 4 Pillars Grid -->
+                <div class="pillars-grid">
+                    <!-- Pillar 1 -->
+                    <div class="pillar-card">
+                        <span class="pillar-num">Pillar 01</span>
+                        <h3 class="pillar-title">Start with 1 or 2 Anchors</h3>
+                        <p class="pillar-desc">Trying to do all 8 habits perfectly on day one leads to fatigue. Pick just two habits (e.g. hydration and morning light) until they feel effortless.</p>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="pillar-card">
+                        <span class="pillar-num">Pillar 02</span>
+                        <h3 class="pillar-title">Habit Stacking Rhythms</h3>
+                        <p class="pillar-desc">Tie new actions to existing daily cues: drink your water while the kettle boils, or do 3 deep breaths while your computer boots up.</p>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="pillar-card">
+                        <span class="pillar-num">Pillar 03</span>
+                        <h3 class="pillar-title">Make Movement Restorative</h3>
+                        <p class="pillar-desc">Morning movement doesn't need to be intense. A 5-minute gentle spine stretch or an easy stroll awakens your lymph and circadian clock beautifully.</p>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="pillar-card">
+                        <span class="pillar-num">Pillar 04</span>
+                        <h3 class="pillar-title">Release All-or-Nothing</h3>
+                        <p class="pillar-desc">If you wake up late or feel drained, doing 1 minute of mindfulness is 100% better than giving up. Consistency is the willingness to do small things.</p>
+                    </div>
+                </div>
+
+                <!-- Habit Quick-Look Details -->
+                <div class="habits-deepdive">
+                    <h3 class="deepdive-title">Gentle Habit Ideas to Try</h3>
+                    <div class="deepdive-grid">
+                        <div class="deepdive-item">
+                            <div class="deepdive-icon">💧</div>
+                            <div class="deepdive-h">Hydrate</div>
+                            <p class="deepdive-p">Warm lemon water or a tall glass with a pinch of sea salt.</p>
+                        </div>
+                        <div class="deepdive-item">
+                            <div class="deepdive-icon">☀️</div>
+                            <div class="deepdive-h">Light</div>
+                            <p class="deepdive-p">Step out into your garden, patio, or open curtains wide within 30 min of waking.</p>
+                        </div>
+                        <div class="deepdive-item">
+                            <div class="deepdive-icon">🧘</div>
+                            <div class="deepdive-h">Move</div>
+                            <p class="deepdive-p">Cat-cow stretches, gentle wrist rolls, or walking around the block.</p>
+                        </div>
+                        <div class="deepdive-item">
+                            <div class="deepdive-icon">🌿</div>
+                            <div class="deepdive-h">Mindfulness</div>
+                            <p class="deepdive-p">4-7-8 breathing or writing down 3 things you love.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note from Coach Abigail -->
+                <div class="coach-note-card">
+                    <div class="coach-note-left">
+                        <h3 class="coach-note-title">A Message From Abigail</h3>
+                        <p class="coach-note-body">Your mornings are not a performance test. They are your personal sanctuary to ground yourself before giving your energy to the world. Celebrate every small win, and remember: progress always beats perfection.</p>
+                        <span class="coach-signature-text">With warmth & encouragement, Abigail Stocks</span>
+                    </div>
+                    <div class="coach-note-cta">
+                        <span class="cta-label">Personalized Coaching</span>
+                        <a href="https://abigailstocks.com/#contact" class="cta-link-text">abigailstocks.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <span>hello@abigailstocks.com</span>
+                <span class="footer-tagline">Progress always beats perfection.</span>
+                <span>Page 3 of 3</span>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Interactive Script -->
+    <script>
+        function toggleHabit(index) {
+            const card = document.getElementById(`card-${index}`);
+            const checkbox = document.getElementById(`habit-${index}`);
+            const bubble = document.getElementById(`bubble-${index}`);
+
+            if (checkbox.checked) {
+                card.classList.add('checked-card');
+                bubble.classList.add('completed');
+                bubble.textContent = '✔';
+            } else {
+                card.classList.remove('checked-card');
+                bubble.classList.remove('completed');
+                bubble.textContent = index;
+            }
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.habit-checkbox');
+            let completed = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) completed++;
+            });
+
+            const text = document.getElementById('habit-progress-text');
+            text.textContent = `${completed} / 8 habits completed`;
+
+            if (completed === 8) {
+                text.style.backgroundColor = '#3F4B3C';
+                text.style.color = '#FFFFFF';
+            } else {
+                text.style.backgroundColor = 'var(--color-sage-light)';
+                text.style.color = 'var(--color-sage-dark)';
+            }
+        }
+
+        function toggleMatrix(el) {
+            el.classList.toggle('active');
+        }
+
+        function resetChecklist() {
+            for (let i = 1; i <= 8; i++) {
+                const cb = document.getElementById(`habit-${i}`);
+                if (cb) {
+                    cb.checked = false;
+                    toggleHabit(i);
+                }
+            }
+            document.querySelectorAll('.matrix-circle').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+            updateProgress();
+        }
+    </script>
+</body>
+</html>

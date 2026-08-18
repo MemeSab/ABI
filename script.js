@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const openDownloadModal = (resourceName) => {
         if (!downloadModal) return;
         
-        const isComingSoon = resourceName === "Morning Wellness Checklist" || resourceName === "Weekly Reflection Prompts";
+        const isComingSoon = resourceName === "Weekly Reflection Prompts";
         const modalFormDesc = downloadModal.querySelector('.modal-desc');
         const submitBtn = downloadModal.querySelector('button[type="submit"]');
 
@@ -233,31 +233,55 @@ document.addEventListener('DOMContentLoaded', () => {
             if (leadSuccessMessage) {
                 leadSuccessMessage.classList.add('show');
                 
-                // If it is any Habit Tracker resource, trigger immediate download
+                // Determine download file and web preview url based on resource
                 let downloadUrl = '';
                 let filename = '';
-                const isHabitTracker = resource.toLowerCase().includes("habit") || resource.toLowerCase().includes("tracker");
-                if (isHabitTracker) {
+                let webUrl = '';
+                let buttonLabel = 'Download PDF Directly';
+                const lowerRes = resource.toLowerCase();
+                const isMorningChecklist = lowerRes.includes("morning") || lowerRes.includes("checklist");
+                const isWeeklyReflection = lowerRes.includes("reflection") || lowerRes.includes("prompts");
+                const isHabitTracker = lowerRes.includes("habit") || lowerRes.includes("tracker");
+                
+                if (isMorningChecklist) {
+                    downloadUrl = 'assets/morning-wellness-checklist.pdf';
+                    filename = 'Morning_Wellness_Checklist_Abigail_Stocks.pdf';
+                    webUrl = 'morning-wellness-checklist.html';
+                    buttonLabel = 'Download Checklist (PDF)';
+                } else if (isWeeklyReflection) {
+                    downloadUrl = 'assets/weekly-reflection-prompts.pdf';
+                    filename = 'Weekly_Reflection_Prompts_Abigail_Stocks.pdf';
+                    webUrl = 'weekly-reflection-prompts.html';
+                    buttonLabel = 'Download Prompts (PDF)';
+                } else if (isHabitTracker) {
                     downloadUrl = 'assets/daily-habits-tracker.pdf';
                     filename = 'Daily_Healthy_Habits_Tracker_Abigail_Stocks.pdf';
+                    webUrl = 'daily-habits-tracker.html';
+                    buttonLabel = 'Download Tracker (PDF)';
                 }
                 
                 if (downloadUrl) {
-                    // Show a direct download button fallback inside the success modal
-                    let fallbackLink = document.getElementById('manual-download-btn');
-                    if (!fallbackLink) {
-                        fallbackLink = document.createElement('a');
-                        fallbackLink.id = 'manual-download-btn';
-                        fallbackLink.className = 'btn btn-primary btn-block';
-                        fallbackLink.style.marginTop = '16px';
-                        fallbackLink.style.display = 'inline-flex';
-                        fallbackLink.style.justifyContent = 'center';
-                        fallbackLink.style.alignItems = 'center';
-                        fallbackLink.textContent = 'Download Tracker Directly';
-                        leadSuccessMessage.appendChild(fallbackLink);
+                    // Update success modal text
+                    const successTitle = leadSuccessMessage.querySelector('h4');
+                    const successText = leadSuccessMessage.querySelector('p');
+                    if (successTitle) successTitle.textContent = "Your Resource is Ready!";
+                    if (successText) successText.textContent = "Your printable A4 PDF has started downloading. You can also open the interactive digital version below:";
+
+                    // Container for both action buttons
+                    let actionsContainer = document.getElementById('modal-success-actions');
+                    if (!actionsContainer) {
+                        actionsContainer = document.createElement('div');
+                        actionsContainer.id = 'modal-success-actions';
+                        actionsContainer.style.marginTop = '16px';
+                        actionsContainer.style.display = 'flex';
+                        actionsContainer.style.flexDirection = 'column';
+                        actionsContainer.style.gap = '10px';
+                        leadSuccessMessage.appendChild(actionsContainer);
                     }
-                    fallbackLink.href = downloadUrl;
-                    fallbackLink.setAttribute('download', filename);
+                    actionsContainer.innerHTML = `
+                        <a href="${downloadUrl}" download="${filename}" class="btn btn-primary btn-block" style="text-decoration:none;">📥 ${buttonLabel}</a>
+                        ${webUrl ? `<a href="${webUrl}" target="_blank" class="btn btn-secondary btn-block" style="text-decoration:none;">📱 Open Interactive Web Version &rarr;</a>` : ''}
+                    `;
                     
                     // Trigger auto-download
                     const autoLink = document.createElement('a');
@@ -269,8 +293,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Optional: Close modal automatically after 5-10 seconds
-            const autoCloseDelay = isHabitTracker ? 10000 : 5000;
+            // Optional: Keep modal open longer for the user to choose
+            const autoCloseDelay = 15000;
             setTimeout(() => {
                 if (downloadModal.classList.contains('show')) {
                     closeDownloadModal();
@@ -360,6 +384,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (guideSuccessContainer) {
                 guideSuccessContainer.classList.add('show');
                 guideSuccessContainer.setAttribute('aria-hidden', 'false');
+                
+                // Add dual action buttons to featured guide success
+                let guideActions = document.getElementById('guide-success-actions');
+                if (!guideActions) {
+                    guideActions = document.createElement('div');
+                    guideActions.id = 'guide-success-actions';
+                    guideActions.style.marginTop = '16px';
+                    guideActions.style.display = 'flex';
+                    guideActions.style.flexDirection = 'column';
+                    guideActions.style.gap = '10px';
+                    guideSuccessContainer.appendChild(guideActions);
+                }
+                guideActions.innerHTML = `
+                    <a href="assets/movement-mindset-guide.pdf" download="Movement_and_Mindset_Guide_Abigail_Stocks.pdf" class="btn btn-primary btn-block" style="text-decoration:none;">📥 Download Workbook (PDF)</a>
+                    <a href="movement-mindset-guide.html" target="_blank" class="btn btn-secondary btn-block" style="text-decoration:none;">📱 Open Interactive Web Guide &rarr;</a>
+                `;
             }
             
             // Trigger auto-download

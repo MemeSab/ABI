@@ -1,34 +1,47 @@
 /* --- Custom Properties / Design System --- */
 :root {
     /* Color Palette */
-    --color-cream: #FCFAF6;          /* Main canvas background */
-    --color-cream-dark: #F5EFEB;     /* Secondary section background */
-    --color-beige: #EBE5DA;          /* Borders, dividers, subtle backgrounds */
-    
-    --color-sage: #8FA08A;           /* Brand primary sage green */
-    --color-sage-light: #EDF2EC;     /* Soft sage background tint */
-    --color-sage-medium: #6B7C67;    /* Contrast sage for secondary elements */
-    --color-sage-dark: #3F4B3C;      /* Deep forest green for main headings */
-    
-    --color-blush: #E2B3AC;          /* Accent blush pink */
-    --color-blush-light: #F7ECEB;    /* Soft pink background tint */
-    --color-blush-medium: #C48E86;   /* Medium accent blush */
-    --color-blush-dark: #A5736C;     /* Contrast blush for buttons or hover */
-    
-    --color-charcoal: #2C2D2B;       /* Text color - soft charcoal for readability */
-    --color-charcoal-muted: #5F615C; /* Secondary text color */
+    --color-cream: #FCFAF6;
+    /* Main canvas background */
+    --color-cream-dark: #F5EFEB;
+    /* Secondary section background */
+    --color-beige: #EBE5DA;
+    /* Borders, dividers, subtle backgrounds */
+
+    --color-sage: #8FA08A;
+    /* Brand primary sage green */
+    --color-sage-light: #EDF2EC;
+    /* Soft sage background tint */
+    --color-sage-medium: #6B7C67;
+    /* Contrast sage for secondary elements */
+    --color-sage-dark: #3F4B3C;
+    /* Deep forest green for main headings */
+
+    --color-blush: #E2B3AC;
+    /* Accent blush pink */
+    --color-blush-light: #F7ECEB;
+    /* Soft pink background tint */
+    --color-blush-medium: #C48E86;
+    /* Medium accent blush */
+    --color-blush-dark: #A5736C;
+    /* Contrast blush for buttons or hover */
+
+    --color-charcoal: #2C2D2B;
+    /* Text color - soft charcoal for readability */
+    --color-charcoal-muted: #5F615C;
+    /* Secondary text color */
     --color-white: #FFFFFF;
-    
+
     /* Typography */
     --font-headings: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    
+
     /* Spacing & Borders */
     --radius-sm: 8px;
     --radius-md: 16px;
     --radius-lg: 24px;
     --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    
+
     /* Shadows */
     --shadow-sm: 0 4px 12px rgba(63, 75, 60, 0.03);
     --shadow-md: 0 12px 36px rgba(63, 75, 60, 0.05);
@@ -55,7 +68,12 @@ body {
     line-height: 1.7;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-headings);
     color: var(--color-sage-dark);
     font-weight: 600;
@@ -283,7 +301,7 @@ ul {
 .hero-section {
     padding-top: 140px;
     background: radial-gradient(circle at 85% 15%, var(--color-blush-light) 0%, transparent 40%),
-                radial-gradient(circle at 15% 85%, var(--color-sage-light) 0%, transparent 40%);
+        radial-gradient(circle at 15% 85%, var(--color-sage-light) 0%, transparent 40%);
 }
 
 .hero-grid {
@@ -1150,7 +1168,7 @@ ul {
     max-height: 80vh;
     border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     transform: scale(0.95);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1250,8 +1268,13 @@ ul {
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* --- Responsive Styles (Mobile First / Breakpoints) --- */
@@ -1260,11 +1283,11 @@ ul {
     .hero-title {
         font-size: 3rem;
     }
-    
+
     .focus-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .resources-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1275,43 +1298,43 @@ ul {
         grid-template-columns: 1fr;
         gap: 48px;
     }
-    
+
     .hero-content {
         order: 1;
     }
-    
+
     .hero-visual {
         order: 0;
         max-width: 500px;
         margin: 0 auto;
         width: 100%;
     }
-    
+
     .about-grid {
         grid-template-columns: 1fr;
         gap: 48px;
     }
-    
+
     .about-visual {
         max-width: 450px;
         margin: 0 auto;
         width: 100%;
     }
-    
+
     .method-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .testimonials-grid {
         grid-template-columns: 1fr;
         gap: 24px;
     }
-    
+
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 48px;
     }
-    
+
     .footer-container {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1322,16 +1345,16 @@ ul {
     .section-container {
         padding: 60px 20px;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     /* Navigation Hamburger Menu */
     .nav-toggle {
         display: flex;
     }
-    
+
     .nav-menu {
         position: absolute;
         top: 100%;
@@ -1346,58 +1369,58 @@ ul {
         transform: translateY(-10px);
         transition: var(--transition);
     }
-    
+
     .nav-menu.show {
         opacity: 1;
         pointer-events: auto;
         transform: translateY(0);
     }
-    
+
     .nav-list {
         flex-direction: column;
         align-items: stretch;
         gap: 20px;
         text-align: center;
     }
-    
+
     .nav-btn-outline {
         display: inline-block;
         width: 100%;
     }
-    
+
     /* Toggle active animation */
     .nav-toggle.active .hamburger-bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
-    
+
     .nav-toggle.active .hamburger-bar:nth-child(2) {
         opacity: 0;
     }
-    
+
     .nav-toggle.active .hamburger-bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-actions {
         flex-direction: column;
         gap: 12px;
     }
-    
+
     .hero-actions .btn {
         width: 100%;
     }
-    
+
     .floating-quote {
         left: 10px;
         bottom: 10px;
         right: 10px;
         max-width: calc(100% - 20px);
     }
-    
+
     .contact-form-wrapper {
         padding: 24px;
     }
@@ -1407,11 +1430,11 @@ ul {
     .focus-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .resources-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .philosophy-highlight-box {
         padding: 24px;
     }
@@ -1474,7 +1497,7 @@ ul {
     height: 320px;
     background-color: var(--color-cream);
     border-radius: 4px 14px 14px 4px;
-    box-shadow: 
+    box-shadow:
         4px 4px 16px rgba(63, 75, 60, 0.12),
         16px 16px 36px rgba(63, 75, 60, 0.08);
     display: flex;
@@ -1485,9 +1508,9 @@ ul {
 
 .book-spine {
     width: 12px;
-    background: linear-gradient(90deg, rgba(0,0,0,0.12) 0%, rgba(255,255,255,0.08) 40%, rgba(0,0,0,0.04) 100%), var(--color-sage-medium);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(255, 255, 255, 0.08) 40%, rgba(0, 0, 0, 0.04) 100%), var(--color-sage-medium);
     height: 100%;
-    border-right: 1px solid rgba(0,0,0,0.08);
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .book-cover-face {
@@ -1500,7 +1523,7 @@ ul {
     text-align: center;
     background-color: var(--color-cream);
     background-image: radial-gradient(circle at 100% 0%, var(--color-sage-light) 0%, transparent 45%),
-                        radial-gradient(circle at 0% 100%, var(--color-blush-light) 0%, transparent 45%);
+        radial-gradient(circle at 0% 100%, var(--color-blush-light) 0%, transparent 45%);
 }
 
 .book-badge {
@@ -1666,17 +1689,17 @@ ul {
     .guide-modal-body {
         grid-template-columns: 1fr;
     }
-    
+
     .guide-modal-left {
         padding: 24px;
         border-right: none;
         border-bottom: 1px solid var(--color-beige);
     }
-    
+
     .guide-modal-right {
         padding: 24px 20px;
     }
-    
+
     .guide-bullets-list {
         grid-template-columns: 1fr;
         gap: 6px;
@@ -1827,6 +1850,37 @@ ul {
     align-self: center;
 }
 
+.price-discovery-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-sage-dark);
+    background-color: var(--color-sage-light);
+    border: 1px solid rgba(143, 160, 138, 0.4);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    align-self: center;
+}
+
+.price-discovery-badge.blush {
+    color: var(--color-blush-dark);
+    background-color: var(--color-blush-light);
+    border-color: rgba(226, 179, 172, 0.5);
+}
+
+.price-disclosure-note {
+    font-size: 0.78rem;
+    color: var(--color-charcoal-muted);
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
 .pricing-features {
     list-style: none;
     padding: 0;
@@ -1895,7 +1949,7 @@ ul {
     background-color: transparent;
     padding: 0;
     border-radius: var(--radius-lg);
-    box-shadow: 
+    box-shadow:
         0 20px 48px rgba(63, 75, 60, 0.14),
         0 6px 16px rgba(63, 75, 60, 0.06);
     border: 1px solid rgba(235, 229, 218, 0.6);
@@ -1910,7 +1964,7 @@ ul {
 
 .podcast-logo-wrapper:hover {
     transform: translateY(-6px);
-    box-shadow: 
+    box-shadow:
         0 24px 48px rgba(63, 75, 60, 0.16),
         0 8px 20px rgba(63, 75, 60, 0.08);
 }
@@ -2001,8 +2055,8 @@ ul {
         font-size: 1.8rem !important;
         line-height: 1 !important;
         z-index: 2000 !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
         padding-bottom: 4px !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 }

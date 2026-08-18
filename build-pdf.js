@@ -11,6 +11,14 @@ const buildConfigs = [
     {
         source: 'daily-habits-tracker.html',
         dest: path.resolve(__dirname, 'assets', 'daily-habits-tracker.pdf')
+    },
+    {
+        source: 'morning-wellness-checklist.html',
+        dest: path.resolve(__dirname, 'assets', 'morning-wellness-checklist.pdf')
+    },
+    {
+        source: 'weekly-reflection-prompts.html',
+        dest: path.resolve(__dirname, 'assets', 'weekly-reflection-prompts.pdf')
     }
 ];
 
