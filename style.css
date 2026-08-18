@@ -1735,16 +1735,23 @@ ul {
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
     margin-top: 50px;
     align-items: stretch;
+}
+
+@media (min-width: 1100px) {
+    .pricing-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+    }
 }
 
 .pricing-card {
     background-color: var(--color-white);
     border-radius: var(--radius-md);
-    padding: 40px 24px;
+    padding: 38px 16px 26px 16px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--color-beige);
     display: flex;
@@ -1909,6 +1916,11 @@ ul {
 
 .pricing-card .btn {
     margin-top: auto;
+    font-size: 0.81rem;
+    padding: 13px 8px;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+    text-align: center;
 }
 
 .pricing-note {
