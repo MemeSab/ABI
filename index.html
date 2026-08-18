@@ -799,36 +799,45 @@
         <div class="modal-card">
             <button class="modal-close card-close" aria-label="Close download window">&times;</button>
             <div class="modal-body">
-                <span class="modal-tag">Free Resource</span>
-                <h3 class="modal-title">Get Your <span id="modal-resource-name">Resource</span></h3>
-                <p class="modal-subtitle">Enter your details below to receive the printable PDF guide in your inbox.</p>
-                <form id="lead-form" class="lead-form">
-                    <!-- Honeypot Spam Protection -->
-                    <input type="text" name="_honey" style="display:none">
-                    <input type="hidden" id="resource-identifier" name="resource-identifier">
-                    <div class="form-group">
-                        <label for="lead-name">First Name</label>
-                        <input type="text" id="lead-name" name="lead-name" required placeholder="Your name">
+                <!-- Pre-submission Form View -->
+                <div id="lead-form-view">
+                    <span class="modal-tag">Free Resource</span>
+                    <h3 class="modal-title">Get Your <span id="modal-resource-name">Resource</span></h3>
+                    <p class="modal-subtitle">Enter your details below to receive the printable A4 PDF and access the interactive online version.</p>
+                    <form id="lead-form" class="lead-form">
+                        <!-- Honeypot Spam Protection -->
+                        <input type="text" name="_honey" style="display:none">
+                        <input type="hidden" id="resource-identifier" name="resource-identifier">
+                        <div class="form-group">
+                            <label for="lead-name">First Name</label>
+                            <input type="text" id="lead-name" name="lead-name" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="lead-email">Email Address</label>
+                            <input type="email" id="lead-email" name="lead-email" required placeholder="name@example.com">
+                        </div>
+                        <div class="form-consent">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">I consent to receiving this resource and occasional wellness encouragement from Abigail Stocks. I can unsubscribe at any time.</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Get Free Resource</button>
+                    </form>
+                </div>
+
+                <!-- Post-submission Success View -->
+                <div id="lead-success" class="lead-success-view" aria-hidden="true">
+                    <div class="lead-success-icon-wrap">
+                        <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
                     </div>
-                    <div class="form-group">
-                        <label for="lead-email">Email Address</label>
-                        <input type="email" id="lead-email" name="lead-email" required placeholder="name@example.com">
+                    <h4 class="lead-success-title">Your Resource is Ready!</h4>
+                    <p class="lead-success-desc">Your printable A4 PDF has started downloading automatically.</p>
+                    <div id="modal-success-actions" class="lead-success-actions">
+                        <!-- Dynamic buttons populated by JS -->
                     </div>
-                    <div class="form-consent">
-                        <input type="checkbox" id="consent" name="consent" required>
-                        <label for="consent">I consent to receiving this resource and occasional wellness encouragement
-                            from Abigail Stocks. I can unsubscribe at any time.</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Send Me the PDF</button>
-                </form>
-                <div id="lead-success" class="lead-success-message" aria-hidden="true">
-                    <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                    <h4>Sent with love!</h4>
-                    <p>Please check your inbox (and spam folder, just in case) for your download link. Happy reading!
-                    </p>
+                    <p class="lead-success-note">A copy has also been sent to your email.</p>
                 </div>
             </div>
         </div>

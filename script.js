@@ -127,43 +127,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadClose = document.querySelector('.card-close');
     const downloadButtons = document.querySelectorAll('.resource-download-btn');
     const leadForm = document.getElementById('lead-form');
+    const leadFormView = document.getElementById('lead-form-view');
     const leadSuccessMessage = document.getElementById('lead-success');
 
     const openDownloadModal = (resourceName) => {
         if (!downloadModal) return;
-        
-        const isComingSoon = resourceName === "Weekly Reflection Prompts";
-        const modalFormDesc = downloadModal.querySelector('.modal-desc');
-        const submitBtn = downloadModal.querySelector('button[type="submit"]');
 
-        // Reset modal forms
+        // Reset modal views
+        if (leadFormView) {
+            leadFormView.style.display = 'block';
+        }
         if (leadForm) {
-            leadForm.style.display = 'block';
             leadForm.reset();
         }
         if (leadSuccessMessage) {
             leadSuccessMessage.classList.remove('show');
-            // Reset success text back to defaults
-            const successTitle = leadSuccessMessage.querySelector('h4');
-            const successText = leadSuccessMessage.querySelector('p');
-            if (isComingSoon) {
-                if (successTitle) successTitle.textContent = "You're on the list!";
-                if (successText) successText.textContent = "Thank you! We will email you your free download link as soon as Abigail publishes this guide.";
-            } else {
-                if (successTitle) successTitle.textContent = "Sent with love!";
-                if (successText) successText.textContent = "Please check your inbox (and spam folder, just in case) for your download link. Happy reading!";
-            }
-            const fallbackLink = document.getElementById('manual-download-btn');
-            if (fallbackLink) fallbackLink.remove();
-        }
-
-        if (modalFormDesc) {
-            modalFormDesc.textContent = isComingSoon 
-                ? "Abigail is currently crafting this resource. Enter your email below to be notified the moment it launches!" 
-                : "Enter your details below to instantly receive your free wellness download.";
-        }
-        if (submitBtn) {
-            submitBtn.textContent = isComingSoon ? "Join Resource Waitlist" : "Get My Free Guide";
+            leadSuccessMessage.setAttribute('aria-hidden', 'true');
         }
 
         modalResourceName.textContent = resourceName;
@@ -198,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Lead Form submission simulation (Standard)
+    // Lead Form submission
     if (leadForm) {
         leadForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -228,62 +207,52 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => console.log('FormSubmit Success:', data))
             .catch(error => console.error('FormSubmit Error:', error));
             
-            // Animate transition to success
-            leadForm.style.display = 'none';
+            // Determine download file and web preview url based on resource
+            let downloadUrl = '';
+            let filename = '';
+            let webUrl = '';
+            let buttonLabel = 'Download PDF Directly';
+            const lowerRes = resource.toLowerCase();
+            const isMorningChecklist = lowerRes.includes("morning") || lowerRes.includes("checklist");
+            const isWeeklyReflection = lowerRes.includes("reflection") || lowerRes.includes("prompts");
+            const isHabitTracker = lowerRes.includes("habit") || lowerRes.includes("tracker");
+            
+            if (isMorningChecklist) {
+                downloadUrl = 'assets/morning-wellness-checklist.pdf';
+                filename = 'Morning_Wellness_Checklist_Abigail_Stocks.pdf';
+                webUrl = 'morning-wellness-checklist.html';
+                buttonLabel = 'Download Checklist (PDF)';
+            } else if (isWeeklyReflection) {
+                downloadUrl = 'assets/weekly-reflection-prompts.pdf';
+                filename = 'Weekly_Reflection_Prompts_Abigail_Stocks.pdf';
+                webUrl = 'weekly-reflection-prompts.html';
+                buttonLabel = 'Download Prompts (PDF)';
+            } else if (isHabitTracker) {
+                downloadUrl = 'assets/daily-habits-tracker.pdf';
+                filename = 'Daily_Healthy_Habits_Tracker_Abigail_Stocks.pdf';
+                webUrl = 'daily-habits-tracker.html';
+                buttonLabel = 'Download Tracker (PDF)';
+            }
+
+            // Animate transition to dedicated success view
+            if (leadFormView) {
+                leadFormView.style.display = 'none';
+            }
             if (leadSuccessMessage) {
                 leadSuccessMessage.classList.add('show');
+                leadSuccessMessage.setAttribute('aria-hidden', 'false');
                 
-                // Determine download file and web preview url based on resource
-                let downloadUrl = '';
-                let filename = '';
-                let webUrl = '';
-                let buttonLabel = 'Download PDF Directly';
-                const lowerRes = resource.toLowerCase();
-                const isMorningChecklist = lowerRes.includes("morning") || lowerRes.includes("checklist");
-                const isWeeklyReflection = lowerRes.includes("reflection") || lowerRes.includes("prompts");
-                const isHabitTracker = lowerRes.includes("habit") || lowerRes.includes("tracker");
-                
-                if (isMorningChecklist) {
-                    downloadUrl = 'assets/morning-wellness-checklist.pdf';
-                    filename = 'Morning_Wellness_Checklist_Abigail_Stocks.pdf';
-                    webUrl = 'morning-wellness-checklist.html';
-                    buttonLabel = 'Download Checklist (PDF)';
-                } else if (isWeeklyReflection) {
-                    downloadUrl = 'assets/weekly-reflection-prompts.pdf';
-                    filename = 'Weekly_Reflection_Prompts_Abigail_Stocks.pdf';
-                    webUrl = 'weekly-reflection-prompts.html';
-                    buttonLabel = 'Download Prompts (PDF)';
-                } else if (isHabitTracker) {
-                    downloadUrl = 'assets/daily-habits-tracker.pdf';
-                    filename = 'Daily_Healthy_Habits_Tracker_Abigail_Stocks.pdf';
-                    webUrl = 'daily-habits-tracker.html';
-                    buttonLabel = 'Download Tracker (PDF)';
+                // Actions container
+                const actionsContainer = document.getElementById('modal-success-actions');
+                if (actionsContainer && downloadUrl) {
+                    actionsContainer.innerHTML = `
+                        <a href="${downloadUrl}" download="${filename}" class="btn btn-primary btn-block">📥 ${buttonLabel}</a>
+                        ${webUrl ? `<a href="${webUrl}" target="_blank" class="btn btn-secondary btn-block">📱 Open Interactive Web Version &rarr;</a>` : ''}
+                    `;
                 }
                 
+                // Trigger auto-download
                 if (downloadUrl) {
-                    // Update success modal text
-                    const successTitle = leadSuccessMessage.querySelector('h4');
-                    const successText = leadSuccessMessage.querySelector('p');
-                    if (successTitle) successTitle.textContent = "Your Resource is Ready!";
-                    if (successText) successText.textContent = "Your printable A4 PDF has started downloading. You can also open the interactive digital version below:";
-
-                    // Container for both action buttons
-                    let actionsContainer = document.getElementById('modal-success-actions');
-                    if (!actionsContainer) {
-                        actionsContainer = document.createElement('div');
-                        actionsContainer.id = 'modal-success-actions';
-                        actionsContainer.style.marginTop = '16px';
-                        actionsContainer.style.display = 'flex';
-                        actionsContainer.style.flexDirection = 'column';
-                        actionsContainer.style.gap = '10px';
-                        leadSuccessMessage.appendChild(actionsContainer);
-                    }
-                    actionsContainer.innerHTML = `
-                        <a href="${downloadUrl}" download="${filename}" class="btn btn-primary btn-block" style="text-decoration:none;">📥 ${buttonLabel}</a>
-                        ${webUrl ? `<a href="${webUrl}" target="_blank" class="btn btn-secondary btn-block" style="text-decoration:none;">📱 Open Interactive Web Version &rarr;</a>` : ''}
-                    `;
-                    
-                    // Trigger auto-download
                     const autoLink = document.createElement('a');
                     autoLink.href = downloadUrl;
                     autoLink.setAttribute('download', filename);
