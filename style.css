@@ -78,6 +78,15 @@ h6 {
     color: var(--color-sage-dark);
     font-weight: 600;
     line-height: 1.25;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: "lnum" 1, "pnum" 1;
+}
+
+.heading-num,
+.lining-num {
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: "lnum" 1, "pnum" 1;
+    letter-spacing: 0.02em;
 }
 
 p {
