@@ -456,9 +456,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const successClientName = document.getElementById('success-client-name');
     const packageFeaturesList = document.getElementById('package-features-list');
     const packageStripeBtn = document.getElementById('package-stripe-btn');
-    const packageCalendlyBtn = document.getElementById('package-calendly-btn');
 
-    // Centralized Package Configuration & Direct CTA Links
+    // Centralized Package Configuration & Direct CTA Links (prices exactly match Stripe)
     const PACKAGE_CONFIG = {
         "Single Habit Reset": {
             title: "Single Habit Reset (1:1 Deep Dive)",
@@ -474,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "6-Session Momentum": {
             title: "6-Session Momentum (Popular Pathway)",
             stripeUrl: "https://buy.stripe.com/00w00k0AK0ovaJ0eiI6sw01",
-            stripeButtonText: "Secure 6-Session Package via Stripe (£390) &rarr;",
+            stripeButtonText: "Secure 6-Session Package via Stripe (£420) &rarr;",
             features: [
                 "<strong>6 x 60 Mins</strong> dedicated 1:1 coaching sessions",
                 "Weekly or bi-weekly accountability check-ins",
@@ -485,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "12-Session Transformation": {
             title: "12-Session Transformation (Full Transformation)",
             stripeUrl: "https://buy.stripe.com/cNi3cwcjs0ov18q3E46sw02",
-            stripeButtonText: "Secure 12-Session Package via Stripe &rarr;",
+            stripeButtonText: "Secure 12-Session Package via Stripe (£780) &rarr;",
             features: [
                 "<strong>12 x 60 Mins</strong> deep-dive 1:1 sessions",
                 "Complete habit transformation map",
@@ -587,9 +586,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (packageStripeBtn) {
                 packageStripeBtn.href = config.stripeUrl;
                 packageStripeBtn.innerHTML = config.stripeButtonText;
-            }
-            if (packageCalendlyBtn) {
-                packageCalendlyBtn.href = "https://calendly.com/hello-abigailstocks/30min";
             }
 
             // Transition to success state
