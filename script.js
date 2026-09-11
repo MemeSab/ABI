@@ -115,6 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
             closeLightbox();
             closeDownloadModal();
             closeGuideModal();
+            if (typeof closePackageModal === 'function') {
+                closePackageModal();
+            }
         }
     });
 
@@ -429,6 +432,199 @@ document.addEventListener('DOMContentLoaded', () => {
                     formSuccessMessage.classList.add('show');
                 }, 300);
             }, 10);
+        });
+    }
+
+    // ==========================================
+    // 6. COACHING PACKAGE ENQUIRY MODAL & AUTOMATED EMAILS
+    // ==========================================
+    const packageModal = document.getElementById('package-enquiry-modal');
+    const modalPackageName = document.getElementById('modal-package-name');
+    const successPackageName = document.getElementById('success-package-name');
+    const enquiryPackageInput = document.getElementById('enquiry-package-name');
+    const packageCardClose = document.querySelector('.package-card-close');
+    const packageEnquireButtons = document.querySelectorAll('.package-enquire-btn');
+    const packageForm = document.getElementById('package-enquiry-form');
+    const packageFormView = document.getElementById('package-form-view');
+    const packageSuccessMessage = document.getElementById('package-enquiry-success');
+    const packageSubmitBtn = document.getElementById('package-submit-btn');
+
+    // Centralized Package Follow-Up Email Templates
+    // Note: Reuses the exact package breakdown from the website cards and the live Discovery Call booking URL.
+    // Abigail or site owners can safely modify or expand copy for each package directly below.
+    const PACKAGE_EMAIL_TEMPLATES = {
+        "Single Habit Reset": (name) => `Hi ${name || 'there'},
+
+Thank you for your enquiry about the Single Habit Reset coaching package with Abigail Stocks Coaching.
+
+Here is the detailed breakdown of what this package includes:
+
+PACKAGE: Single Habit Reset (1:1 Deep Dive)
+- Focus: Ideal for a quick reset, laser focus on a specific health hurdle, or a targeted realignment of your daily routines.
+- 60 Mins intensive 1:1 coaching session
+- Current routine audit & block identification
+- Actionable post-call habit blueprint
+- Email recap with custom action steps
+
+INVESTMENT & DETAILS:
+Investment discussed on enquiry.
+(If you have specific hurdles or routine questions you would like to explore, feel free to reply directly to this email.)
+
+NEXT STEP: BOOK YOUR COMPLIMENTARY DISCOVERY CALL
+Whenever you are ready to connect and discuss your goals, you can book a free, no-pressure 30-minute Discovery Call here:
+https://calendly.com/hello-abigailstocks/30min
+
+Warmly,
+Abigail Stocks
+Healthy Habits Coach
+hello@abigailstocks.com | https://abigailstocks.com`,
+
+        "6-Session Momentum": (name) => `Hi ${name || 'there'},
+
+Thank you for your enquiry about the 6-Session Momentum coaching package with Abigail Stocks Coaching.
+
+Here is the detailed breakdown of what this package includes:
+
+PACKAGE: 6-Session Momentum (Popular Pathway)
+- Focus: Perfect for building momentum, establishing solid daily rhythms, and building self-trust with consistent accountability.
+- 6 x 60 Mins dedicated 1:1 coaching sessions
+- Weekly or bi-weekly accountability check-ins
+- Mindset & movement worksheets & guides
+- Direct email support between sessions
+
+INVESTMENT & DETAILS:
+Investment discussed on enquiry.
+(If you have specific hurdles or routine questions you would like to explore, feel free to reply directly to this email.)
+
+NEXT STEP: BOOK YOUR COMPLIMENTARY DISCOVERY CALL
+Whenever you are ready to connect and discuss your goals, you can book a free, no-pressure 30-minute Discovery Call here:
+https://calendly.com/hello-abigailstocks/30min
+
+Warmly,
+Abigail Stocks
+Healthy Habits Coach
+hello@abigailstocks.com | https://abigailstocks.com`,
+
+        "12-Session Transformation": (name) => `Hi ${name || 'there'},
+
+Thank you for your enquiry about the 12-Session Transformation coaching package with Abigail Stocks Coaching.
+
+Here is the detailed breakdown of what this package includes:
+
+PACKAGE: 12-Session Transformation (Full Transformation)
+- Focus: Our deepest and most comprehensive program, designed for full lifestyle shifts, sustained habit changes, and lasting wellness.
+- 12 x 60 Mins deep-dive 1:1 sessions
+- Complete habit transformation map
+- Ongoing priority message & email support
+- Custom wellness logs & personalized tools
+
+INVESTMENT & DETAILS:
+Investment discussed on enquiry.
+(If you have specific hurdles or routine questions you would like to explore, feel free to reply directly to this email.)
+
+NEXT STEP: BOOK YOUR COMPLIMENTARY DISCOVERY CALL
+Whenever you are ready to connect and discuss your goals, you can book a free, no-pressure 30-minute Discovery Call here:
+https://calendly.com/hello-abigailstocks/30min
+
+Warmly,
+Abigail Stocks
+Healthy Habits Coach
+hello@abigailstocks.com | https://abigailstocks.com`
+    };
+
+    window.closePackageModal = () => {
+        if (!packageModal) return;
+        packageModal.classList.remove('show');
+        packageModal.setAttribute('aria-hidden', 'true');
+    };
+
+    const openPackageModal = (packageName) => {
+        if (!packageModal) return;
+
+        // Reset views and forms
+        if (packageFormView) packageFormView.style.display = 'block';
+        if (packageForm) packageForm.reset();
+        if (packageSuccessMessage) {
+            packageSuccessMessage.classList.remove('show');
+            packageSuccessMessage.setAttribute('aria-hidden', 'true');
+        }
+        if (packageSubmitBtn) {
+            packageSubmitBtn.disabled = false;
+            packageSubmitBtn.textContent = 'Email to Enquire';
+        }
+
+        if (modalPackageName) modalPackageName.textContent = packageName;
+        if (successPackageName) successPackageName.textContent = packageName;
+        if (enquiryPackageInput) enquiryPackageInput.value = packageName;
+
+        packageModal.classList.add('show');
+        packageModal.setAttribute('aria-hidden', 'false');
+    };
+
+    packageEnquireButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const pkg = btn.getAttribute('data-package') || 'Single Habit Reset';
+            openPackageModal(pkg);
+        });
+    });
+
+    if (packageCardClose) packageCardClose.addEventListener('click', window.closePackageModal);
+    if (packageModal) {
+        packageModal.addEventListener('click', (e) => {
+            if (e.target === packageModal) {
+                window.closePackageModal();
+            }
+        });
+    }
+
+    // Package Enquiry Form submission
+    if (packageForm) {
+        packageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('package-lead-name').value.trim();
+            const email = document.getElementById('package-lead-email').value.trim();
+            const selectedPackage = enquiryPackageInput.value || 'Single Habit Reset';
+
+            console.log(`Package enquiry submitted: ${name} (${email}) for "${selectedPackage}"`);
+
+            // Disable submit button during request
+            if (packageSubmitBtn) {
+                packageSubmitBtn.disabled = true;
+                packageSubmitBtn.textContent = 'Sending Enquiry...';
+            }
+
+            // Generate package-specific follow-up email content
+            const templateFn = PACKAGE_EMAIL_TEMPLATES[selectedPackage] || PACKAGE_EMAIL_TEMPLATES["Single Habit Reset"];
+            const autoresponseMessage = templateFn(name);
+
+            // Submit form via fetch to FormSubmit
+            fetch("https://formsubmit.co/ajax/hello@abigailstocks.com", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    package: selectedPackage,
+                    _subject: `New Coaching Enquiry: ${selectedPackage} - Abigail Stocks Coaching`,
+                    _autoresponse: autoresponseMessage
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Package Enquiry FormSubmit Success:', data))
+            .catch(error => console.error('Package Enquiry FormSubmit Error:', error));
+
+            // Transition to success state
+            if (packageFormView) {
+                packageFormView.style.display = 'none';
+            }
+            if (packageSuccessMessage) {
+                packageSuccessMessage.classList.add('show');
+                packageSuccessMessage.setAttribute('aria-hidden', 'false');
+            }
         });
     }
 });

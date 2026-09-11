@@ -587,8 +587,7 @@
                             <li>Actionable post-call habit blueprint</li>
                             <li>Email recap with custom action steps</li>
                         </ul>
-                        <a href="https://calendly.com/hello-abigailstocks/30min" target="_blank" rel="noopener"
-                            class="btn btn-secondary btn-block">Book Discovery Call to Enquire</a>
+                        <button type="button" class="btn btn-secondary btn-block package-enquire-btn" data-package="Single Habit Reset">Email to Enquire</button>
                     </div>
 
                     <!-- Package 3: 6-Session Package -->
@@ -606,8 +605,7 @@
                             <li>Mindset & movement worksheets & guides</li>
                             <li>Direct email support between sessions</li>
                         </ul>
-                        <a href="https://calendly.com/hello-abigailstocks/30min" target="_blank" rel="noopener"
-                            class="btn btn-primary btn-block">Book Discovery Call to Enquire</a>
+                        <button type="button" class="btn btn-primary btn-block package-enquire-btn" data-package="6-Session Momentum">Email to Enquire</button>
                     </div>
 
                     <!-- Package 4: 12-Session Package -->
@@ -625,8 +623,7 @@
                             <li>Ongoing priority message & email support</li>
                             <li>Custom wellness logs & personalized tools</li>
                         </ul>
-                        <a href="https://calendly.com/hello-abigailstocks/30min" target="_blank" rel="noopener"
-                            class="btn btn-secondary btn-block">Book Discovery Call to Enquire</a>
+                        <button type="button" class="btn btn-secondary btn-block package-enquire-btn" data-package="12-Session Transformation">Email to Enquire</button>
                     </div>
                 </div>
 
@@ -838,6 +835,51 @@
                         <!-- Dynamic buttons populated by JS -->
                     </div>
                     <p class="lead-success-note">A copy has also been sent to your email.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PACKAGE ENQUIRY MODAL -->
+    <div id="package-enquiry-modal" class="modal download-modal" aria-hidden="true" role="dialog">
+        <div class="modal-card">
+            <button class="modal-close card-close package-card-close" aria-label="Close enquiry window">&times;</button>
+            <div class="modal-body">
+                <!-- Pre-submission Form View -->
+                <div id="package-form-view">
+                    <span class="modal-tag">Coaching Enquiry</span>
+                    <h3 class="modal-title">Enquire About <span id="modal-package-name">Package</span></h3>
+                    <p class="modal-subtitle">Enter your details below to receive the detailed package breakdown and information directly to your inbox, with the option to book a complimentary Discovery Call.</p>
+                    <form id="package-enquiry-form" class="lead-form">
+                        <!-- Honeypot Spam Protection -->
+                        <input type="text" name="_honey" style="display:none">
+                        <input type="hidden" id="enquiry-package-name" name="package">
+                        <div class="form-group">
+                            <label for="package-lead-name">Your Name</label>
+                            <input type="text" id="package-lead-name" name="name" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="package-lead-email">Email Address</label>
+                            <input type="email" id="package-lead-email" name="email" required placeholder="name@example.com">
+                        </div>
+                        <button type="submit" id="package-submit-btn" class="btn btn-primary btn-block">Email to Enquire</button>
+                    </form>
+                </div>
+
+                <!-- Post-submission Success View -->
+                <div id="package-enquiry-success" class="lead-success-view" aria-hidden="true">
+                    <div class="lead-success-icon-wrap">
+                        <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                    </div>
+                    <h4 class="lead-success-title">Enquiry Sent!</h4>
+                    <p class="lead-success-desc">We've sent the detailed breakdown for <strong id="success-package-name">your selected package</strong> to your inbox.</p>
+                    <div class="lead-success-actions" style="margin-top: 20px; width: 100%;">
+                        <a href="https://calendly.com/hello-abigailstocks/30min" target="_blank" rel="noopener" class="btn btn-primary btn-block">Book Discovery Call Now &rarr;</a>
+                    </div>
+                    <p class="lead-success-note" style="margin-top: 14px;">Ready to chat sooner? You can also book a free 30-min call anytime.</p>
                 </div>
             </div>
         </div>
