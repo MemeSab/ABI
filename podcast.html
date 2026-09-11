@@ -198,7 +198,7 @@
                     const email = document.getElementById('waitlist-email').value;
                     
                     // Submit waitlist details to FormSubmit
-                    fetch("https://formsubmit.co/ajax/hello@abigailstocks.com", {
+                    fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
                         method: "POST",
                         headers: { 
                             'Content-Type': 'application/json',
@@ -207,7 +207,8 @@
                         body: JSON.stringify({
                             name: name,
                             email: email,
-                            _subject: "New Strive Podcast Waitlist Signup"
+                            _subject: "New Strive Podcast Waitlist Signup",
+                            _cc: "hello@abigailstocks.com"
                         })
                     })
                     .then(response => response.json())

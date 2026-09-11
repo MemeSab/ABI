@@ -849,7 +849,7 @@
                 <div id="package-form-view">
                     <span class="modal-tag">Coaching Enquiry</span>
                     <h3 class="modal-title">Enquire About <span id="modal-package-name">Package</span></h3>
-                    <p class="modal-subtitle">Enter your details below to receive the detailed package breakdown and information directly to your inbox, with the option to book a complimentary Discovery Call.</p>
+                    <p class="modal-subtitle">Enter your details below to access the full package breakdown, with direct options to book or schedule your complimentary Discovery Call.</p>
                     <form id="package-enquiry-form" class="lead-form">
                         <!-- Honeypot Spam Protection -->
                         <input type="text" name="_honey" style="display:none">
@@ -862,7 +862,7 @@
                             <label for="package-lead-email">Email Address</label>
                             <input type="email" id="package-lead-email" name="email" required placeholder="name@example.com">
                         </div>
-                        <button type="submit" id="package-submit-btn" class="btn btn-primary btn-block">Email to Enquire</button>
+                        <button type="submit" id="package-submit-btn" class="btn btn-primary btn-block">Submit Enquiry &amp; View Details</button>
                     </form>
                 </div>
 
@@ -874,9 +874,23 @@
                             <polyline points="22 4 12 14.01 9 11.01" />
                         </svg>
                     </div>
-                    <h4 class="lead-success-title">Thank You!</h4>
-                    <p class="lead-success-desc">We’ve sent the complete breakdown and information for <strong id="success-package-name">your selected package</strong> directly to your inbox.</p>
-                    <p class="lead-success-note" style="margin-top: 16px; margin-bottom: 22px; font-style: italic; color: var(--color-charcoal-muted); line-height: 1.5;">Take your time reviewing the details. Whenever you're ready to chat, you'll find an invitation inside the email to connect with Abigail.</p>
+                    <h4 class="lead-success-title">Enquiry Received!</h4>
+                    <p class="lead-success-desc">Thank you, <strong id="success-client-name">there</strong>! Here is the complete breakdown for <strong id="success-package-name">your selected package</strong>:</p>
+
+                    <!-- Package Features & Deliverables Box -->
+                    <div id="package-details-box" style="background: rgba(142, 163, 149, 0.12); border: 1px solid rgba(142, 163, 149, 0.3); border-radius: 12px; padding: 18px; margin-bottom: 20px; text-align: left; width: 100%;">
+                        <ul id="package-features-list" style="margin: 0; padding-left: 20px; color: var(--color-charcoal); font-size: 0.9rem; line-height: 1.6;">
+                            <!-- Injected dynamically by script.js -->
+                        </ul>
+                    </div>
+
+                    <!-- Action Buttons: Stripe & Calendly -->
+                    <div class="lead-success-actions" id="package-modal-actions">
+                        <a id="package-stripe-btn" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-block">Secure Your Package via Stripe &rarr;</a>
+                        <a id="package-calendly-btn" href="https://calendly.com/hello-abigailstocks/30min" target="_blank" rel="noopener" class="btn btn-secondary btn-block">Or Book a Free 30-Min Discovery Call &rarr;</a>
+                    </div>
+
+                    <p class="lead-success-note" style="margin-top: 14px; margin-bottom: 20px; font-style: italic; color: var(--color-charcoal-muted); line-height: 1.5;">Abigail has received your details and will also follow up directly. You can book your discovery call or secure your package above anytime.</p>
                     <button type="button" class="btn btn-secondary package-success-close-btn" style="min-width: 140px; margin: 0 auto;">Close</button>
                 </div>
             </div>
