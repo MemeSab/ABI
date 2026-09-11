@@ -448,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const packageFormView = document.getElementById('package-form-view');
     const packageSuccessMessage = document.getElementById('package-enquiry-success');
     const packageSubmitBtn = document.getElementById('package-submit-btn');
+    const packageSuccessCloseBtn = document.querySelector('.package-success-close-btn');
 
     // Centralized Package Follow-Up Email Templates
     // Note: Reuses the exact package breakdown from the website cards and the live Discovery Call booking URL.
@@ -569,6 +570,7 @@ hello@abigailstocks.com | https://abigailstocks.com`
     });
 
     if (packageCardClose) packageCardClose.addEventListener('click', window.closePackageModal);
+    if (packageSuccessCloseBtn) packageSuccessCloseBtn.addEventListener('click', window.closePackageModal);
     if (packageModal) {
         packageModal.addEventListener('click', (e) => {
             if (e.target === packageModal) {
