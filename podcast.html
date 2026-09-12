@@ -71,21 +71,150 @@
                     </div>
                 </div>
                 
-                <!-- Right: Copy & Waitlist Form -->
+                <!-- Right: Copy, Audio Player & Waitlist Form -->
                 <div class="podcast-hero-content">
-                    <span class="section-tag">Coming Soon</span>
+                    <span class="section-tag">Special Preview Episode</span>
                     <h1 class="podcast-title">Strive Podcast</h1>
-                    <p class="podcast-tagline">Real-life stories of strength, inspiration, and the ability to keep striving through life’s challenges.</p>
+                    <p class="podcast-tagline">Real-life stories of strength, marriage, wellness, and the ability to keep striving through life’s challenges.</p>
                     
                     <div class="podcast-description">
-                        <p>The <strong>Strive Podcast</strong> is a warm, uplifting space dedicated to real-life stories of strength, inspiration, faith, and daily wellbeing. Hosted by Abigail Stocks, these honest conversations focus on building resilience, honoring our bodies, and finding grace and purpose through life's challenges.</p>
-                        <p>We are currently preparing a wonderful lineup of episodes, inspiring guest interviews, and practical habit coaching sessions designed to encourage and build you up.</p>
+                        <p>Welcome to an exclusive first listen of the <strong>Strive Podcast</strong>. In this special pilot conversation, Abigail is joined by her husband Graham (married 28 years!) for an unscripted, humorous, and heartfelt Q&amp;A.</p>
+                        <p>From parenting in the chaos and navigating perimenopause (<em>“like a cactus”</em>), to rediscovering self-worth and choosing to want each other every single day, this 10-minute highlight gives you a true taste of what Strive is all about.</p>
+                    </div>
+
+                    <!-- Interactive Audio Player Card -->
+                    <div class="podcast-player-card">
+                        <div class="podcast-player-header">
+                            <span class="podcast-player-tag">🎙️ Pilot Episode • 10 Min Highlights</span>
+                            <h2 class="podcast-player-title">Life, Marriage, Perimenopause &amp; Habits</h2>
+                            <p class="podcast-player-sub">An unscripted Q&amp;A with Abigail &amp; Graham Stocks</p>
+                        </div>
+
+                        <!-- Audio Element -->
+                        <audio id="strive-audio" preload="metadata">
+                            <source src="assets/strive-preview-episode.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+
+                        <!-- Controls Bar -->
+                        <div class="podcast-player-controls">
+                            <button id="audio-play-btn" class="audio-play-btn" aria-label="Play podcast episode">
+                                <svg id="play-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                <svg id="pause-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display:none;">
+                                    <rect x="6" y="4" width="4" height="16"></rect>
+                                    <rect x="14" y="4" width="4" height="16"></rect>
+                                </svg>
+                            </button>
+
+                            <button id="audio-rewind-btn" class="audio-skip-btn" title="Rewind 15 seconds">↺ 15s</button>
+                            <button id="audio-forward-btn" class="audio-skip-btn" title="Forward 15 seconds">↻ 15s</button>
+
+                            <div class="audio-progress-container">
+                                <div id="audio-progress-wrap" class="audio-progress-bar-wrap" role="slider" aria-label="Audio progress" tabindex="0">
+                                    <div id="audio-progress-fill" class="audio-progress-bar-fill"></div>
+                                </div>
+                                <div class="audio-time-row">
+                                    <span id="audio-current-time">0:00</span>
+                                    <span id="audio-duration">09:49</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Clickable Episode Chapters -->
+                        <div class="podcast-chapters-box">
+                            <div class="podcast-chapters-header">
+                                <h3 class="podcast-chapters-title">Episode Highlights &amp; Chapters</h3>
+                                <span class="podcast-chapters-hint">Click any topic to jump &amp; play</span>
+                            </div>
+                            <ul class="podcast-chapters-list">
+                                <li>
+                                    <button class="podcast-chapter-btn active" data-time="0">
+                                        <span class="chapter-time-pill">0:00</span>
+                                        <span class="chapter-label">The mate who said “just cry it out”</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="43">
+                                        <span class="chapter-time-pill">0:43</span>
+                                        <span class="chapter-label">Realising self-worth, after years of not believing it</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="93">
+                                        <span class="chapter-time-pill">1:33</span>
+                                        <span class="chapter-label">Not brave enough to raise her hand in class</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="143">
+                                        <span class="chapter-time-pill">2:23</span>
+                                        <span class="chapter-label">Perimenopause: “like a cactus”, and the crisps</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="197">
+                                        <span class="chapter-time-pill">3:17</span>
+                                        <span class="chapter-label">The bath with candles: “the sweetest night of my life”</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="249">
+                                        <span class="chapter-time-pill">4:09</span>
+                                        <span class="chapter-label">Advice to wives: stop sending the video clips</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="294">
+                                        <span class="chapter-time-pill">4:54</span>
+                                        <span class="chapter-label">“I can't be your safe space, I need you to be mine”</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="345">
+                                        <span class="chapter-time-pill">5:45</span>
+                                        <span class="chapter-label">“I'm still the same guy you married 28 years ago”</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="397">
+                                        <span class="chapter-time-pill">6:37</span>
+                                        <span class="chapter-label">Advice to a couple who are struggling</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="448">
+                                        <span class="chapter-time-pill">7:28</span>
+                                        <span class="chapter-label">Choosing to want each other: “would you choose me again?”</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="podcast-chapter-btn" data-time="545">
+                                        <span class="chapter-time-pill">9:05</span>
+                                        <span class="chapter-label">“Without a shadow of a doubt... I choose you”</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Quote Cards -->
+                    <div class="podcast-quotes-grid">
+                        <div class="podcast-quote-card">
+                            <p>“I can't be your safe space baby, I've got nothing left in the tank. I need you to be mine.”</p>
+                            <span class="podcast-quote-author">— Abigail Stocks</span>
+                        </div>
+                        <div class="podcast-quote-card">
+                            <p>“Would you choose me again after 28 years? Without a shadow of a doubt... I choose you.”</p>
+                            <span class="podcast-quote-author">— Graham Stocks</span>
+                        </div>
                     </div>
 
                     <!-- Waitlist Form Container -->
                     <div class="podcast-form-box">
                         <h3 class="podcast-form-title">Join the Podcast Waitlist</h3>
-                        <p class="podcast-form-subtitle">Be the first to know when the initial episode drops and get exclusive subscriber-only wellness guides.</p>
+                        <p class="podcast-form-subtitle">Loved this conversation? Be the first to know when the full series drops and receive exclusive subscriber wellness guides.</p>
                         
                         <form id="podcast-waitlist-form" class="podcast-waitlist-form">
                             <!-- Honeypot Spam Protection -->
@@ -219,6 +348,125 @@
                     waitlistForm.style.display = 'none';
                     successBox.classList.add('show');
                     successBox.setAttribute('aria-hidden', 'false');
+                });
+            }
+
+            // Audio Player Controls & Interactive Chapters
+            const audio = document.getElementById('strive-audio');
+            const playBtn = document.getElementById('audio-play-btn');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            const rewindBtn = document.getElementById('audio-rewind-btn');
+            const forwardBtn = document.getElementById('audio-forward-btn');
+            const progressWrap = document.getElementById('audio-progress-wrap');
+            const progressFill = document.getElementById('audio-progress-fill');
+            const currentTimeEl = document.getElementById('audio-current-time');
+            const durationEl = document.getElementById('audio-duration');
+            const chapterButtons = document.querySelectorAll('.podcast-chapter-btn');
+
+            function formatTime(seconds) {
+                if (isNaN(seconds) || seconds < 0) return '0:00';
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            if (audio && playBtn) {
+                // Initialize duration once metadata is loaded
+                audio.addEventListener('loadedmetadata', () => {
+                    durationEl.textContent = formatTime(audio.duration);
+                });
+
+                // Play / Pause Toggle
+                function togglePlay() {
+                    if (audio.paused) {
+                        audio.play();
+                        playIcon.style.display = 'none';
+                        pauseIcon.style.display = 'block';
+                        playBtn.setAttribute('aria-label', 'Pause podcast episode');
+                    } else {
+                        audio.pause();
+                        playIcon.style.display = 'block';
+                        pauseIcon.style.display = 'none';
+                        playBtn.setAttribute('aria-label', 'Play podcast episode');
+                    }
+                }
+
+                playBtn.addEventListener('click', togglePlay);
+
+                // Update Progress Bar & Current Time
+                audio.addEventListener('timeupdate', () => {
+                    if (audio.duration) {
+                        const progress = (audio.currentTime / audio.duration) * 100;
+                        progressFill.style.width = `${progress}%`;
+                        currentTimeEl.textContent = formatTime(audio.currentTime);
+
+                        // Highlight active chapter
+                        let activeIndex = 0;
+                        chapterButtons.forEach((btn, idx) => {
+                            const startTime = parseFloat(btn.getAttribute('data-time'));
+                            if (audio.currentTime >= startTime) {
+                                activeIndex = idx;
+                            }
+                        });
+                        chapterButtons.forEach((btn, idx) => {
+                            if (idx === activeIndex) {
+                                btn.classList.add('active');
+                            } else {
+                                btn.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+
+                // Audio Ended State
+                audio.addEventListener('ended', () => {
+                    playIcon.style.display = 'block';
+                    pauseIcon.style.display = 'none';
+                    progressFill.style.width = '0%';
+                    currentTimeEl.textContent = '0:00';
+                    playBtn.setAttribute('aria-label', 'Play podcast episode');
+                });
+
+                // Skip Buttons
+                if (rewindBtn) {
+                    rewindBtn.addEventListener('click', () => {
+                        audio.currentTime = Math.max(0, audio.currentTime - 15);
+                    });
+                }
+                if (forwardBtn) {
+                    forwardBtn.addEventListener('click', () => {
+                        audio.currentTime = Math.min(audio.duration || 589, audio.currentTime + 15);
+                    });
+                }
+
+                // Click / Scrub Progress Bar
+                if (progressWrap) {
+                    progressWrap.addEventListener('click', (e) => {
+                        const rect = progressWrap.getBoundingClientRect();
+                        const clickX = e.clientX - rect.left;
+                        const width = rect.width;
+                        const percentage = Math.max(0, Math.min(1, clickX / width));
+                        if (audio.duration) {
+                            audio.currentTime = percentage * audio.duration;
+                        }
+                    });
+                }
+
+                // Click on Chapter to Jump & Play Immediately
+                chapterButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const targetTime = parseFloat(btn.getAttribute('data-time'));
+                        audio.currentTime = targetTime;
+                        if (audio.paused) {
+                            audio.play();
+                            playIcon.style.display = 'none';
+                            pauseIcon.style.display = 'block';
+                            playBtn.setAttribute('aria-label', 'Pause podcast episode');
+                        }
+                        chapterButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    });
                 });
             }
         });
