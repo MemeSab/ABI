@@ -381,18 +381,43 @@
                 <div class="video-modal-heading">
                     <h3 id="video-modal-title" class="video-modal-title">Highlight Clip</h3>
                 </div>
-                <button id="video-modal-close" class="video-modal-close-btn" aria-label="Close video">
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
+                <div class="video-modal-actions">
+                    <div class="video-modal-nav">
+                        <button id="video-modal-prev" class="video-nav-btn" aria-label="Previous clip" title="Previous clip (Left Arrow)">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <span id="video-modal-counter" class="video-modal-counter">1 of 11</span>
+                        <button id="video-modal-next" class="video-nav-btn" aria-label="Next clip" title="Next clip (Right Arrow)">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <button id="video-modal-close" class="video-modal-close-btn" aria-label="Close video" title="Close (Esc)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div class="video-modal-body" id="video-modal-body">
+                <button id="video-floating-prev" class="video-floating-nav prev" aria-label="Previous video clip" title="Previous clip (Left Arrow)">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
                 <video id="modal-video-player" class="video-modal-player" controls playsinline preload="auto">
                     <source id="modal-video-source" src="" type="video/mp4">
                     Your browser does not support HTML5 video.
                 </video>
+                <button id="video-floating-next" class="video-floating-nav next" aria-label="Next video clip" title="Next clip (Right Arrow)">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
@@ -569,27 +594,43 @@
                 });
             }
 
-            // Video Lightbox Modal Controls (Option A & Option B)
+            // Video Lightbox Modal Controls (Next / Prev Scrolling & Swiping)
             const videoModal = document.getElementById('podcast-video-modal');
             const modalBackdrop = document.getElementById('video-modal-backdrop');
             const modalCloseBtn = document.getElementById('video-modal-close');
             const modalTitle = document.getElementById('video-modal-title');
             const modalBody = document.getElementById('video-modal-body');
             const modalVideo = document.getElementById('modal-video-player');
+            const modalCounter = document.getElementById('video-modal-counter');
+            const prevBtns = [document.getElementById('video-modal-prev'), document.getElementById('video-floating-prev')].filter(Boolean);
+            const nextBtns = [document.getElementById('video-modal-next'), document.getElementById('video-floating-next')].filter(Boolean);
 
-            function openVideoModal(clipSrc, title, aspect) {
-                if (!videoModal || !modalVideo) return;
+            const chapterVideoTriggers = Array.from(document.querySelectorAll('.chapter-video-trigger'));
+            let currentClipIndex = 0;
 
-                // Auto-pause podcast background audio if playing
-                if (audio && !audio.paused) {
-                    audio.pause();
-                    if (playIcon) playIcon.style.display = 'block';
-                    if (pauseIcon) pauseIcon.style.display = 'none';
-                    if (playBtn) playBtn.setAttribute('aria-label', 'Play podcast episode');
+            function updateClip(index) {
+                if (chapterVideoTriggers.length === 0) return;
+
+                // Loop smoothly: 0 to length - 1
+                if (index < 0) {
+                    currentClipIndex = chapterVideoTriggers.length - 1;
+                } else if (index >= chapterVideoTriggers.length) {
+                    currentClipIndex = 0;
+                } else {
+                    currentClipIndex = index;
                 }
 
+                const trigger = chapterVideoTriggers[currentClipIndex];
+                const clipSrc = trigger.getAttribute('data-clip');
+                const title = trigger.getAttribute('data-title') || 'Highlight Clip';
+                const aspect = trigger.getAttribute('data-aspect') || 'square';
+
                 if (modalTitle) {
-                    modalTitle.textContent = title || 'Highlight Clip';
+                    modalTitle.textContent = title;
+                }
+
+                if (modalCounter) {
+                    modalCounter.textContent = `${currentClipIndex + 1} of ${chapterVideoTriggers.length}`;
                 }
 
                 if (modalBody) {
@@ -603,16 +644,30 @@
                 modalVideo.src = clipSrc;
                 modalVideo.load();
 
-                videoModal.classList.add('is-active');
-                videoModal.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-
                 const playPromise = modalVideo.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(() => {
-                        // User interaction policy or auto-play prevented
+                        // Handled if browser policies pause
                     });
                 }
+            }
+
+            function openVideoModal(index) {
+                if (!videoModal || !modalVideo) return;
+
+                // Auto-pause podcast background audio if playing
+                if (audio && !audio.paused) {
+                    audio.pause();
+                    if (playIcon) playIcon.style.display = 'block';
+                    if (pauseIcon) pauseIcon.style.display = 'none';
+                    if (playBtn) playBtn.setAttribute('aria-label', 'Play podcast episode');
+                }
+
+                updateClip(index);
+
+                videoModal.classList.add('is-active');
+                videoModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
             }
 
             function closeVideoModal() {
@@ -629,6 +684,21 @@
                 document.body.style.overflow = '';
             }
 
+            function goToPrevClip() {
+                if (videoModal && videoModal.classList.contains('is-active')) {
+                    updateClip(currentClipIndex - 1);
+                }
+            }
+
+            function goToNextClip() {
+                if (videoModal && videoModal.classList.contains('is-active')) {
+                    updateClip(currentClipIndex + 1);
+                }
+            }
+
+            prevBtns.forEach(btn => btn.addEventListener('click', goToPrevClip));
+            nextBtns.forEach(btn => btn.addEventListener('click', goToNextClip));
+
             if (modalCloseBtn) {
                 modalCloseBtn.addEventListener('click', closeVideoModal);
             }
@@ -637,23 +707,50 @@
                 modalBackdrop.addEventListener('click', closeVideoModal);
             }
 
+            // Keyboard navigation (Escape to close, Arrow keys to scroll clips)
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && videoModal && videoModal.classList.contains('is-active')) {
+                if (!videoModal || !videoModal.classList.contains('is-active')) return;
+                if (e.key === 'Escape') {
                     closeVideoModal();
+                } else if (e.key === 'ArrowLeft') {
+                    goToPrevClip();
+                } else if (e.key === 'ArrowRight') {
+                    goToNextClip();
                 }
             });
 
-            // Option A: Click on Chapter "Watch" trigger
-            const chapterVideoTriggers = document.querySelectorAll('.chapter-video-trigger');
-            chapterVideoTriggers.forEach(btn => {
+            // Touch Swipe gestures on mobile & tablet
+            if (modalBody) {
+                let touchStartX = 0;
+                let touchStartY = 0;
+                let touchEndX = 0;
+                let touchEndY = 0;
+
+                modalBody.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
+                }, { passive: true });
+
+                modalBody.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    touchEndY = e.changedTouches[0].screenY;
+                    const diffX = touchEndX - touchStartX;
+                    const diffY = touchEndY - touchStartY;
+                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+                        if (diffX < 0) {
+                            goToNextClip(); // Swiped Left -> Next
+                        } else {
+                            goToPrevClip(); // Swiped Right -> Previous
+                        }
+                    }
+                }, { passive: true });
+            }
+
+            // Click on Chapter "Watch" trigger
+            chapterVideoTriggers.forEach((btn, idx) => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation(); // Avoid triggering chapter audio jump
-                    const clip = btn.getAttribute('data-clip');
-                    const title = btn.getAttribute('data-title');
-                    const aspect = btn.getAttribute('data-aspect') || 'square';
-                    if (clip) {
-                        openVideoModal(clip, title, aspect);
-                    }
+                    openVideoModal(idx);
                 });
             });
         });
