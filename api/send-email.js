@@ -51,7 +51,7 @@ export default async function handler(req, res) {
           <tr>
             <td align="center" style="padding: 34px 24px 22px; border-bottom: 1px solid #F0ECE4; background-color: #FFFFFF;">
               <a href="https://abigailstocks.com" target="_blank" style="text-decoration: none; display: inline-block;">
-                <img src="https://abigailstocks.com/assets/logo-header.png" alt="Abigail Stocks Coaching" width="210" style="display: block; border: 0; max-width: 210px; height: auto;" />
+                <img src="https://abigailstocks.com/assets/abigail-stocks-logo.png" alt="Abigail Stocks Coaching" width="210" style="display: block; border: 0; max-width: 210px; height: auto;" />
               </a>
               <div style="margin-top: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: #A5736C; font-weight: 600;">
                 Healthy Habits Coaching for Real Life
