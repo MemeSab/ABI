@@ -731,7 +731,7 @@ https://abigailstocks.com`;
         }
         if (packageSubmitBtn) {
             packageSubmitBtn.disabled = false;
-            packageSubmitBtn.textContent = 'Submit Enquiry & View Details';
+            packageSubmitBtn.textContent = 'Submit Enquiry';
         }
 
         if (modalPackageName) modalPackageName.textContent = packageName;
@@ -773,7 +773,7 @@ https://abigailstocks.com`;
             // Disable submit button during request
             if (packageSubmitBtn) {
                 packageSubmitBtn.disabled = true;
-                packageSubmitBtn.textContent = 'Sending Details...';
+                packageSubmitBtn.textContent = 'Sending Enquiry...';
             }
 
             // 1. Trigger automated package details delivery to client inbox via Vercel serverless API

@@ -849,7 +849,7 @@
                 <div id="package-form-view">
                     <span class="modal-tag">Coaching Enquiry</span>
                     <h3 class="modal-title">Enquire About <span id="modal-package-name">Package</span></h3>
-                    <p class="modal-subtitle">Enter your details below to access the full package breakdown, with direct options to book or schedule your complimentary Discovery Call.</p>
+                    <p class="modal-subtitle">Enter your details below to receive the complete package details, pricing breakdown, and booking options directly to your email inbox.</p>
                     <form id="package-enquiry-form" class="lead-form">
                         <!-- Honeypot Spam Protection -->
                         <input type="text" name="_honey" style="display:none">
@@ -862,7 +862,7 @@
                             <label for="package-lead-email">Email Address</label>
                             <input type="email" id="package-lead-email" name="email" required placeholder="name@example.com">
                         </div>
-                        <button type="submit" id="package-submit-btn" class="btn btn-primary btn-block">Submit Enquiry &amp; View Details</button>
+                        <button type="submit" id="package-submit-btn" class="btn btn-primary btn-block">Submit Enquiry</button>
                     </form>
                 </div>
 
@@ -874,23 +874,20 @@
                             <polyline points="22 4 12 14.01 9 11.01" />
                         </svg>
                     </div>
-                    <h4 class="lead-success-title">Enquiry Received!</h4>
-                    <p class="lead-success-desc">Thank you, <strong id="success-client-name">there</strong>! Here is the complete breakdown for <strong id="success-package-name">your selected package</strong>:</p>
+                    <h4 class="lead-success-title">Thank You for Your Enquiry!</h4>
+                    <p class="lead-success-desc">We've received your enquiry, <strong id="success-client-name">there</strong>!</p>
 
-                    <!-- Package Features & Deliverables Box -->
-                    <div id="package-details-box" style="background: rgba(142, 163, 149, 0.12); border: 1px solid rgba(142, 163, 149, 0.3); border-radius: 12px; padding: 18px; margin-bottom: 20px; text-align: left; width: 100%;">
-                        <ul id="package-features-list" style="margin: 0; padding-left: 20px; color: var(--color-charcoal); font-size: 0.9rem; line-height: 1.6;">
-                            <!-- Injected dynamically by script.js -->
-                        </ul>
+                    <!-- Clean Confirmation Box -->
+                    <div style="background: rgba(142, 163, 149, 0.12); border: 1px solid rgba(142, 163, 149, 0.3); border-radius: 12px; padding: 22px 18px; margin: 18px 0; text-align: center; width: 100%;">
+                        <div style="font-size: 1.6rem; margin-bottom: 8px;">📬</div>
+                        <h5 style="margin: 0 0 8px; color: var(--color-charcoal); font-size: 1.05rem; font-weight: 600;">Check Your Inbox</h5>
+                        <p style="margin: 0; color: var(--color-charcoal-muted); font-size: 0.92rem; line-height: 1.5;">
+                            We've sent the complete details for <strong id="success-package-name" style="color: var(--color-charcoal);">your package</strong>, including investment pricing and direct booking links, straight to your email.
+                        </p>
                     </div>
 
-                    <!-- Action Button: Stripe Payment Link -->
-                    <div class="lead-success-actions" id="package-modal-actions">
-                        <a id="package-stripe-btn" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-block">Secure Your Package via Stripe &rarr;</a>
-                    </div>
-
-                    <p class="lead-success-note" style="margin-top: 14px; margin-bottom: 20px; font-style: italic; color: var(--color-charcoal-muted); line-height: 1.5;">Abigail has received your enquiry. To complete and secure your coaching spot, click the secure Stripe payment link above.</p>
-                    <button type="button" class="btn btn-secondary package-success-close-btn" style="min-width: 140px; margin: 0 auto;">Close</button>
+                    <p class="lead-success-note" style="margin-bottom: 20px; font-style: italic; color: var(--color-charcoal-muted); line-height: 1.5;">Please check your spam or promotions folder just in case. Abigail will also review your enquiry personally.</p>
+                    <button type="button" class="btn btn-primary package-success-close-btn" style="min-width: 140px; margin: 0 auto;">Done</button>
                 </div>
             </div>
         </div>
