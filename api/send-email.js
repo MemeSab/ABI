@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         }
 
         const clientName = (name || '').trim() || 'there';
-        const senderFrom = process.env.RESEND_FROM || 'Abigail Stocks <onboarding@resend.dev>';
+        const senderFrom = process.env.RESEND_FROM || 'Abigail Stocks <hello@abigailstocks.com>';
         const abiEmail = 'abigailstockscoaching@gmail.com';
         const helloEmail = 'hello@abigailstocks.com';
 
