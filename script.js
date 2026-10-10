@@ -372,7 +372,19 @@ https://abigailstocks.com`;
             
             console.log(`Lead collected: ${name} (${email}) downloaded resource: "${resource}"`);
             
-            // Submit form via fetch to FormSubmit
+            // 1. Trigger automated inbox delivery via Vercel serverless API
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'resource',
+                    name: name,
+                    email: email,
+                    resourceName: resource
+                })
+            }).catch(err => console.log('Email delivery notice:', err));
+
+            // 2. Submit form via fetch to FormSubmit (Lead notification backup)
             fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
                 method: "POST",
                 headers: { 
@@ -513,7 +525,19 @@ https://abigailstocks.com`;
             
             console.log(`Lead collected: ${name} (${email}) downloaded resource: "${resource}"`);
             
-            // Submit form via fetch to FormSubmit
+            // 1. Trigger automated inbox delivery via Vercel serverless API
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'resource',
+                    name: name,
+                    email: email,
+                    resourceName: 'Movement & Mindset Guide'
+                })
+            }).catch(err => console.log('Email delivery notice:', err));
+
+            // 2. Submit form via fetch to FormSubmit (Lead notification backup)
             fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
                 method: "POST",
                 headers: { 
@@ -584,7 +608,19 @@ https://abigailstocks.com`;
             
             console.log(`Contact Form Submission: ${name} (${email}) - Message: ${message}`);
             
-            // Submit form via fetch to FormSubmit
+            // 1. Trigger automated inbox delivery via Vercel serverless API
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'contact',
+                    name: name,
+                    email: email,
+                    message: message
+                })
+            }).catch(err => console.log('Email delivery notice:', err));
+
+            // 2. Submit form via fetch to FormSubmit (Lead notification backup)
             fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
                 method: "POST",
                 headers: { 
@@ -740,7 +776,19 @@ https://abigailstocks.com`;
                 packageSubmitBtn.textContent = 'Sending Details...';
             }
 
-            // Submit form via fetch to FormSubmit (Primary: Gmail, CC: hello)
+            // 1. Trigger automated package details delivery to client inbox via Vercel serverless API
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'package',
+                    name: name,
+                    email: email,
+                    packageName: selectedPackage
+                })
+            }).catch(err => console.log('Package email delivery notice:', err));
+
+            // 2. Submit form via fetch to FormSubmit (Lead notification backup)
             fetch("https://formsubmit.co/ajax/abigailstockscoaching@gmail.com", {
                 method: "POST",
                 headers: {
