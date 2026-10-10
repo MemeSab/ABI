@@ -386,4 +386,4 @@ https://abigailstocks.com`;
         console.error('Unexpected serverless function error:', err);
         return res.status(500).json({ success: false, error: err.message || 'Internal Server Error' });
     }
-}\n
+}
