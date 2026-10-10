@@ -443,6 +443,23 @@
             const waitlistForm = document.getElementById('podcast-waitlist-form');
             const successBox = document.getElementById('waitlist-success');
 
+            const getWaitlistEmailContent = (name) => {
+                const clientName = name ? name.trim() : 'there';
+                return `Hi ${clientName},
+
+Thank you for joining the waitlist for The Strive Podcast with Abigail Stocks!
+
+You'll be the first to know as soon as full episodes drop, plus you'll receive exclusive subscriber guides and candid conversations on habits, fitness, and mindset.
+
+In the meantime, you can listen to the preview audio and watch chapter clips anytime here:
+https://abigailstocks.com/podcast
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+            };
+
             if (waitlistForm && successBox) {
                 waitlistForm.addEventListener('submit', (e) => {
                     e.preventDefault();
@@ -461,6 +478,7 @@
                             name: name,
                             email: email,
                             _subject: "New Strive Podcast Waitlist Signup",
+                            _autoresponse: getWaitlistEmailContent(name),
                             _cc: "hello@abigailstocks.com"
                         })
                     })

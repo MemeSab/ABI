@@ -122,6 +122,186 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
+    // AUTOMATED EMAIL TEMPLATES (FormSubmit _autoresponse)
+    // ==========================================
+    const getResourceEmailContent = (name, resourceName) => {
+        const clientName = name ? name.trim() : 'there';
+        const lowerRes = (resourceName || '').toLowerCase();
+
+        if (lowerRes.includes('morning') || lowerRes.includes('checklist')) {
+            return `Hi ${clientName},
+
+Thank you for downloading the Morning Wellness Checklist from Abigail Stocks Coaching!
+
+Here are your direct access links:
+• Download the PDF Checklist: https://abigailstocks.com/assets/morning-wellness-checklist.pdf
+• Open the Interactive Web Version: https://abigailstocks.com/morning-wellness-checklist.html
+
+Start small, build momentum, and celebrate the small wins!
+
+When you're ready to design routines that truly stick:
+• Book a free 30-minute Discovery Call: https://calendly.com/hello-abigailstocks/30min
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+        } else if (lowerRes.includes('reflection') || lowerRes.includes('prompts')) {
+            return `Hi ${clientName},
+
+Thank you for downloading the Weekly Reflection Prompts from Abigail Stocks Coaching!
+
+Here are your direct access links:
+• Download the PDF Prompts: https://abigailstocks.com/assets/weekly-reflection-prompts.pdf
+• Open the Interactive Web Version: https://abigailstocks.com/weekly-reflection-prompts.html
+
+Use these prompts each week to pause, reflect, and realign with your personal intentions.
+
+Whenever you'd like 1:1 guidance on your wellness journey:
+• Book a free 30-minute Discovery Call: https://calendly.com/hello-abigailstocks/30min
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+        } else if (lowerRes.includes('habit') || lowerRes.includes('tracker')) {
+            return `Hi ${clientName},
+
+Thank you for downloading the Daily Healthy Habits Tracker from Abigail Stocks Coaching!
+
+Here are your direct access links:
+• Download the PDF Tracker: https://abigailstocks.com/assets/daily-habits-tracker.pdf
+• Open the Interactive Web Version: https://abigailstocks.com/daily-habits-tracker.html
+
+Remember: consistency over intensity. Track your daily habits and watch your progress unfold!
+
+When you're ready to accelerate your habit transformation:
+• Book a free 30-minute Discovery Call: https://calendly.com/hello-abigailstocks/30min
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+        } else {
+            // Movement & Mindset Guide or default
+            return `Hi ${clientName},
+
+Thank you for downloading the Movement & Mindset Guide from Abigail Stocks Coaching!
+
+Here are your direct access links:
+• Download the PDF Workbook: https://abigailstocks.com/assets/movement-mindset-guide.pdf
+• Open the Interactive Web Guide: https://abigailstocks.com/movement-mindset-guide.html
+
+Take your time exploring the exercises and habit reflections. When you're ready to take the next step towards sustainable habits, I'd love to chat:
+• Book a free 30-minute Discovery Call: https://calendly.com/hello-abigailstocks/30min
+
+If you ever have any questions, you can reply directly to this email.
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+        }
+    };
+
+    const getContactEmailContent = (name) => {
+        const clientName = name ? name.trim() : 'there';
+        return `Hi ${clientName},
+
+Thank you for getting in touch with Abigail Stocks Coaching!
+
+I have received your message and will get back to you personally within 24-48 hours.
+
+If you'd like to jump straight into a conversation about your habits and goals, you can book a free 30-minute Discovery Call right here:
+https://calendly.com/hello-abigailstocks/30min
+
+Speak soon,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+    };
+
+    const getPackageEmailContent = (name, packageName) => {
+        const clientName = name ? name.trim() : 'there';
+        if (packageName === 'Single Habit Reset') {
+            return `Hi ${clientName},
+
+Thank you for your enquiry about the Single Habit Reset with Abigail Stocks Coaching!
+
+Here is what is included in your 1:1 Deep Dive:
+• 60 Mins intensive 1:1 coaching session
+• Current routine audit & block identification
+• Actionable post-call habit blueprint
+• Comprehensive email recap with custom action steps
+
+Investment: £75
+
+Ready to begin? You can secure your session directly via Stripe:
+https://buy.stripe.com/dRm8wQ6Z84ELaJ0caA6sw00
+
+Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
+https://calendly.com/hello-abigailstocks/30min
+
+If you have any questions, simply reply directly to this email or reach out to hello@abigailstocks.com.
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+        } else if (packageName === '6-Session Momentum') {
+            return `Hi ${clientName},
+
+Thank you for your enquiry about the 6-Session Momentum Package with Abigail Stocks Coaching!
+
+Here is what is included in your coaching journey:
+• 6 x 60 Mins dedicated 1:1 coaching sessions
+• Weekly or bi-weekly accountability check-ins
+• Mindset & movement worksheets & tailored guides
+• Direct email support between sessions
+
+Investment: £420
+
+Ready to secure your package? You can complete checkout directly via Stripe:
+https://buy.stripe.com/00w00k0AK0ovaJ0eiI6sw01
+
+Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
+https://calendly.com/hello-abigailstocks/30min
+
+If you have any questions, feel free to reply directly or contact hello@abigailstocks.com.
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+        } else {
+            return `Hi ${clientName},
+
+Thank you for your enquiry about the 12-Session Transformation Package with Abigail Stocks Coaching!
+
+Here is what is included in your full transformation journey:
+• 12 x 60 Mins deep-dive 1:1 sessions
+• Complete habit transformation roadmap
+• Ongoing priority message & direct email support
+• Custom wellness logs & personalized tools
+
+Investment: £780
+
+Ready to secure your package? You can complete checkout directly via Stripe:
+https://buy.stripe.com/cNi3cwcjs0ov18q3E46sw02
+
+Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
+https://calendly.com/hello-abigailstocks/30min
+
+If you have any questions, feel free to reply directly or contact hello@abigailstocks.com.
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+        }
+    };
+
+    // ==========================================
     // 4. RESOURCE LEAD MAGNET MODAL (STANDARD)
     // ==========================================
     const downloadModal = document.getElementById('download-modal');
@@ -204,6 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     email: email,
                     resource: resource,
                     _subject: `New Lead Magnet Download: ${resource}`,
+                    _autoresponse: getResourceEmailContent(name, resource),
                     _cc: "hello@abigailstocks.com"
                 })
             })
@@ -344,6 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     email: email,
                     resource: resource,
                     _subject: `New Lead Magnet Download: ${resource}`,
+                    _autoresponse: getResourceEmailContent(name, resource),
                     _cc: "hello@abigailstocks.com"
                 })
             })
@@ -414,6 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     email: email,
                     message: message,
                     _subject: "New Contact Message - Abigail Stocks Coaching",
+                    _autoresponse: getContactEmailContent(name),
                     _cc: "hello@abigailstocks.com"
                 })
             })
@@ -569,6 +752,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     email: email,
                     package: selectedPackage,
                     _subject: `New Coaching Enquiry: ${selectedPackage} - Abigail Stocks Coaching`,
+                    _autoresponse: getPackageEmailContent(name, selectedPackage),
                     _cc: "hello@abigailstocks.com"
                 })
             })
