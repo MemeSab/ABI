@@ -1,6 +1,5 @@
 // Vercel Serverless Function: /api/send-email
 export default async function handler(req, res) {
-    // Only accept POST requests
     if (req.method !== 'POST') {
         res.setHeader('Allow', ['POST']);
         return res.status(405).json({ success: false, error: 'Method Not Allowed' });
@@ -28,16 +27,98 @@ export default async function handler(req, res) {
         const helloEmail = 'hello@abigailstocks.com';
 
         let subject = '';
+        let headerTag = 'Coaching Enquiry';
+        let emailTitle = '';
+        let bodyHtml = '';
         let textContent = '';
-        let htmlContent = '';
+
+        // Helper function: Wrap into Abigail Stocks Brand Template
+        const renderBrandEmail = (tag, title, content) => {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abigail Stocks Coaching</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #FAF7F2; font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #2C2D2B;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #FAF7F2; padding: 36px 14px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #EBE5DA; overflow: hidden; box-shadow: 0 4px 20px rgba(63, 75, 60, 0.05);">
+          
+          <!-- Brand Header -->
+          <tr>
+            <td align="center" style="padding: 34px 24px 22px; border-bottom: 1px solid #F0ECE4; background-color: #FFFFFF;">
+              <a href="https://abigailstocks.com" target="_blank" style="text-decoration: none; display: inline-block;">
+                <img src="https://abigailstocks.com/assets/logo-header.png" alt="Abigail Stocks Coaching" width="210" style="display: block; border: 0; max-width: 210px; height: auto;" />
+              </a>
+              <div style="margin-top: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: #A5736C; font-weight: 600;">
+                Healthy Habits Coaching for Real Life
+              </div>
+            </td>
+          </tr>
+
+          <!-- Main Body Content -->
+          <tr>
+            <td style="padding: 34px 32px 28px; color: #2C2D2B; font-size: 15px; line-height: 1.65;">
+              
+              <!-- Tag Pill -->
+              <div style="display: inline-block; background-color: #F7ECEB; color: #A5736C; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;">
+                ${tag}
+              </div>
+
+              <!-- Main Heading -->
+              <h1 style="font-family: Georgia, 'Cormorant Garamond', serif; font-size: 24px; font-weight: 500; color: #3F4B3C; margin: 0 0 16px; line-height: 1.3;">
+                ${title}
+              </h1>
+
+              <!-- Dynamic Email Body -->
+              ${content}
+
+              <!-- Abigail Signature Block with Photo -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #F0ECE4;">
+                <tr>
+                  <td width="60" valign="middle" style="padding-right: 14px;">
+                    <img src="https://abigailstocks.com/assets/abigail_actual.jpg" alt="Abigail Stocks" width="52" height="52" style="border-radius: 50%; display: block; border: 2px solid #EBE5DA; object-fit: cover;" />
+                  </td>
+                  <td valign="middle">
+                    <p style="margin: 0; font-family: Georgia, serif; font-size: 16px; font-weight: bold; color: #3F4B3C;">Abigail Stocks</p>
+                    <p style="margin: 2px 0 0; font-size: 13px; color: #5F615C;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #A5736C; text-decoration: none; font-weight: 500;">abigailstocks.com</a></p>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="background-color: #FBF9F5; padding: 20px 24px; border-top: 1px solid #EBE5DA; font-size: 12px; color: #8C8E89; line-height: 1.5;">
+              <p style="margin: 0 0 4px;">Abigail Stocks Coaching &bull; Personalised Habit & Lifestyle Coaching</p>
+              <p style="margin: 0;">Have a question? Simply reply directly to this email or write to <a href="mailto:hello@abigailstocks.com" style="color: #3F4B3C; text-decoration: underline;">hello@abigailstocks.com</a></p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+        };
 
         if (type === 'package') {
             const pkg = packageName || 'Initial Coaching Call';
+            headerTag = 'Coaching Programme Enquiry';
+
             if (pkg === 'Initial Coaching Call' || pkg === 'Single Habit Reset') {
                 subject = 'Your Initial Coaching Call Details - Abigail Stocks Coaching';
+                emailTitle = `Hi ${clientName},`;
+
                 textContent = `Hi ${clientName},
 
-Thank you for your enquiry about the Initial Coaching Call with Abigail Stocks Coaching!
+Thank you for enquiring about the Initial Coaching Call with Abigail Stocks Coaching!
 
 Here is what is included in your 60-minute session:
 • 60 Mins dedicated 1:1 coaching session
@@ -47,40 +128,45 @@ Here is what is included in your 60-minute session:
 
 Investment: £45 (One-off session)
 
-Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to confirm your availability.
-
-If you have any questions before booking, feel free to ask!
+Ready to begin? Simply reply directly to this email or write to hello@abigailstocks.com to arrange your session date and time.
 
 Warmly,
 Abigail Stocks
 Habit & Mindset Coach
 https://abigailstocks.com`;
 
-                htmlContent = `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
-    <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for enquiring about the <strong>Initial Coaching Call</strong> with Abigail Stocks Coaching!</p>
-    <div style="background: #F7FAFC; border-left: 4px solid #319795; padding: 16px; margin: 20px 0; border-radius: 4px;">
-        <h3 style="margin-top: 0; color: #2C7A7B;">What's Included in Your 1:1 Session:</h3>
-        <ul style="padding-left: 20px; margin-bottom: 0;">
-            <li><strong>60 Mins</strong> dedicated 1:1 coaching session</li>
-            <li>Explore your goals, understand personal challenges & blocks</li>
-            <li>Actionable next steps & personalized habit guidance</li>
-            <li>Understand if 1:1 coaching is the right fit for your journey</li>
-        </ul>
-        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £45 (One-off session)</p>
-    </div>
-    <p>Ready to schedule your session? Simply reply directly to this email or message <a href="mailto:hello@abigailstocks.com" style="color: #319795; font-weight: 600;">hello@abigailstocks.com</a> to confirm your preferred dates and times.</p>
-    <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
-    <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Warmly,</p>
-    <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
-    <p style="font-size: 13px; color: #718096; margin: 0;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #319795;">abigailstocks.com</a></p>
-</div>`;
+                bodyHtml = `
+<p style="margin-top: 0;">Thank you for enquiring about the <strong>Initial Coaching Call</strong>. Whether you're looking to reset your routines, overcome a specific hurdle, or explore if coaching is right for you, this session is designed to give you clarity and direction.</p>
+
+<div style="background-color: #F8FAF8; border-left: 4px solid #3F4B3C; border-radius: 8px; padding: 20px; margin: 24px 0;">
+  <h3 style="margin: 0 0 12px; font-family: Georgia, serif; font-size: 17px; color: #3F4B3C;">What's Included in Your 1:1 Session:</h3>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; line-height: 1.7; color: #2C2D2B;">
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td><strong>60 Mins</strong> dedicated 1:1 coaching session via video call</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Current routine audit & deep-dive into your personal challenges</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Actionable habit blueprint & realistic next steps</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Explore if a structured coaching pathway is right for you</td></tr>
+  </table>
+
+  <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid #EBE5DA;">
+    <span style="display: inline-block; background-color: #F7ECEB; color: #A5736C; font-size: 15px; font-weight: 700; padding: 6px 14px; border-radius: 8px;">
+      Investment: £45 <span style="font-size: 13px; font-weight: normal; color: #5F615C;">(One-off session)</span>
+    </span>
+  </div>
+</div>
+
+<div style="margin: 28px 0 20px;">
+  <a href="mailto:hello@abigailstocks.com?subject=Booking%20Initial%20Coaching%20Call" style="display: inline-block; background-color: #3F4B3C; color: #FFFFFF; font-weight: 600; font-size: 15px; text-decoration: none; padding: 12px 26px; border-radius: 8px;">Reply to Book Your Session &rarr;</a>
+</div>
+
+<p style="font-size: 14px; color: #5F615C; margin-bottom: 0;">Have any questions first? Simply hit reply to this email and I will gladly help!</p>`;
+
             } else if (pkg === '6-Week Coaching Programme' || pkg === '6-Session Momentum') {
                 subject = 'Your 6-Week Coaching Programme Details - Abigail Stocks Coaching';
+                emailTitle = `Hi ${clientName},`;
+
                 textContent = `Hi ${clientName},
 
-Thank you for your enquiry about the 6-Week Coaching Programme with Abigail Stocks Coaching!
+Thank you for enquiring about the 6-Week Coaching Programme with Abigail Stocks Coaching!
 
 Here is what is included in your structured programme:
 • 6 × 60-Minute dedicated 1:1 coaching sessions (weekly rhythm)
@@ -90,38 +176,45 @@ Here is what is included in your structured programme:
 
 Investment: £250 package price (regular £270)
 
-Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to secure your spot and schedule your first session.
+Ready to begin? Simply reply directly to this email or write to hello@abigailstocks.com to secure your spot.
 
 Warmly,
 Abigail Stocks
 Habit & Mindset Coach
 https://abigailstocks.com`;
 
-                htmlContent = `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
-    <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for enquiring about the <strong>6-Week Coaching Programme</strong> with Abigail Stocks Coaching!</p>
-    <div style="background: #F7FAFC; border-left: 4px solid #319795; padding: 16px; margin: 20px 0; border-radius: 4px;">
-        <h3 style="margin-top: 0; color: #2C7A7B;">What's Included in Your 6-Week Pathway:</h3>
-        <ul style="padding-left: 20px; margin-bottom: 0;">
-            <li><strong>6 × 60-Minute</strong> dedicated 1:1 coaching sessions</li>
-            <li>Structured roadmap to build confidence, set habits & make steady progress</li>
-            <li>Mindset & movement worksheets & tailored guides</li>
-            <li>Direct email support & accountability between sessions</li>
-        </ul>
-        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £250 package price <span style="font-size: 14px; font-weight: normal; color: #718096;">(regular £270)</span></p>
-    </div>
-    <p>Ready to secure your spot? Simply reply directly to this email or contact <a href="mailto:hello@abigailstocks.com" style="color: #319795; font-weight: 600;">hello@abigailstocks.com</a> to lock in your start date.</p>
-    <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
-    <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Warmly,</p>
-    <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
-    <p style="font-size: 13px; color: #718096; margin: 0;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #319795;">abigailstocks.com</a></p>
-</div>`;
+                bodyHtml = `
+<p style="margin-top: 0;">Thank you for enquiring about the <strong>6-Week Coaching Programme</strong>! This structured pathway is designed to help you build confidence, set sustainable health rhythms, and build self-trust with consistent 1:1 guidance.</p>
+
+<div style="background-color: #F8FAF8; border-left: 4px solid #3F4B3C; border-radius: 8px; padding: 20px; margin: 24px 0;">
+  <h3 style="margin: 0 0 12px; font-family: Georgia, serif; font-size: 17px; color: #3F4B3C;">What's Included in Your 6-Week Pathway:</h3>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; line-height: 1.7; color: #2C2D2B;">
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td><strong>6 × 60-Minute</strong> dedicated 1:1 coaching sessions</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Weekly accountability check-ins & goal tracking</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Mindset & movement worksheets & tailored guides</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Direct email support & encouragement between calls</td></tr>
+  </table>
+
+  <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid #EBE5DA;">
+    <span style="display: inline-block; background-color: #F7ECEB; color: #A5736C; font-size: 15px; font-weight: 700; padding: 6px 14px; border-radius: 8px;">
+      Investment: £250 Package Price <span style="font-size: 13px; font-weight: normal; color: #5F615C;">(regular £270 · Save £20)</span>
+    </span>
+  </div>
+</div>
+
+<div style="margin: 28px 0 20px;">
+  <a href="mailto:hello@abigailstocks.com?subject=Booking%206-Week%20Coaching%20Programme" style="display: inline-block; background-color: #3F4B3C; color: #FFFFFF; font-weight: 600; font-size: 15px; text-decoration: none; padding: 12px 26px; border-radius: 8px;">Reply to Secure Your Spot &rarr;</a>
+</div>
+
+<p style="font-size: 14px; color: #5F615C; margin-bottom: 0;">Simply reply to this email with your preferred days/times, and we will get your first session scheduled!</p>`;
+
             } else {
                 subject = 'Your 12-Week Coaching Programme Details - Abigail Stocks Coaching';
+                emailTitle = `Hi ${clientName},`;
+
                 textContent = `Hi ${clientName},
 
-Thank you for your enquiry about the 12-Week Coaching Programme with Abigail Stocks Coaching!
+Thank you for enquiring about the 12-Week Coaching Programme with Abigail Stocks Coaching!
 
 Here is what is included in your comprehensive programme:
 • 12 × 60-Minute deep-dive 1:1 sessions (weekly rhythm)
@@ -131,35 +224,41 @@ Here is what is included in your comprehensive programme:
 
 Investment: £495 package price (regular £540)
 
-Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to secure your spot and arrange your schedule.
+Ready to begin? Simply reply directly to this email or write to hello@abigailstocks.com to secure your spot.
 
 Warmly,
 Abigail Stocks
 Habit & Mindset Coach
 https://abigailstocks.com`;
 
-                htmlContent = `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
-    <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for enquiring about the <strong>12-Week Coaching Programme</strong> with Abigail Stocks Coaching!</p>
-    <div style="background: #F7FAFC; border-left: 4px solid #319795; padding: 16px; margin: 20px 0; border-radius: 4px;">
-        <h3 style="margin-top: 0; color: #2C7A7B;">What's Included in Your Full Transformation:</h3>
-        <ul style="padding-left: 20px; margin-bottom: 0;">
-            <li><strong>12 × 60-Minute</strong> deep-dive 1:1 sessions</li>
-            <li>Complete habit transformation roadmap for deep progress & lasting change</li>
-            <li>Ongoing priority message & direct email support between sessions</li>
-            <li>Custom wellness logs, personalized reflection tools & continuous accountability</li>
-        </ul>
-        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £495 package price <span style="font-size: 14px; font-weight: normal; color: #718096;">(regular £540)</span></p>
-    </div>
-    <p>Ready to secure your spot? Simply reply directly to this email or contact <a href="mailto:hello@abigailstocks.com" style="color: #319795; font-weight: 600;">hello@abigailstocks.com</a> to lock in your start date.</p>
-    <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
-    <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Warmly,</p>
-    <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
-    <p style="font-size: 13px; color: #718096; margin: 0;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #319795;">abigailstocks.com</a></p>
-</div>`;
+                bodyHtml = `
+<p style="margin-top: 0;">Thank you for enquiring about the <strong>12-Week Coaching Programme</strong>! This is my deepest and most comprehensive pathway, created for full lifestyle shifts, sustained habit change, and lasting wellness.</p>
+
+<div style="background-color: #F8FAF8; border-left: 4px solid #3F4B3C; border-radius: 8px; padding: 20px; margin: 24px 0;">
+  <h3 style="margin: 0 0 12px; font-family: Georgia, serif; font-size: 17px; color: #3F4B3C;">What's Included in Your Full Transformation:</h3>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; line-height: 1.7; color: #2C2D2B;">
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td><strong>12 × 60-Minute</strong> deep-dive 1:1 coaching sessions</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Complete habit transformation roadmap for lasting change</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Ongoing priority message & direct email support between sessions</td></tr>
+    <tr><td width="22" valign="top" style="color: #3F4B3C; font-weight: bold;">✓</td><td>Custom wellness logs, personalized reflection tools & weekly accountability</td></tr>
+  </table>
+
+  <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid #EBE5DA;">
+    <span style="display: inline-block; background-color: #F7ECEB; color: #A5736C; font-size: 15px; font-weight: 700; padding: 6px 14px; border-radius: 8px;">
+      Investment: £495 Package Price <span style="font-size: 13px; font-weight: normal; color: #5F615C;">(regular £540 · Save £45)</span>
+    </span>
+  </div>
+</div>
+
+<div style="margin: 28px 0 20px;">
+  <a href="mailto:hello@abigailstocks.com?subject=Booking%2012-Week%20Coaching%20Programme" style="display: inline-block; background-color: #3F4B3C; color: #FFFFFF; font-weight: 600; font-size: 15px; text-decoration: none; padding: 12px 26px; border-radius: 8px;">Reply to Secure Your Spot &rarr;</a>
+</div>
+
+<p style="font-size: 14px; color: #5F615C; margin-bottom: 0;">Ready to embark on this journey? Hit reply to confirm your start date and times!</p>`;
             }
+
         } else if (type === 'resource') {
+            headerTag = 'Free Wellness Resource';
             const resLower = (resourceName || '').toLowerCase();
             let resTitle = 'Movement & Mindset Guide';
             let pdfLink = 'https://abigailstocks.com/assets/movement-mindset-guide.pdf';
@@ -180,104 +279,86 @@ https://abigailstocks.com`;
             }
 
             subject = `Your Free ${resTitle} - Abigail Stocks Coaching`;
+            emailTitle = `Hi ${clientName},`;
+
             textContent = `Hi ${clientName},
 
 Thank you for downloading the ${resTitle} from Abigail Stocks Coaching!
 
 Here are your direct access links:
-• Download PDF: ${pdfLink}
+• Download Printable PDF: ${pdfLink}
 • Open Interactive Web Version: ${webLink}
-
-When you're ready to design routines that truly stick:
-• Book a free 30-minute Discovery Call: https://calendly.com/hello-abigailstocks/30min
 
 Warmly,
 Abigail Stocks
 Habit & Mindset Coach
 https://abigailstocks.com`;
 
-            htmlContent = `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
-    <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for downloading the <strong>${resTitle}</strong> from Abigail Stocks Coaching!</p>
-    <div style="background: #F7FAFC; padding: 20px; border-radius: 8px; margin: 24px 0; border: 1px solid #E2E8F0;">
-        <h3 style="margin-top: 0; color: #2C7A7B;">Instant Access:</h3>
-        <p style="margin-bottom: 16px;"><a href="${pdfLink}" style="display: inline-block; background: #319795; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600;">📥 Download Printable PDF</a></p>
-        <p style="margin: 0;"><a href="${webLink}" style="color: #319795; font-weight: 500;">📱 Open Interactive Web Version &rarr;</a></p>
-    </div>
-    <p>Whenever you're ready to accelerate your habit transformation: <a href="https://calendly.com/hello-abigailstocks/30min" style="color: #319795; text-decoration: underline;">Book a free 30-minute Discovery Call on Calendly</a>.</p>
-    <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
-    <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Warmly,</p>
-    <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
-    <p style="font-size: 13px; color: #718096; margin: 0;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #319795;">abigailstocks.com</a></p>
-</div>`;
+            bodyHtml = `
+<p style="margin-top: 0;">Thank you for downloading the <strong>${resTitle}</strong>! Small, sustainable steps are the foundation of real wellness.</p>
+
+<div style="background-color: #F8FAF8; border: 1px solid #EBE5DA; border-radius: 12px; padding: 22px; margin: 24px 0; text-align: center;">
+  <p style="margin: 0 0 16px; font-weight: 600; color: #3F4B3C;">Access Your Resource Instantly:</p>
+  <a href="${pdfLink}" style="display: inline-block; background-color: #3F4B3C; color: #FFFFFF; font-weight: 600; font-size: 14px; text-decoration: none; padding: 11px 22px; border-radius: 8px; margin-bottom: 12px;">📥 Download Printable PDF</a>
+  <div>
+    <a href="${webLink}" style="color: #A5736C; font-size: 13px; font-weight: 600; text-decoration: underline;">📱 Open Interactive Web Version &rarr;</a>
+  </div>
+</div>
+
+<p style="font-size: 14px; color: #5F615C; margin-bottom: 0;">Whenever you're ready for 1:1 guidance to fast-track your health habits, you can always write to me at <a href="mailto:hello@abigailstocks.com" style="color: #3F4B3C;">hello@abigailstocks.com</a>.</p>`;
+
         } else if (type === 'contact') {
+            headerTag = 'Message Received';
             subject = 'Thank you for reaching out - Abigail Stocks Coaching';
+            emailTitle = `Hi ${clientName},`;
+
             textContent = `Hi ${clientName},
 
 Thank you for getting in touch with Abigail Stocks Coaching!
 
-I have received your message and will get back to you personally within 24-48 hours.
-
-If you'd like to jump straight into a conversation about your habits and goals, you can book a free 30-minute Discovery Call right here:
-https://calendly.com/hello-abigailstocks/30min
-
-Speak soon,
-Abigail Stocks
-Habit & Mindset Coach
-https://abigailstocks.com`;
-
-            htmlContent = `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
-    <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for getting in touch with Abigail Stocks Coaching!</p>
-    <p>I have received your message and will get back to you personally within 24-48 business hours.</p>
-    <p>If you'd like to jump straight into a conversation about your habits and routines: <a href="https://calendly.com/hello-abigailstocks/30min" style="color: #319795; text-decoration: underline;">Book a free 30-minute Discovery Call on Calendly</a>.</p>
-    <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
-    <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Speak soon,</p>
-    <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
-    <p style="font-size: 13px; color: #718096; margin: 0;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #319795;">abigailstocks.com</a></p>
-</div>`;
-        } else if (type === 'waitlist') {
-            subject = "You're on the list! - The Strive Podcast with Abigail Stocks";
-            textContent = `Hi ${clientName},
-
-Thank you for joining the waitlist for The Strive Podcast with Abigail Stocks!
-
-You'll be the first to know as soon as full episodes drop, plus you'll receive exclusive subscriber guides and candid conversations on habits, fitness, and mindset.
-
-In the meantime, you can listen to the preview audio and watch chapter clips anytime here:
-https://abigailstocks.com/podcast
+I have received your message and will get back to you personally within 24-48 business hours.
 
 Warmly,
 Abigail Stocks
 Habit & Mindset Coach
 https://abigailstocks.com`;
 
-            htmlContent = `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
-    <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for joining the waitlist for <strong>The Strive Podcast</strong> with Abigail Stocks!</p>
-    <p>You'll be the first to know as soon as full episodes drop, plus you'll receive exclusive subscriber guides and candid conversations on habits, fitness, and mindset.</p>
-    <p>In the meantime, listen to the preview episode and explore chapters anytime: <a href="https://abigailstocks.com/podcast" style="color: #319795; text-decoration: underline;">Listen on abigailstocks.com/podcast</a>.</p>
-    <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
-    <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Warmly,</p>
-    <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
-    <p style="font-size: 13px; color: #718096; margin: 0;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #319795;">abigailstocks.com</a></p>
+            bodyHtml = `
+<p style="margin-top: 0;">Thank you for getting in touch! I have received your message and will get back to you personally within 24–48 business hours.</p>
+<p>Whether you have a question about one of our coaching programmes, daily habit routines, or wellness tips, I look forward to speaking with you.</p>`;
+
+        } else if (type === 'waitlist') {
+            headerTag = 'The Strive Podcast';
+            subject = "You're on the list! - The Strive Podcast with Abigail Stocks";
+            emailTitle = `Hi ${clientName},`;
+
+            textContent = `Hi ${clientName},
+
+Thank you for joining the waitlist for The Strive Podcast with Abigail Stocks!
+
+You'll be the first to know as soon as full episodes drop. In the meantime, listen to the preview audio at https://abigailstocks.com/podcast.
+
+Warmly,
+Abigail Stocks
+Habit & Mindset Coach
+https://abigailstocks.com`;
+
+            bodyHtml = `
+<p style="margin-top: 0;">Thank you for joining the waitlist for <strong>The Strive Podcast</strong>! You'll be the first to receive updates when full episodes launch, along with exclusive subscriber habit guides.</p>
+<div style="margin: 22px 0;">
+  <a href="https://abigailstocks.com/podcast" style="display: inline-block; background-color: #3F4B3C; color: #FFFFFF; font-weight: 600; font-size: 14px; text-decoration: none; padding: 11px 22px; border-radius: 8px;">Listen to Preview Episode &rarr;</a>
 </div>`;
-        } else {
-            return res.status(400).json({ success: false, error: 'Invalid enquiry type specified.' });
         }
 
-        // Call Resend API via native fetch
-        // Note: onboarding@resend.dev only allows sending to the single account email; BCC is added when custom domain is verified
+        const fullHtml = renderBrandEmail(headerTag, emailTitle, bodyHtml);
+
         const isTestingDomain = senderFrom.includes('resend.dev');
         const resendPayload = {
             from: senderFrom,
             to: [email],
             subject: subject,
             text: textContent,
-            html: htmlContent
+            html: fullHtml
         };
 
         if (!isTestingDomain) {
@@ -305,4 +386,4 @@ https://abigailstocks.com`;
         console.error('Unexpected serverless function error:', err);
         return res.status(500).json({ success: false, error: err.message || 'Internal Server Error' });
     }
-}
+}\n
