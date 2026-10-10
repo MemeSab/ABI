@@ -223,51 +223,41 @@ https://abigailstocks.com`;
 
     const getPackageEmailContent = (name, packageName) => {
         const clientName = name ? name.trim() : 'there';
-        if (packageName === 'Single Habit Reset') {
+        if (packageName === 'Initial Coaching Call' || packageName === 'Single Habit Reset') {
             return `Hi ${clientName},
 
-Thank you for your enquiry about the Single Habit Reset with Abigail Stocks Coaching!
+Thank you for your enquiry about the Initial Coaching Call with Abigail Stocks Coaching!
 
-Here is what is included in your 1:1 Deep Dive:
-• 60 Mins intensive 1:1 coaching session
-• Current routine audit & block identification
-• Actionable post-call habit blueprint
-• Comprehensive email recap with custom action steps
+Here is what is included in your 60-minute session:
+• 60 Mins dedicated 1:1 coaching session
+• Explore your goals, understand personal challenges & blocks
+• Actionable next steps & personalized habit guidance
+• Understand if 1:1 coaching is the right fit for your journey
 
-Investment: £75
+Investment: £45 (One-off session)
 
-Ready to begin? You can secure your session directly via Stripe:
-https://buy.stripe.com/dRm8wQ6Z84ELaJ0caA6sw00
+Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to confirm your availability.
 
-Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
-https://calendly.com/hello-abigailstocks/30min
-
-If you have any questions, simply reply directly to this email or reach out to hello@abigailstocks.com.
+If you have any questions before booking, feel free to ask!
 
 Warmly,
 Abigail Stocks
 Habit & Mindset Coach
 https://abigailstocks.com`;
-        } else if (packageName === '6-Session Momentum') {
+        } else if (packageName === '6-Week Coaching Programme' || packageName === '6-Session Momentum') {
             return `Hi ${clientName},
 
-Thank you for your enquiry about the 6-Session Momentum Package with Abigail Stocks Coaching!
+Thank you for your enquiry about the 6-Week Coaching Programme with Abigail Stocks Coaching!
 
-Here is what is included in your coaching journey:
-• 6 x 60 Mins dedicated 1:1 coaching sessions
-• Weekly or bi-weekly accountability check-ins
+Here is what is included in your structured programme:
+• 6 × 60-Minute dedicated 1:1 coaching sessions (weekly rhythm)
+• Structured roadmap to build confidence, set habits & make steady progress
 • Mindset & movement worksheets & tailored guides
-• Direct email support between sessions
+• Direct email support & accountability between sessions
 
-Investment: £420
+Investment: £250 package price (regular £270)
 
-Ready to secure your package? You can complete checkout directly via Stripe:
-https://buy.stripe.com/00w00k0AK0ovaJ0eiI6sw01
-
-Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
-https://calendly.com/hello-abigailstocks/30min
-
-If you have any questions, feel free to reply directly or contact hello@abigailstocks.com.
+Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to secure your spot and schedule your first session.
 
 Warmly,
 Abigail Stocks
@@ -276,23 +266,17 @@ https://abigailstocks.com`;
         } else {
             return `Hi ${clientName},
 
-Thank you for your enquiry about the 12-Session Transformation Package with Abigail Stocks Coaching!
+Thank you for your enquiry about the 12-Week Coaching Programme with Abigail Stocks Coaching!
 
-Here is what is included in your full transformation journey:
-• 12 x 60 Mins deep-dive 1:1 sessions
-• Complete habit transformation roadmap
-• Ongoing priority message & direct email support
-• Custom wellness logs & personalized tools
+Here is what is included in your comprehensive programme:
+• 12 × 60-Minute deep-dive 1:1 sessions (weekly rhythm)
+• Complete habit transformation roadmap for deep progress and lasting change
+• Ongoing priority message & direct email support between sessions
+• Custom wellness logs, personalized reflection tools & continuous accountability
 
-Investment: £780
+Investment: £495 package price (regular £540)
 
-Ready to secure your package? You can complete checkout directly via Stripe:
-https://buy.stripe.com/cNi3cwcjs0ov18q3E46sw02
-
-Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
-https://calendly.com/hello-abigailstocks/30min
-
-If you have any questions, feel free to reply directly or contact hello@abigailstocks.com.
+Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to secure your spot and arrange your schedule.
 
 Warmly,
 Abigail Stocks
@@ -744,7 +728,7 @@ https://abigailstocks.com`;
 
     packageEnquireButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            const pkg = btn.getAttribute('data-package') || 'Single Habit Reset';
+            const pkg = btn.getAttribute('data-package') || 'Initial Coaching Call';
             openPackageModal(pkg);
         });
     });
@@ -766,7 +750,7 @@ https://abigailstocks.com`;
 
             const name = document.getElementById('package-lead-name').value.trim();
             const email = document.getElementById('package-lead-email').value.trim();
-            const selectedPackage = enquiryPackageInput.value || 'Single Habit Reset';
+            const selectedPackage = enquiryPackageInput.value || 'Initial Coaching Call';
 
             console.log(`Package enquiry submitted: ${name} (${email}) for "${selectedPackage}"`);
 

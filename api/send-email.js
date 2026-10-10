@@ -32,28 +32,24 @@ export default async function handler(req, res) {
         let htmlContent = '';
 
         if (type === 'package') {
-            const pkg = packageName || 'Single Habit Reset';
-            if (pkg === 'Single Habit Reset') {
-                subject = 'Your Single Habit Reset Details - Abigail Stocks Coaching';
+            const pkg = packageName || 'Initial Coaching Call';
+            if (pkg === 'Initial Coaching Call' || pkg === 'Single Habit Reset') {
+                subject = 'Your Initial Coaching Call Details - Abigail Stocks Coaching';
                 textContent = `Hi ${clientName},
 
-Thank you for your enquiry about the Single Habit Reset with Abigail Stocks Coaching!
+Thank you for your enquiry about the Initial Coaching Call with Abigail Stocks Coaching!
 
-Here is what is included in your 1:1 Deep Dive:
-• 60 Mins intensive 1:1 coaching session
-• Current routine audit & block identification
-• Actionable post-call habit blueprint
-• Comprehensive email recap with custom action steps
+Here is what is included in your 60-minute session:
+• 60 Mins dedicated 1:1 coaching session
+• Explore your goals, understand personal challenges & blocks
+• Actionable next steps & personalized habit guidance
+• Understand if 1:1 coaching is the right fit for your journey
 
-Investment: £75
+Investment: £45 (One-off session)
 
-Ready to begin? You can secure your session directly via Stripe:
-https://buy.stripe.com/dRm8wQ6Z84ELaJ0caA6sw00
+Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to confirm your availability.
 
-Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
-https://calendly.com/hello-abigailstocks/30min
-
-If you have any questions, simply reply directly to this email or reach out to hello@abigailstocks.com.
+If you have any questions before booking, feel free to ask!
 
 Warmly,
 Abigail Stocks
@@ -63,45 +59,38 @@ https://abigailstocks.com`;
                 htmlContent = `
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
     <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for enquiring about the <strong>Single Habit Reset</strong> with Abigail Stocks Coaching!</p>
+    <p>Thank you for enquiring about the <strong>Initial Coaching Call</strong> with Abigail Stocks Coaching!</p>
     <div style="background: #F7FAFC; border-left: 4px solid #319795; padding: 16px; margin: 20px 0; border-radius: 4px;">
-        <h3 style="margin-top: 0; color: #2C7A7B;">What's Included in Your 1:1 Deep Dive:</h3>
+        <h3 style="margin-top: 0; color: #2C7A7B;">What's Included in Your 1:1 Session:</h3>
         <ul style="padding-left: 20px; margin-bottom: 0;">
-            <li><strong>60 Mins</strong> intensive 1:1 coaching session</li>
-            <li>Current routine audit & block identification</li>
-            <li>Actionable post-call habit blueprint</li>
-            <li>Comprehensive email recap with custom action steps</li>
+            <li><strong>60 Mins</strong> dedicated 1:1 coaching session</li>
+            <li>Explore your goals, understand personal challenges & blocks</li>
+            <li>Actionable next steps & personalized habit guidance</li>
+            <li>Understand if 1:1 coaching is the right fit for your journey</li>
         </ul>
-        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £75</p>
+        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £45 (One-off session)</p>
     </div>
-    <div style="margin: 28px 0;">
-        <a href="https://buy.stripe.com/dRm8wQ6Z84ELaJ0caA6sw00" style="display: inline-block; background: #319795; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 16px;">Secure Session via Stripe (£75) &rarr;</a>
-    </div>
-    <p>Prefer to chat first? <a href="https://calendly.com/hello-abigailstocks/30min" style="color: #319795; text-decoration: underline;">Book a complimentary 30-minute Discovery Call on Calendly</a>.</p>
+    <p>Ready to schedule your session? Simply reply directly to this email or message <a href="mailto:hello@abigailstocks.com" style="color: #319795; font-weight: 600;">hello@abigailstocks.com</a> to confirm your preferred dates and times.</p>
     <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
     <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Warmly,</p>
     <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
     <p style="font-size: 13px; color: #718096; margin: 0;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #319795;">abigailstocks.com</a></p>
 </div>`;
-            } else if (pkg === '6-Session Momentum') {
-                subject = 'Your 6-Session Momentum Package Details - Abigail Stocks Coaching';
+            } else if (pkg === '6-Week Coaching Programme' || pkg === '6-Session Momentum') {
+                subject = 'Your 6-Week Coaching Programme Details - Abigail Stocks Coaching';
                 textContent = `Hi ${clientName},
 
-Thank you for your enquiry about the 6-Session Momentum Package with Abigail Stocks Coaching!
+Thank you for your enquiry about the 6-Week Coaching Programme with Abigail Stocks Coaching!
 
-Here is what is included in your coaching journey:
-• 6 x 60 Mins dedicated 1:1 coaching sessions
-• Weekly or bi-weekly accountability check-ins
+Here is what is included in your structured programme:
+• 6 × 60-Minute dedicated 1:1 coaching sessions (weekly rhythm)
+• Structured roadmap to build confidence, set habits & make steady progress
 • Mindset & movement worksheets & tailored guides
-• Direct email support between sessions
+• Direct email support & accountability between sessions
 
-Investment: £420
+Investment: £250 package price (regular £270)
 
-Ready to secure your package? You can complete checkout directly via Stripe:
-https://buy.stripe.com/00w00k0AK0ovaJ0eiI6sw01
-
-Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
-https://calendly.com/hello-abigailstocks/30min
+Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to secure your spot and schedule your first session.
 
 Warmly,
 Abigail Stocks
@@ -111,45 +100,38 @@ https://abigailstocks.com`;
                 htmlContent = `
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
     <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for enquiring about the <strong>6-Session Momentum Package</strong> with Abigail Stocks Coaching!</p>
+    <p>Thank you for enquiring about the <strong>6-Week Coaching Programme</strong> with Abigail Stocks Coaching!</p>
     <div style="background: #F7FAFC; border-left: 4px solid #319795; padding: 16px; margin: 20px 0; border-radius: 4px;">
-        <h3 style="margin-top: 0; color: #2C7A7B;">What's Included in Your Momentum Pathway:</h3>
+        <h3 style="margin-top: 0; color: #2C7A7B;">What's Included in Your 6-Week Pathway:</h3>
         <ul style="padding-left: 20px; margin-bottom: 0;">
-            <li><strong>6 x 60 Mins</strong> dedicated 1:1 coaching sessions</li>
-            <li>Weekly or bi-weekly accountability check-ins</li>
+            <li><strong>6 × 60-Minute</strong> dedicated 1:1 coaching sessions</li>
+            <li>Structured roadmap to build confidence, set habits & make steady progress</li>
             <li>Mindset & movement worksheets & tailored guides</li>
-            <li>Direct email support between sessions</li>
+            <li>Direct email support & accountability between sessions</li>
         </ul>
-        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £420</p>
+        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £250 package price <span style="font-size: 14px; font-weight: normal; color: #718096;">(regular £270)</span></p>
     </div>
-    <div style="margin: 28px 0;">
-        <a href="https://buy.stripe.com/00w00k0AK0ovaJ0eiI6sw01" style="display: inline-block; background: #319795; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 16px;">Secure 6-Session Package via Stripe (£420) &rarr;</a>
-    </div>
-    <p>Prefer to chat first? <a href="https://calendly.com/hello-abigailstocks/30min" style="color: #319795; text-decoration: underline;">Book a complimentary 30-minute Discovery Call on Calendly</a>.</p>
+    <p>Ready to secure your spot? Simply reply directly to this email or contact <a href="mailto:hello@abigailstocks.com" style="color: #319795; font-weight: 600;">hello@abigailstocks.com</a> to lock in your start date.</p>
     <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
     <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Warmly,</p>
     <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
     <p style="font-size: 13px; color: #718096; margin: 0;">Habit & Mindset Coach &bull; <a href="https://abigailstocks.com" style="color: #319795;">abigailstocks.com</a></p>
 </div>`;
             } else {
-                subject = 'Your 12-Session Transformation Details - Abigail Stocks Coaching';
+                subject = 'Your 12-Week Coaching Programme Details - Abigail Stocks Coaching';
                 textContent = `Hi ${clientName},
 
-Thank you for your enquiry about the 12-Session Transformation Package with Abigail Stocks Coaching!
+Thank you for your enquiry about the 12-Week Coaching Programme with Abigail Stocks Coaching!
 
-Here is what is included in your full transformation journey:
-• 12 x 60 Mins deep-dive 1:1 sessions
-• Complete habit transformation roadmap
-• Ongoing priority message & direct email support
-• Custom wellness logs & personalized tools
+Here is what is included in your comprehensive programme:
+• 12 × 60-Minute deep-dive 1:1 sessions (weekly rhythm)
+• Complete habit transformation roadmap for deep progress and lasting change
+• Ongoing priority message & direct email support between sessions
+• Custom wellness logs, personalized reflection tools & continuous accountability
 
-Investment: £780
+Investment: £495 package price (regular £540)
 
-Ready to secure your package? You can complete checkout directly via Stripe:
-https://buy.stripe.com/cNi3cwcjs0ov18q3E46sw02
-
-Would you prefer to chat first? Book a complimentary 30-minute Discovery Call:
-https://calendly.com/hello-abigailstocks/30min
+Ready to begin? Reply directly to this email or reach out to hello@abigailstocks.com to secure your spot and arrange your schedule.
 
 Warmly,
 Abigail Stocks
@@ -159,21 +141,18 @@ https://abigailstocks.com`;
                 htmlContent = `
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2D3748; line-height: 1.6;">
     <h2 style="color: #1A365D; margin-top: 0;">Hi ${clientName},</h2>
-    <p>Thank you for enquiring about the <strong>12-Session Transformation Package</strong> with Abigail Stocks Coaching!</p>
+    <p>Thank you for enquiring about the <strong>12-Week Coaching Programme</strong> with Abigail Stocks Coaching!</p>
     <div style="background: #F7FAFC; border-left: 4px solid #319795; padding: 16px; margin: 20px 0; border-radius: 4px;">
         <h3 style="margin-top: 0; color: #2C7A7B;">What's Included in Your Full Transformation:</h3>
         <ul style="padding-left: 20px; margin-bottom: 0;">
-            <li><strong>12 x 60 Mins</strong> deep-dive 1:1 sessions</li>
-            <li>Complete habit transformation roadmap</li>
-            <li>Ongoing priority message & direct email support</li>
-            <li>Custom wellness logs & personalized tools</li>
+            <li><strong>12 × 60-Minute</strong> deep-dive 1:1 sessions</li>
+            <li>Complete habit transformation roadmap for deep progress & lasting change</li>
+            <li>Ongoing priority message & direct email support between sessions</li>
+            <li>Custom wellness logs, personalized reflection tools & continuous accountability</li>
         </ul>
-        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £780</p>
+        <p style="font-size: 18px; font-weight: bold; margin: 12px 0 0; color: #1A365D;">Investment: £495 package price <span style="font-size: 14px; font-weight: normal; color: #718096;">(regular £540)</span></p>
     </div>
-    <div style="margin: 28px 0;">
-        <a href="https://buy.stripe.com/cNi3cwcjs0ov18q3E46sw02" style="display: inline-block; background: #319795; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 16px;">Secure 12-Session Package via Stripe (£780) &rarr;</a>
-    </div>
-    <p>Prefer to chat first? <a href="https://calendly.com/hello-abigailstocks/30min" style="color: #319795; text-decoration: underline;">Book a complimentary 30-minute Discovery Call on Calendly</a>.</p>
+    <p>Ready to secure your spot? Simply reply directly to this email or contact <a href="mailto:hello@abigailstocks.com" style="color: #319795; font-weight: 600;">hello@abigailstocks.com</a> to lock in your start date.</p>
     <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
     <p style="font-size: 14px; color: #718096; margin-bottom: 4px;">Warmly,</p>
     <p style="font-size: 15px; font-weight: bold; color: #1A365D; margin: 0;">Abigail Stocks</p>
