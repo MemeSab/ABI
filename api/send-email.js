@@ -291,14 +291,19 @@ https://abigailstocks.com`;
         }
 
         // Call Resend API via native fetch
+        // Note: onboarding@resend.dev only allows sending to the single account email; BCC is added when custom domain is verified
+        const isTestingDomain = senderFrom.includes('resend.dev');
         const resendPayload = {
             from: senderFrom,
             to: [email],
-            bcc: [abiEmail, helloEmail],
             subject: subject,
             text: textContent,
             html: htmlContent
         };
+
+        if (!isTestingDomain) {
+            resendPayload.bcc = [abiEmail, helloEmail];
+        }
 
         const response = await fetch('https://api.resend.com/emails', {
             method: 'POST',
