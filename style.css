@@ -2151,6 +2151,91 @@ ul {
     }
 }
 
+/* --- Podcast Episode Switcher Tabs --- */
+.podcast-episode-switcher {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: var(--color-sand-light);
+    border: 1px solid var(--color-sand);
+    border-radius: 12px;
+    padding: 6px;
+    margin-top: 20px;
+    margin-bottom: 18px;
+}
+
+.episode-tab-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    padding: 11px 14px;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--color-charcoal-muted);
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition);
+    font-family: var(--font-body);
+}
+
+.episode-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.65);
+    color: var(--color-sage-dark);
+}
+
+.episode-tab-btn.active {
+    background: var(--color-white);
+    color: var(--color-sage-dark);
+    border-color: rgba(142, 163, 149, 0.35);
+    box-shadow: 0 4px 12px rgba(63, 75, 60, 0.08);
+}
+
+.episode-tab-top {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: 100%;
+}
+
+.episode-tab-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-sage-medium);
+}
+
+.episode-tab-btn.active .episode-tab-number {
+    color: var(--color-sage-dark);
+}
+
+.episode-tab-badge {
+    background: var(--color-sage);
+    color: var(--color-white);
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 7px;
+    border-radius: 10px;
+    line-height: 1.3;
+}
+
+.episode-tab-title {
+    font-family: var(--font-headings);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    line-height: 1.25;
+}
+
+.episode-tab-btn.active .episode-tab-title {
+    color: var(--color-sage-dark);
+    font-weight: 700;
+}
+
 /* --- Podcast Audio Player & Chapters --- */
 .podcast-player-card {
     background-color: var(--color-white);
@@ -2954,6 +3039,19 @@ ul {
     .podcast-quotes-grid {
         grid-template-columns: 1fr;
         gap: 14px;
+    }
+
+    .podcast-episode-switcher {
+        gap: 6px;
+        padding: 5px;
+    }
+
+    .episode-tab-btn {
+        padding: 9px 10px;
+    }
+
+    .episode-tab-title {
+        font-size: 0.94rem;
     }
 
     .podcast-form-box {
