@@ -15,6 +15,10 @@
       "dest": "/podcast.html"
     },
     {
+      "src": "/podcast-preview",
+      "dest": "/podcast-preview.html"
+    },
+    {
       "src": "/brand-suite",
       "dest": "/brand-suite.html"
     },
